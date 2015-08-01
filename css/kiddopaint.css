@@ -26,6 +26,34 @@
   float:left;
 }
 
+#colorbar {
+/*
+  border: solid;
+  border-color: red;
+*/
+  display: block;
+  width: 50px;
+  float:left;
+}
+
+#colorselector {
+/*
+  border: solid;
+  border-color: red;
+*/
+  width: 55px;
+}
+
+#toolbar {
+/*
+  border: solid;
+  border-color: red;
+*/
+  display: block;
+  width: 50px;
+  float:left;
+}
+
 #subtoolbar {
 /*
   border-color: green;
@@ -37,6 +65,19 @@
   width: 50px;
   height: 50px;
 }
+
+.currentColor {
+  width: 50px;
+  height: 50px;
+}
+
+.color {
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+/*      padding: 25px 50px; */
+}
+
 
 #kiddopaint {
   border-color: blue;

@@ -3,10 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>Kiddo Paint!</title>
-  <link rel="stylesheet" type="text/css" href="kiddopaint.css">
+  <link rel="stylesheet" type="text/css" href="css/kiddopaint.css">
+  <script type="text/javascript" src="js/kiddopaint.js"></script>
+  <script type="text/javascript" src="js/tools.js"></script>
+  <script type="text/javascript" src="js/textures.js"></script>
+  <script type="text/javascript" src="js/colors.js"></script>
 </head>
 
-<body>
+<body onload="init_kiddo_paint();">
 <div id="container">
 
   <div id="toolbar">
@@ -22,6 +26,14 @@
     <button class="tool">10</button>
     <button class="tool">11</button>
     <button class="tool">12</button>
+    <br>
+    <br>
+    <div id="colorbar">
+      <button class="currentColor">c</button>
+      <div id="colorselector">
+        <button class="color">r</button><button class="color">g</button><button class="color">b</button>
+      </div>
+    </div>
   </div>
 
   <div id="hcontainer">
@@ -43,7 +55,7 @@
       <button class="tool">15</button>
     </div>
     <div id="paint">
-      <canvas id="kiddopaint">:(</canvas>
+      <canvas id="kiddopaint" width="1024" height="768">:(</canvas>
     </div>
   </div>
 

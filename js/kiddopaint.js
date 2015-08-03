@@ -2,8 +2,10 @@
 var KiddoPaint = {};
 KiddoPaint.Tools = {};
 KiddoPaint.Textures = {};
+KiddoPaint.Brushes = {};
 KiddoPaint.Display = {};
 KiddoPaint.Colors = {};
+KiddoPaint.Current = {};
 
 function init_kiddo_paint() {
   var canvas = document.getElementById('kiddopaint');
@@ -14,8 +16,15 @@ function init_kiddo_paint() {
     KiddoPaint.Display.canvas = canvas;
     KiddoPaint.Display.context = ctx;
     KiddoPaint.Display.step = 0;
+
+    init_kiddo_defaults();
     init_listeners(canvas);
   }
+}
+
+function init_kiddo_defaults() {
+  KiddoPaint.Current.color = KiddoPaint.Colors.All.black;
+  KiddoPaint.Current.tool = KiddoPaint.Tools.PixelPencil;
 }
 
 function init_listeners(canvas) {
@@ -37,7 +46,7 @@ function ev_canvas (ev) {
   }
 
   // handle event
-  var func = KiddoPaint.currentTool[ev.type];
+  var func = KiddoPaint.Current.tool[ev.type];
   if (func) {
     func(ev);
   }

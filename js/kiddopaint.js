@@ -19,11 +19,12 @@ function init_kiddo_paint() {
 
     init_kiddo_defaults();
     init_listeners(canvas);
+    init_color_selector();
   }
 }
 
 function init_kiddo_defaults() {
-  KiddoPaint.Current.color = KiddoPaint.Colors.All.black;
+  KiddoPaint.Current.color = KiddoPaint.Colors.All.colorblack;
   KiddoPaint.Current.tool = KiddoPaint.Tools.PixelPencil;
 }
 
@@ -31,6 +32,19 @@ function init_listeners(canvas) {
   canvas.addEventListener('mousedown', ev_canvas, false);
   canvas.addEventListener('mousemove', ev_canvas, false);
   canvas.addEventListener('mouseup', ev_canvas, false);
+}
+
+function colorSelect(e) {
+  var color = e.srcElement.className;
+  KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
+}
+
+function init_color_selector() {
+  var buttons = document.getElementById('colorselector').children;
+  for(var i = 0, len = buttons.length; i < len; i++) {
+    var button = buttons[i];
+    button.addEventListener("click", colorSelect);
+  }
 }
 
 function ev_canvas (ev) {

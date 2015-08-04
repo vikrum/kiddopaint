@@ -38,7 +38,8 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 	this.mousemove = function (ev) {
 		if (tool.isDown) {
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.RSmiley();
-			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), 20, 30);
+			KiddoPaint.Display.context.fillStyle = KiddoPaint.Current.color;
+			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), 30, 30);
 		}
 	};
 

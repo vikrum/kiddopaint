@@ -1,10 +1,10 @@
 KiddoPaint.Brushes.Arrow = function(color1) {
 	color1 = color1 || 'black';
 
-	var canvasBrush = document.createElement("canvas");
+	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = 43;
 	canvasBrush.height = 43;
-	var contextBrush = canvasBrush.getContext("2d");
+	var contextBrush = canvasBrush.getContext('2d');
 
 	contextBrush.beginPath();
 //	contextBrush.rect(0, 0, 43, 43);

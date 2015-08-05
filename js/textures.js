@@ -1,17 +1,17 @@
 KiddoPaint.Textures.Solid = function(color1) {
 	color1 = color1 || 'black';
 
-	var canvasPattern = document.createElement("canvas");
+	var canvasPattern = document.createElement('canvas');
 	canvasPattern.width = 1;
 	canvasPattern.height = 1;
-	var contextPattern = canvasPattern.getContext("2d");
+	var contextPattern = canvasPattern.getContext('2d');
 	
 	contextPattern.beginPath();
 	contextPattern.strokeStyle = color1;
 	contextPattern.rect(0, 0, 1, 1);
 	contextPattern.stroke();
 	
-	return KiddoPaint.Display.context.createPattern(canvasPattern,"repeat");
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
 }
 
 KiddoPaint.Textures.Smiley = function(color1, color2, color3, color4) {
@@ -20,10 +20,10 @@ KiddoPaint.Textures.Smiley = function(color1, color2, color3, color4) {
 	color3 = color3 || color1 || 'black';
 	color4 = color4 || color1 || 'black';
 
-	var canvasPattern = document.createElement("canvas");
+	var canvasPattern = document.createElement('canvas');
 	canvasPattern.width = 20;
 	canvasPattern.height = 20;
-	var contextPattern = canvasPattern.getContext("2d");
+	var contextPattern = canvasPattern.getContext('2d');
 	
 	contextPattern.beginPath();
 
@@ -40,7 +40,7 @@ KiddoPaint.Textures.Smiley = function(color1, color2, color3, color4) {
 	contextPattern.rect(15, 5, 1, 1);
 	contextPattern.stroke();
 	
-	return KiddoPaint.Display.context.createPattern(canvasPattern,"repeat");
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
 }
 
 KiddoPaint.Textures.RSmiley = function() {

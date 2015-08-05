@@ -38,8 +38,11 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 	this.mousemove = function (ev) {
 		if (tool.isDown) {
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.RSmiley();
-			KiddoPaint.Display.context.fillStyle = KiddoPaint.Current.color;
-			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), 30, 30);
+//			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Smiley(KiddoPaint.Current.color);
+			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Solid(KiddoPaint.Current.color);
+//			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.RSolid();
+//			KiddoPaint.Display.context.fillStyle = KiddoPaint.Current.color;
+			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), 5 * KiddoPaint.Current.Scaling, 5 * KiddoPaint.Current.Scaling);
 		}
 	};
 
@@ -63,7 +66,8 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 
 	this.mousemove = function (ev) {
 		if (tool.isDown) {
-			var brushFill = KiddoPaint.Brushes.Arrow();
+			var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color);
+//			var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor());
 			KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
 
 		}

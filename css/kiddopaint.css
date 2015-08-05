@@ -75,26 +75,24 @@
   width: 25px;
   height: 25px;
   margin: 0px;
-/*      padding: 25px 50px; */
 }
 
-.color { width: 25px; height: 25px; margin: 0px; }
-.colorblack { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 0, 0); }
-.colorwhite { width: 25px; height: 25px; margin: 0px; background-color: rgb(255, 255, 255); }
-.colordgrey { width: 25px; height: 25px; margin: 0px; background-color: rgb(128, 128, 128); }
-.colorlgrey { width: 25px; height: 25px; margin: 0px; background-color: rgb(192, 192, 192); }
-.colordred { width: 25px; height: 25px; margin: 0px; background-color: rgb(128, 0, 0); }
-.colorlred { width: 25px; height: 25px; margin: 0px; background-color: rgb(255, 0, 0); }
-.colordyellow { width: 25px; height: 25px; margin: 0px; background-color: rgb(128, 128, 0); }
-.colorlyellow { width: 25px; height: 25px; margin: 0px; background-color: rgb(255, 255, 0); }
-.colordgreen { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 128, 0); }
-.colorlgreen { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 255, 0); }
-.colordcyan { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 128, 128); }
-.colorlcyan { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 255, 255); }
-.colordblue { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 0, 128); }
-.colorlblue { width: 25px; height: 25px; margin: 0px; background-color: rgb(0, 0, 255); }
-.colordpurple { width: 25px; height: 25px; margin: 0px; background-color: rgb(128, 0, 128); }
-.colorlpurple { width: 25px; height: 25px; margin: 0px; background-color: rgb(255, 0, 255); }
+.colorblack { background-color: rgb(0, 0, 0); }
+.colorwhite { background-color: rgb(255, 255, 255); }
+.colordgrey { background-color: rgb(128, 128, 128); }
+.colorlgrey { background-color: rgb(190, 190, 190); }
+.colordred { background-color: rgb(128, 0, 0); }
+.colorlred { background-color: rgb(255, 0, 0); }
+.colordyellow { background-color: rgb(128, 128, 0); }
+.colorlyellow { background-color: rgb(255, 255, 0); }
+.colordgreen { background-color: rgb(0, 128, 0); }
+.colorlgreen { background-color: rgb(0, 255, 0); }
+.colordcyan { background-color: rgb(0, 128, 128); }
+.colorlcyan { background-color: rgb(0, 255, 255); }
+.colordblue { background-color: rgb(0, 0, 128); }
+.colorlblue { background-color: rgb(0, 0, 255); }
+.colordpurple { background-color: rgb(128, 0, 128); }
+.colorlpurple { background-color: rgb(255, 0, 255); }
 
 #kiddopaint {
   border-color: blue;

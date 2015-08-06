@@ -39,7 +39,8 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 		if (tool.isDown) {
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.RSmiley();
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Smiley(KiddoPaint.Current.color);
-			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Solid(KiddoPaint.Current.color);
+//			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Solid(KiddoPaint.Current.color);
+			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.Partial1(KiddoPaint.Current.color);
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Textures.RSolid();
 //			KiddoPaint.Display.context.fillStyle = KiddoPaint.Current.color;
 			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), 5 * KiddoPaint.Current.Scaling, 5 * KiddoPaint.Current.Scaling);

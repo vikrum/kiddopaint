@@ -54,11 +54,16 @@
   float:left;
 }
 
-#subtoolbar {
+.subtoolbar {
 /*
+  position: absolute;
   border-color: green;
   border: solid;
 */
+}
+
+.hidden {
+  display: none;
 }
 
 .tool {

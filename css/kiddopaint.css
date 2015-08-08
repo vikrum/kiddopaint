@@ -1,3 +1,15 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 #container {
 /*
   border: solid;
@@ -14,6 +26,7 @@
 */
   overflow: hidden;
   white-space: nowrap;
+  height:100%;
 }
 
 #toolbar {
@@ -66,9 +79,18 @@
   display: none;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.subtoolbar {
+  height: 50px;
+}
+
 .tool {
   width: 50px;
   height: 50px;
+  padding: 0px 0px 0px 0px;
 }
 
 .currentColor {
@@ -102,7 +124,28 @@
 #kiddopaint {
   border-color: blue;
   border: solid;
+  /*
+  width: 100%;
+  height: 100%;
+  */
   width: 1024px;
   height: 768px;
 }
 
+/*
+#pt1 { background: url(../img/pt1.png); }
+#pt2 { background: url(../img/pt2.png); }
+#pt3 { background: url(../img/pt3.png); }
+#pt4 { background: url(../img/pt4.png); }
+#pt5 { background: url(../img/pt5.png); }
+#pt6 { background: url(../img/pt6.png); }
+#pt7 { background: url(../img/pt7.png); }
+#pt8 { background: url(../img/pt8.png); }
+*/
+
+/*#pw1 { background: url(../img/pw1.png); background-position: center center; background-repeat: no-repeat; }
+#pw2 { background: url(../img/pw2.png); background-position: center center; background-repeat: no-repeat; }
+#pw3 { background: url(../img/pw3.png); background-position: center center; background-repeat: no-repeat; }
+#pw4 { background: url(../img/pw4.png); background-position: center center; background-repeat: no-repeat; }
+#pw5 { background: url(../img/pw5.png); background-position: center center; background-repeat: no-repeat; }
+*/

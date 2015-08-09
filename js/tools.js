@@ -56,18 +56,23 @@ KiddoPaint.Tools.PixelPencil = new KiddoPaint.Tools.Toolbox.PixelPencil();
 KiddoPaint.Tools.Toolbox.Brush = function() {
 	var tool = this;
 	this.isDown = false;
+	this.previousEv = null;
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
 		tool.mousemove(ev);
+		tool.previousEv = ev;
 	};
 
 	this.mousemove = function (ev) {
 		if (tool.isDown) {
-			var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color);
-//			var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor());
-			KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
-
+			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > 25) {
+			  var angle = tool.previousEv == null ? 0 : angleBetween(tool.previousEv, ev) + 0.5 * Math.PI;
+//			  var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color, angle);
+			  var brushFill = KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor(), angle);
+			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
+			  tool.previousEv = ev;
+			}
 		}
 	};
 
@@ -75,6 +80,7 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 		if (tool.isDown) {
 			tool.mousemove(ev);
 			tool.isDown = false;
+			tool.previousEv = null;
 		}
 	};
 };

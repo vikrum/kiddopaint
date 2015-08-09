@@ -1,5 +1,6 @@
-KiddoPaint.Brushes.Arrow = function(color1) {
+KiddoPaint.Brushes.Arrow = function(color1, angle) {
 	color1 = color1 || 'black';
+	angle = angle || 0;
 
 	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = 43;
@@ -8,10 +9,13 @@ KiddoPaint.Brushes.Arrow = function(color1) {
 
 	contextBrush.beginPath();
 //	contextBrush.rect(0, 0, 43, 43);
-//	contextBrush.translate(21, 21);
-//	contextBrush.rotate(45*Math.PI/180);
+
+	contextBrush.translate(21, 21);
+	contextBrush.rotate(angle);
+	contextBrush.translate(-10.5, -15.5);
 
 	contextBrush.strokeStyle = color1;
+
 	contextBrush.moveTo(10,0);
 	contextBrush.lineTo(10,30);
 	contextBrush.lineTo(13,30);

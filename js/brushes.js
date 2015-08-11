@@ -18,8 +18,6 @@ KiddoPaint.Brushes.Arrow = function(color1, angle) {
 
 	contextBrush.moveTo(10,0);
 	contextBrush.lineTo(10,30);
-	contextBrush.lineTo(13,30);
-	contextBrush.lineTo(7,30);
 	contextBrush.moveTo(10,0);
 	contextBrush.lineTo(0,7);
 	contextBrush.moveTo(10,0);

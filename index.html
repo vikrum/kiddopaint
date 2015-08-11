@@ -6,9 +6,11 @@
   <link rel="stylesheet" type="text/css" href="css/kiddopaint.css">
   <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/kiddopaint.js"></script>
+  <script type="text/javascript" src="js/display.js"></script>
   <script type="text/javascript" src="js/tools.js"></script>
   <script type="text/javascript" src="js/textures.js"></script>
   <script type="text/javascript" src="js/brushes.js"></script>
+  <script type="text/javascript" src="js/builders.js"></script>
   <script type="text/javascript" src="js/colors.js"></script>
 </head>
 
@@ -18,6 +20,7 @@
   <div id="toolbar">
     <button class="tool" id="pencil">pncl</button>
     <button class="tool" id="brush">brsh</button>
+    <button class="tool" id="builder">bldr</button>
     <button class="tool" id="erase">erse</button>
     <br>
     <br>
@@ -31,7 +34,7 @@
 
   <div id="hcontainer">
     <div id="subtoolbars">
-       <div id="penciltoolbar" class="">
+       <div id="penciltoolbar" class="subtoolbar">
          <button class="tool" id="pw1"><img src="img/pw1.png"></button>
          <button class="tool" id="pw2"><img src="img/pw2.png"></button>
          <button class="tool" id="pw3"><img src="img/pw3.png"></button>
@@ -48,9 +51,13 @@
          <button class="tool" id="pt8"><img src="img/pt8.png"></button>
        </div>
        <div id="brushtoolbar" class="hidden">
-         <button class="tool">b1</button>
-         <button class="tool">b2</button>
-         <button class="tool">b3</button>
+         <button class="tool" id="br1">br1</button>
+         <button class="tool" id="br2">br2</button>
+         <button class="tool" id="br3">br3</button>
+       </div>
+       <div id="buildertoolbar" class="hidden">
+         <button class="tool" id="bl1"><img src="img/bl1.png"></button>
+         <button class="tool" id="bl2"><img src="img/bl2.png"></button>
        </div>
     </div>
     <div id="paint">

@@ -114,6 +114,7 @@ function init_tool_bar() {
 function init_subtool_bars() {
   init_pencil_subtoolbar();
   init_line_subtoolbar();
+  init_brush_subtoolbar();
   init_builder_subtoolbar();
 }
 
@@ -145,14 +146,15 @@ function init_line_subtoolbar() {
   document.getElementById('lt2').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
   document.getElementById('lt3').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
   document.getElementById('lt4').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
-  document.getElementById('lt5').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Smiley(KiddoPaint.Current.color); } });
-  document.getElementById('lt6').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.PartialSquares(KiddoPaint.Current.color); } });
   document.getElementById('lt7').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = false; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.RSolid(); } });
-  document.getElementById('lt8').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.RSmiley(); } });
+}
+
+function init_brush_subtoolbar() {
+  document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
 }
 
 function init_builder_subtoolbar() {
-  document.getElementById('bl1').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color, angle); }; });
+  document.getElementById('bl1').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
   document.getElementById('bl2').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
 }
 

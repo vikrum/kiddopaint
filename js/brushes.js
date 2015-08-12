@@ -1,29 +1,26 @@
-KiddoPaint.Brushes.Arrow = function(color1, angle) {
+KiddoPaint.Brushes.Circles = function(color1, color2) {
 	color1 = color1 || 'black';
-	angle = angle || 0;
+	color2 = color2 || color1;
 
 	var canvasBrush = document.createElement('canvas');
-	canvasBrush.width = 43;
-	canvasBrush.height = 43;
+	canvasBrush.width = 40;
+	canvasBrush.height = 40;
 	var contextBrush = canvasBrush.getContext('2d');
 
 	contextBrush.beginPath();
-//	contextBrush.rect(0, 0, 43, 43);
-
-	contextBrush.translate(21, 21);
-	contextBrush.rotate(angle);
-	contextBrush.translate(-10.5, -15.5);
-
-	contextBrush.strokeStyle = color1;
-
-	contextBrush.moveTo(10,0);
-	contextBrush.lineTo(10,30);
-	contextBrush.moveTo(10,0);
-	contextBrush.lineTo(0,7);
-	contextBrush.moveTo(10,0);
-	contextBrush.lineTo(20,7);
-
+	contextBrush.arc(20, 20, 10, 0, 2 * Math.PI);
+	contextBrush.fillStyle = color1;
+	contextBrush.fill();
+	contextBrush.lineWidth = 2;
+	contextBrush.strokeStyle = color2;
 	contextBrush.stroke();
+	contextBrush.closePath();
 	
 	return canvasBrush;
+}
+
+KiddoPaint.Brushes.RCircles = function() {
+	var color1 = KiddoPaint.Colors.randomColor(); 
+	var color2 = KiddoPaint.Colors.randomColor(); 
+	return KiddoPaint.Brushes.Circles(color1, color2);
 }

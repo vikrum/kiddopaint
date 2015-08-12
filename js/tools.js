@@ -63,6 +63,7 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 	var tool = this;
 	this.isDown = false;
 	this.previousEv = null;
+	this.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); };
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
@@ -74,8 +75,7 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 		if (tool.isDown) {
 			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > 25) {
 			  var angle = tool.previousEv == null ? 0 : angleBetween(tool.previousEv, ev) + 0.5 * Math.PI;
-			  //var brushFill = KiddoPaint.Current.modified ? KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color, angle);
-			  var brushFill = KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle);
+			  var brushFill = tool.texture();
 			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
 			  tool.previousEv = ev;
 			}
@@ -99,7 +99,7 @@ KiddoPaint.Tools.Toolbox.Builder = function() {
 	this.didMove = false;
 	this.previousEv = null;
 	this.minDistance = 0;
-	this.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Brushes.Arrow(KiddoPaint.Current.color, angle); };
+	this.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); };
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
@@ -163,7 +163,7 @@ KiddoPaint.Tools.Toolbox.Line = function() {
 			}
 
 			KiddoPaint.Display.context.beginPath();
-			KiddoPaint.Display.context.moveTo(tool.x, tool.y);
+			KiddoPaint.Display.context.moveTo(Math.round(tool.x), Math.round(tool.y));
 			if(KiddoPaint.Current.modified) {
 				deltax = Math.abs(ev._x - tool.x);
 				deltay = Math.abs(ev._y - tool.y);

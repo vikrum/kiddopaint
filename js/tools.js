@@ -202,3 +202,31 @@ KiddoPaint.Tools.Toolbox.Line = function() {
 	};
 };
 KiddoPaint.Tools.Line = new KiddoPaint.Tools.Toolbox.Line();
+
+KiddoPaint.Tools.Toolbox.Machines = function() {
+	var tool = this;
+	this.isDown = false;
+	this.machine = '🚂';
+
+	this.mousedown = function (ev) {
+		tool.isDown = true;
+		KiddoPaint.Display.context.font = KiddoPaint.Current.modified ? "144px sans-serif" : "64px sans-serif"
+		KiddoPaint.Display.context.fillStyle = 'transparent';
+		KiddoPaint.Display.context.fillText(tool.machine, ev._x, ev._y);
+	};
+
+	this.mousemove = function (ev) {
+		if( ! tool.isDown) {
+			KiddoPaint.Display.previewContext.font = KiddoPaint.Current.modified ? "144px sans-serif" : "64px sans-serif"
+			KiddoPaint.Display.previewContext.fillStyle = 'transparent';
+			KiddoPaint.Display.previewContext.fillText(tool.machine, ev._x, ev._y);
+		}
+	};
+
+	this.mouseup = function (ev) {
+		tool.isDown = false;
+		KiddoPaint.Display.saveMain();
+	};
+};
+KiddoPaint.Tools.Machines = new KiddoPaint.Tools.Toolbox.Machines();
+

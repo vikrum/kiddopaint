@@ -118,6 +118,11 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Builder;
   });
 
+  document.getElementById('machines').addEventListener('mousedown', function() {
+    show_sub_toolbar('machinetoolbar');
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Machines;
+  });
+
   document.getElementById('erase').addEventListener('mousedown', function() {
     KiddoPaint.Display.context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
     KiddoPaint.Display.main_context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
@@ -129,6 +134,7 @@ function init_subtool_bars() {
   init_line_subtoolbar();
   init_brush_subtoolbar();
   init_builder_subtoolbar();
+  init_machines_subtoolbar();
 }
 
 function init_pencil_subtoolbar() {
@@ -169,6 +175,28 @@ function init_brush_subtoolbar() {
 function init_builder_subtoolbar() {
   document.getElementById('bl1').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
   document.getElementById('bl2').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
+}
+
+function init_machines_subtoolbar() {
+  document.getElementById('m1').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚂'; });
+  document.getElementById('m2').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏠'; });
+  document.getElementById('m3').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚃'; });
+  document.getElementById('m4').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚙'; });
+  document.getElementById('m5').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚚'; });
+  document.getElementById('m6').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚛'; });
+  document.getElementById('m7').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚜'; });
+  document.getElementById('m8').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚧'; });
+  document.getElementById('m9').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '✈️'; });
+  document.getElementById('m10').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏢'; });
+  document.getElementById('m11').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏤'; });
+  document.getElementById('m12').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚲'; });
+  document.getElementById('m13').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚁'; });
+  document.getElementById('m14').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '☁️'; });
+  document.getElementById('m15').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '⛳'; });
+  document.getElementById('m16').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🍕'; });
+  document.getElementById('m17').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🐓'; });
+  document.getElementById('m18').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚶'; });
+  document.getElementById('m19').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏃'; });
 }
 
 

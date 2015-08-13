@@ -43,10 +43,9 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 	};
 
 	this.mousemove = function (ev) {
-		if (tool.isDown) {
-			KiddoPaint.Display.context.fillStyle = tool.texture();
-			KiddoPaint.Display.context.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size * KiddoPaint.Current.scaling, tool.size * KiddoPaint.Current.scaling);
-		}
+		var ctx = tool.isDown ? KiddoPaint.Display.context : KiddoPaint.Display.previewContext;
+		ctx.fillStyle = tool.texture();
+		ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size * KiddoPaint.Current.scaling, tool.size * KiddoPaint.Current.scaling);
 	};
 
 	this.mouseup = function (ev) {
@@ -76,9 +75,14 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > 25) {
 			  var angle = tool.previousEv == null ? 0 : angleBetween(tool.previousEv, ev) + 0.5 * Math.PI;
 			  var brushFill = tool.texture();
-			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
+			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x) - 20, Math.round(ev._y) - 20 );
 			  tool.previousEv = ev;
 			}
+		}
+		else {
+			  var angle = tool.previousEv == null ? 0 : angleBetween(tool.previousEv, ev) + 0.5 * Math.PI;
+			  var brushFill = tool.texture();
+			  KiddoPaint.Display.previewContext.drawImage(brushFill, Math.round(ev._x) - 20, Math.round(ev._y - 20));
 		}
 	};
 
@@ -129,6 +133,11 @@ KiddoPaint.Tools.Toolbox.Builder = function() {
 				// next builder should be spaced out
 				tool.minDistance = 25;
 			}
+		}
+		else {
+			var angle = tool.previousEv == null ? 0 : angleBetween(tool.previousEv, ev) + 0.5 * Math.PI;
+			var brushFill = tool.texture(angle);
+			KiddoPaint.Display.previewContext.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
 		}
 	};
 

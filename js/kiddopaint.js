@@ -18,6 +18,15 @@ function init_kiddo_paint() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     var container = canvas.parentNode;
+
+    previewCanvas = document.createElement('canvas');
+    previewCanvas.id     = 'previewCanvas';
+    previewCanvas.width  = canvas.width;
+    previewCanvas.height = canvas.height;
+    container.appendChild(previewCanvas);
+    previewContext = previewCanvas.getContext('2d');
+    previewContext.clearRect(0, 0, canvas.width, canvas.height);
+
     tmpCanvas = document.createElement('canvas');
     tmpCanvas.id     = 'tmpCanvas';
     tmpCanvas.width  = canvas.width;
@@ -28,6 +37,9 @@ function init_kiddo_paint() {
 
     KiddoPaint.Display.canvas = tmpCanvas;
     KiddoPaint.Display.context = tmpContext;
+
+    KiddoPaint.Display.previewCanvas = previewCanvas;
+    KiddoPaint.Display.previewContext = previewContext;
 
     KiddoPaint.Display.main_canvas = canvas;
     KiddoPaint.Display.main_context = ctx;
@@ -48,9 +60,10 @@ function init_kiddo_defaults() {
 }
 
 function init_listeners(canvas) {
-  canvas.addEventListener('mousedown', ev_canvas, false);
-  canvas.addEventListener('mousemove', ev_canvas, false);
-  canvas.addEventListener('mouseup', ev_canvas, false);
+  canvas.addEventListener('mousedown', ev_canvas);
+  canvas.addEventListener('mousemove', ev_canvas);
+  canvas.addEventListener('mouseup', ev_canvas);
+  canvas.addEventListener('mouseleave', function() { KiddoPaint.Display.clearPreview(); });
 
   document.onkeydown = function checkKey(e) { if(e.keyCode == 16) { KiddoPaint.Current.scaling = 2; KiddoPaint.Current.modified = true; }; }
   document.onkeyup = function checkKey(e) { if(e.keyCode == 16) { KiddoPaint.Current.scaling = 1; KiddoPaint.Current.modified = false; }; }
@@ -158,9 +171,11 @@ function init_builder_subtoolbar() {
   document.getElementById('bl2').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
 }
 
+
 function ev_canvas (ev) {
   // pre event 
   KiddoPaint.Display.step += 1;
+  KiddoPaint.Display.clearPreview();
 
   if (ev.layerX || ev.layerX == 0) {
     ev._x = ev.layerX;

@@ -4,6 +4,7 @@ KiddoPaint.Tools = {};
 KiddoPaint.Textures = {};
 KiddoPaint.Brushes = {};
 KiddoPaint.Builders = {};
+KiddoPaint.Stamps = {};
 KiddoPaint.Display = {};
 KiddoPaint.Colors = {};
 KiddoPaint.Current = {};
@@ -113,9 +114,22 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Brush;
   });
 
-  document.getElementById('machines').addEventListener('mousedown', function() {
-    show_sub_toolbar('machinetoolbar');
-    KiddoPaint.Current.tool = KiddoPaint.Tools.Machines;
+  document.getElementById('stamp1').addEventListener('mousedown', function() {
+    init_stamp_bar('stamp1');
+    show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+  });
+
+  document.getElementById('stamp2').addEventListener('mousedown', function() {
+    init_stamp_bar('stamp2');
+    show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+  });
+
+  document.getElementById('stamp3').addEventListener('mousedown', function() {
+    init_stamp_bar('stamp3');
+    show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
   document.getElementById('erase').addEventListener('mousedown', function() {
@@ -124,11 +138,20 @@ function init_tool_bar() {
   });
 };
 
+function init_stamp_bar(stampgroup) {
+  var stamptoolbar = KiddoPaint.Stamps.grouping[stampgroup].stamps;
+  KiddoPaint.Tools.Stamp.stamp = stamptoolbar[0];
+  for(var i = 0; i < stamptoolbar.length; i++) {
+    var buttonValue = '<h1>' + stamptoolbar[i] + '</h1>';
+    document.getElementById('xst' + i).innerHTML = buttonValue;
+  }
+}
+
 function init_subtool_bars() {
   init_pencil_subtoolbar();
   init_line_subtoolbar();
   init_brush_subtoolbar();
-  init_machines_subtoolbar();
+  init_stamp_subtoolbar();
 }
 
 function init_pencil_subtoolbar() {
@@ -168,26 +191,13 @@ function init_brush_subtoolbar() {
   document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
 }
 
-function init_machines_subtoolbar() {
-  document.getElementById('m1').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚂'; });
-  document.getElementById('m2').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏠'; });
-  document.getElementById('m3').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚃'; });
-  document.getElementById('m4').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚙'; });
-  document.getElementById('m5').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚚'; });
-  document.getElementById('m6').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚛'; });
-  document.getElementById('m7').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚜'; });
-  document.getElementById('m8').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚧'; });
-  document.getElementById('m9').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '✈️'; });
-  document.getElementById('m10').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏢'; });
-  document.getElementById('m11').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏤'; });
-  document.getElementById('m12').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚲'; });
-  document.getElementById('m13').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚁'; });
-  document.getElementById('m14').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '☁️'; });
-  document.getElementById('m15').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '⛳'; });
-  document.getElementById('m16').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🍕'; });
-  document.getElementById('m17').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🐓'; });
-  document.getElementById('m18').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🚶'; });
-  document.getElementById('m19').addEventListener('mousedown', function() { KiddoPaint.Tools.Machines.machine = '🏃'; });
+function init_stamp_subtoolbar() {
+  // document.getElementsByName("xx") ; name="xx"
+  var stampselect = document.querySelectorAll('*[id^="xst"]');
+  for(var i = 0; i < stampselect.length; i++) {
+    var stampButton = stampselect[i];
+    stampButton.addEventListener('mousedown', function(ev) { KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
+  }
 }
 
 

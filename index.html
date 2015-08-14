@@ -12,16 +12,20 @@
   <script type="text/javascript" src="js/brushes.js"></script>
   <script type="text/javascript" src="js/builders.js"></script>
   <script type="text/javascript" src="js/colors.js"></script>
+  <script type="text/javascript" src="js/stamps.js"></script>
 </head>
 
-<body oncontextmenu="return false" onload="init_kiddo_paint();">
+<!--body oncontextmenu="return false" onload="init_kiddo_paint();"-->
+<body onload="init_kiddo_paint();">
 <div id="container">
 
   <div id="toolbar">
     <button class="tool" id="pencil"><h1>✏️</h1> </button>
     <button class="tool" id="line"><h1>📏</h1></button>
     <button class="tool" id="brush"><h1>🎨</h1></button>
-    <button class="tool" id="machines"><h1>🚂</h1></button>
+    <button class="tool" id="stamp1" data"1"><h1>🚂</h1></button>
+    <button class="tool" id="stamp2" data"2"><h1>🏠</h1></button>
+    <button class="tool" id="stamp3" data"3"><h1>🏃</h1></button>
     <button class="tool" id="erase"><h1>💣</h1></button>
     <br>
     <br>
@@ -69,26 +73,26 @@
          <button class="tool" id="br2"><img src="img/bl2.png"></button>
          <button class="tool" id="br3"><h1>⚫</h1></button>
        </div>
-       <div id="machinetoolbar" class="hidden">
-         <button class="tool" id="m1"><h1>🚂</h1></button>
-         <button class="tool" id="m2"><h1>🏠</h1></button>
-         <button class="tool" id="m3"><h1>🚃</h1></button>
-         <button class="tool" id="m4"><h1>🚙</h1></button>
-         <button class="tool" id="m5"><h1>🚚</h1></button>
-         <button class="tool" id="m6"><h1>🚛</h1></button>
-         <button class="tool" id="m7"><h1>🚜</h1></button>
-         <button class="tool" id="m8"><h1>🚧</h1></button>
-         <button class="tool" id="m9"><h1>✈️</h1></button>
-         <button class="tool" id="m10"><h1>🏢</h1></button>
-         <button class="tool" id="m11"><h1>🏤</h1></button>
-         <button class="tool" id="m12"><h1>🚲</h1></button>
-         <button class="tool" id="m13"><h1>🚁</h1></button>
-         <button class="tool" id="m14"><h1>☁️</h1></button>
-         <button class="tool" id="m15"><h1>⛳</h1></button>
-         <button class="tool" id="m16"><h1>🍕</h1></button>
-         <button class="tool" id="m17"><h1>🐓</h1></button>
-         <button class="tool" id="m18"><h1>🚶</h1></button>
-         <button class="tool" id="m19"><h1>🏃</h1></button>
+       <div id="stamptoolbar" class="hidden">
+         <button class="tool" id="xst0"></button>
+         <button class="tool" id="xst1"></button>
+         <button class="tool" id="xst2"></button>
+         <button class="tool" id="xst3"></button>
+         <button class="tool" id="xst4"></button>
+         <button class="tool" id="xst5"></button>
+         <button class="tool" id="xst6"></button>
+         <button class="tool" id="xst7"></button>
+         <button class="tool" id="xst8"></button>
+         <button class="tool" id="xst9"></button>
+         <button class="tool" id="xst10"></button>
+         <button class="tool" id="xst11"></button>
+         <button class="tool" id="xst12"></button>
+         <button class="tool" id="xst13"></button>
+         <button class="tool" id="xst14"></button>
+         <button class="tool" id="xst15"></button>
+         <button class="tool" id="xst16"></button>
+         <button class="tool" id="xst17"></button>
+         <button class="tool" id="xst18"></button>
        </div>
     </div>
     <div id="paint">

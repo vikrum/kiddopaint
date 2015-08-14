@@ -2,6 +2,7 @@
 - Car tracks, bike track, foot prints, train tracks - brush type
 - Draggable bridge, rainbow
 - Maze fill with varied density
+- Box fill with thread connect (1,10; 2,9; 3,8..)
 
 Notes: 
 - // http://stackoverflow.com/a/16511854

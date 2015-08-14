@@ -113,11 +113,6 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Brush;
   });
 
-  document.getElementById('builder').addEventListener('mousedown', function() {
-    show_sub_toolbar('buildertoolbar');
-    KiddoPaint.Current.tool = KiddoPaint.Tools.Builder;
-  });
-
   document.getElementById('machines').addEventListener('mousedown', function() {
     show_sub_toolbar('machinetoolbar');
     KiddoPaint.Current.tool = KiddoPaint.Tools.Machines;
@@ -133,7 +128,6 @@ function init_subtool_bars() {
   init_pencil_subtoolbar();
   init_line_subtoolbar();
   init_brush_subtoolbar();
-  init_builder_subtoolbar();
   init_machines_subtoolbar();
 }
 
@@ -169,12 +163,9 @@ function init_line_subtoolbar() {
 }
 
 function init_brush_subtoolbar() {
-  document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
-}
-
-function init_builder_subtoolbar() {
-  document.getElementById('bl1').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
-  document.getElementById('bl2').addEventListener('mousedown', function() { KiddoPaint.Tools.Builder.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
+  document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
+  document.getElementById('br2').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
+  document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
 }
 
 function init_machines_subtoolbar() {

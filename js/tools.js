@@ -58,7 +58,7 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 };
 KiddoPaint.Tools.PixelPencil = new KiddoPaint.Tools.Toolbox.PixelPencil();
 
-KiddoPaint.Tools.Toolbox.Brush = function() {
+KiddoPaint.Tools.Toolbox.xBrush = function() {
 	var tool = this;
 	this.isDown = false;
 	this.previousEv = null;
@@ -95,9 +95,9 @@ KiddoPaint.Tools.Toolbox.Brush = function() {
 		}
 	};
 };
-KiddoPaint.Tools.Brush = new KiddoPaint.Tools.Toolbox.Brush();
+KiddoPaint.Tools.xBrush = new KiddoPaint.Tools.Toolbox.xBrush();
 
-KiddoPaint.Tools.Toolbox.Builder = function() {
+KiddoPaint.Tools.Toolbox.Brush = function() {
 	var tool = this;
 	this.isDown = false;
 	this.didMove = false;
@@ -150,7 +150,7 @@ KiddoPaint.Tools.Toolbox.Builder = function() {
 		}
 	};
 };
-KiddoPaint.Tools.Builder = new KiddoPaint.Tools.Toolbox.Builder();
+KiddoPaint.Tools.Brush = new KiddoPaint.Tools.Toolbox.Brush();
 
 KiddoPaint.Tools.Toolbox.Line = function() {
 	var tool = this;

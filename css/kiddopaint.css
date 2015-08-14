@@ -135,3 +135,8 @@ html, body {
   top: 1px;
   left: 1px;
 }
+
+h1 {
+  font-size: 3em;
+  margin: 0.5ex;
+}

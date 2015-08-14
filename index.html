@@ -14,16 +14,15 @@
   <script type="text/javascript" src="js/colors.js"></script>
 </head>
 
-<body onload="init_kiddo_paint();">
+<body oncontextmenu="return false" onload="init_kiddo_paint();">
 <div id="container">
 
   <div id="toolbar">
-    <button class="tool" id="pencil">pncl</button>
-    <button class="tool" id="line">line</button>
-    <button class="tool" id="brush">brsh</button>
-    <button class="tool" id="builder">bldr</button>
+    <button class="tool" id="pencil"><h1>✏️</h1> </button>
+    <button class="tool" id="line"><h1>📏</h1></button>
+    <button class="tool" id="brush"><h1>🎨</h1></button>
     <button class="tool" id="machines"><h1>🚂</h1></button>
-    <button class="tool" id="erase">erse</button>
+    <button class="tool" id="erase"><h1>💣</h1></button>
     <br>
     <br>
     <div id="colorbar">
@@ -66,11 +65,9 @@
          <button class="tool" id="lt7"><img src="img/pt7.png"></button>
        </div>
        <div id="brushtoolbar" class="hidden">
-         <button class="tool" id="br1">br1</button>
-       </div>
-       <div id="buildertoolbar" class="hidden">
-         <button class="tool" id="bl1"><img src="img/bl1.png"></button>
-         <button class="tool" id="bl2"><img src="img/bl2.png"></button>
+         <button class="tool" id="br1"><img src="img/bl1.png"></button>
+         <button class="tool" id="br2"><img src="img/bl2.png"></button>
+         <button class="tool" id="br3"><h1>⚫</h1></button>
        </div>
        <div id="machinetoolbar" class="hidden">
          <button class="tool" id="m1"><h1>🚂</h1></button>

@@ -148,6 +148,12 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
+  document.getElementById('stamp4').addEventListener('mousedown', function() {
+    init_stamp_bar('stamp4');
+    show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+  });
+
   document.getElementById('erase').addEventListener('mousedown', function() {
     KiddoPaint.Display.context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
     KiddoPaint.Display.main_context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);

@@ -66,8 +66,24 @@ function init_listeners(canvas) {
   canvas.addEventListener('mouseup', ev_canvas);
   canvas.addEventListener('mouseleave', function() { KiddoPaint.Display.clearPreview(); });
 
-  document.onkeydown = function checkKey(e) { if(e.keyCode == 16) { KiddoPaint.Current.scaling = 2; KiddoPaint.Current.modified = true; }; }
-  document.onkeyup = function checkKey(e) { if(e.keyCode == 16) { KiddoPaint.Current.scaling = 1; KiddoPaint.Current.modified = false; }; }
+  document.onkeydown = function checkKey(e) {
+    if(e.keyCode == 16) {
+      KiddoPaint.Current.scaling = 2;
+      KiddoPaint.Current.modified = true;
+     }
+     else if(e.keyCode == 18) {
+      KiddoPaint.Current.modifiedAlt = true;
+     };
+  }
+  document.onkeyup = function checkKey(e) {
+    if(e.keyCode == 16) {
+      KiddoPaint.Current.scaling = 1;
+      KiddoPaint.Current.modified = false;
+    }
+    else if(e.keyCode == 18) {
+      KiddoPaint.Current.modifiedAlt = false;
+    };
+  }
 }
 
 function colorSelect(e) {
@@ -189,6 +205,8 @@ function init_brush_subtoolbar() {
   document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
   document.getElementById('br2').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
   document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
+  document.getElementById('br4').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '👣',  angle); }; });
+  document.getElementById('br5').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '🐾', angle); }; });
 }
 
 function init_stamp_subtoolbar() {

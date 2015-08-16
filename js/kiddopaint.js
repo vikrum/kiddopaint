@@ -154,9 +154,12 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
+  document.getElementById('undo').addEventListener('mousedown', function() {
+    KiddoPaint.Display.undo();
+  });
+
   document.getElementById('erase').addEventListener('mousedown', function() {
-    KiddoPaint.Display.context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
-    KiddoPaint.Display.main_context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+    KiddoPaint.Display.clearAll();
   });
 };
 

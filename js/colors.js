@@ -16,7 +16,9 @@ KiddoPaint.Colors.All = {
   colordblue: 'rgb(0, 0, 128)',
   colorlblue: 'rgb(0, 0, 255)',
   colordpurple: 'rgb(128, 0, 128)',
-  colorlpurple: 'rgb(255, 0, 255)'
+  colorlpurple: 'rgb(255, 0, 255)',
+  colorlbrown: 'rgb(187, 145, 95)',
+  colordbrown: 'rgb(136, 104, 67)'
 }
 
 KiddoPaint.Colors.nextColor = function() {

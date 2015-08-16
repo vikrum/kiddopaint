@@ -5,6 +5,7 @@ KiddoPaint.Textures = {};
 KiddoPaint.Brushes = {};
 KiddoPaint.Builders = {};
 KiddoPaint.Stamps = {};
+KiddoPaint.Sounds = {};
 KiddoPaint.Display = {};
 KiddoPaint.Colors = {};
 KiddoPaint.Current = {};
@@ -155,10 +156,12 @@ function init_tool_bar() {
   });
 
   document.getElementById('undo').addEventListener('mousedown', function() {
+    KiddoPaint.Sounds.oops();
     KiddoPaint.Display.undo();
   });
 
   document.getElementById('erase').addEventListener('mousedown', function() {
+    KiddoPaint.Sounds.explosion();
     KiddoPaint.Display.clearAll();
   });
 };
@@ -216,6 +219,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
   document.getElementById('br4').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '👣',  angle); }; });
   document.getElementById('br5').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '🐾', angle); }; });
+  document.getElementById('br6').addEventListener('mousedown', function() { KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Rail(KiddoPaint.Colors.randomColor(), angle) }; });
 }
 
 function init_stamp_subtoolbar() {

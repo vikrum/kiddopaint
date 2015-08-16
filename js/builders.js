@@ -73,3 +73,30 @@ KiddoPaint.Builders.Prints = function(color1, print, angle) {
 
 	return canvasBrush;
 }
+
+KiddoPaint.Builders.Rail = function(color1, angle) {
+	color1 = color1 || 'black';
+	angle = angle || 0;
+
+	var canvasBrush = document.createElement('canvas');
+	canvasBrush.width = 43;
+	canvasBrush.height = 43;
+	var contextBrush = canvasBrush.getContext('2d');
+
+	contextBrush.beginPath();
+
+	contextBrush.translate(21, 21);
+	contextBrush.rotate(angle);
+	contextBrush.translate(-15.5, -15.5);
+
+	contextBrush.fillStyle = KiddoPaint.Colors.All.colorlgrey;
+	contextBrush.fillRect(0.5, 0, 3, 40);
+	contextBrush.fillRect(30.5, 0, 2.5, 40);
+
+	contextBrush.fillStyle = KiddoPaint.Colors.All.colordgrey;
+	contextBrush.fillRect(3.5, 0, 2.5, 40);
+	contextBrush.fillRect(27.5, 0, 2.5, 40);
+
+	return canvasBrush;
+}
+

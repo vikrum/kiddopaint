@@ -137,38 +137,25 @@ KiddoPaint.Tools.Toolbox.Stamp = function() {
 	var tool = this;
 	this.isDown = false;
 	this.stamp = '🚂';
+	this.size = 64;
+	this.texture = function() { return KiddoPaint.Stamps.stamp(tool.stamp, KiddoPaint.Current.modifiedAlt, tool.size); };
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
-		KiddoPaint.Display.context.font = KiddoPaint.Current.modified ? "144px sans-serif" : "64px sans-serif"
-		KiddoPaint.Display.context.fillStyle = 'transparent';
 		KiddoPaint.Sounds.stamp();
-		if(KiddoPaint.Current.modifiedAlt) {
-			KiddoPaint.Display.context.save();
-			KiddoPaint.Display.context.translate(ev._x, ev._y);
-			KiddoPaint.Display.context.scale(-1, 1);
-			KiddoPaint.Display.context.fillText(tool.stamp, 0, 0);
-			KiddoPaint.Display.context.restore();
-		}
-		else {
-			KiddoPaint.Display.context.fillText(tool.stamp, ev._x, ev._y);
-		}
+
+		tool.size = KiddoPaint.Current.modified ? 144 : 64;
+		KiddoPaint.Display.context.fillStyle = 'transparent';
+		var brushFill = tool.texture();
+		KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y - tool.size));
 	};
 
 	this.mousemove = function (ev) {
 		if( ! tool.isDown) {
-			KiddoPaint.Display.previewContext.font = KiddoPaint.Current.modified ? "144px sans-serif" : "64px sans-serif"
+			tool.size = KiddoPaint.Current.modified ? 144 : 64;
 			KiddoPaint.Display.previewContext.fillStyle = 'transparent';
-			if(KiddoPaint.Current.modifiedAlt) {
-				KiddoPaint.Display.previewContext.save();
-				KiddoPaint.Display.previewContext.translate(ev._x, ev._y);
-				KiddoPaint.Display.previewContext.scale(-1, 1);
-				KiddoPaint.Display.previewContext.fillText(tool.stamp, 0, 0);
-				KiddoPaint.Display.previewContext.restore();
-			}
-			else {
-				KiddoPaint.Display.previewContext.fillText(tool.stamp, ev._x, ev._y);
-			}
+			var brushFill = tool.texture();
+			KiddoPaint.Display.previewContext.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y - tool.size));
 		}
 	};
 

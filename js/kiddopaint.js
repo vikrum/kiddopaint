@@ -59,6 +59,12 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.tool = KiddoPaint.Tools.PixelPencil;
   KiddoPaint.Current.scaling = 1;
   KiddoPaint.Display.step = 0;
+  KiddoPaint.Current.modified = false;
+  KiddoPaint.Current.modifiedAlt = false;
+  KiddoPaint.Current.modifiedCtrl = false;
+  KiddoPaint.Current.modifiedRange = 0;
+  KiddoPaint.Current.modifiedAltRange = 0;
+  KiddoPaint.Current.modifiedCtrlRange = 0;
 }
 
 function init_listeners(canvas) {
@@ -66,20 +72,27 @@ function init_listeners(canvas) {
   canvas.addEventListener('mousemove', ev_canvas);
   canvas.addEventListener('mouseup', ev_canvas);
   canvas.addEventListener('mouseleave', function() { KiddoPaint.Display.clearPreview(); });
+  canvas.addEventListener("mousewheel", mouse_wheel);
 
   document.onkeydown = function checkKey(e) {
     if(e.keyCode == 16) {
       KiddoPaint.Current.scaling = 2;
       KiddoPaint.Current.modified = true;
      }
+     else if(e.keyCode == 91) {
+      KiddoPaint.Current.modifiedCtrl = true;
+     }
      else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = true;
-     };
+     }
   }
   document.onkeyup = function checkKey(e) {
     if(e.keyCode == 16) {
       KiddoPaint.Current.scaling = 1;
       KiddoPaint.Current.modified = false;
+    }
+    else if(e.keyCode == 91) {
+      KiddoPaint.Current.modifiedCtrl = false;
     }
     else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = false;
@@ -232,10 +245,11 @@ function init_stamp_subtoolbar() {
 }
 
 
-function ev_canvas (ev) {
+function ev_canvas(ev) {
   // pre event 
   KiddoPaint.Display.step += 1;
   KiddoPaint.Display.clearPreview();
+  KiddoPaint.Current.ev = ev;
 
   if (ev.layerX || ev.layerX == 0) {
     ev._x = ev.layerX;
@@ -250,6 +264,40 @@ function ev_canvas (ev) {
   if (func) {
     func(ev);
   }
+}
 
-  // post event
+function mouse_wheel(ev) {
+  var delta = Math.max(-1, Math.min(1, (ev.wheelDelta || -ev.detail)));
+  if(KiddoPaint.Current.modified) {
+    KiddoPaint.Current.modifiedRange += delta;
+    if(KiddoPaint.Current.modifiedRange > 100) {
+      KiddoPaint.Current.modifiedRange = -100;
+    }
+    else if (KiddoPaint.Current.modifiedRange < -100) {
+      KiddoPaint.Current.modifiedRange = 100;
+    }
+  }
+  else if(KiddoPaint.Current.modifiedAlt) {
+    KiddoPaint.Current.modifiedAltRange += delta;
+    if(KiddoPaint.Current.modifiedAltRange > 100) {
+      KiddoPaint.Current.modifiedAltRange = -100;
+    }
+    else if (KiddoPaint.Current.modifiedAltRange < -100) {
+      KiddoPaint.Current.modifiedAltRange = 100;
+    }
+  }
+  else if(KiddoPaint.Current.modifiedCtrl) {
+    KiddoPaint.Current.modifiedCtrlRange += delta;
+    if(KiddoPaint.Current.modifiedCtrlRange > 100) {
+      KiddoPaint.Current.modifiedCtrlRange = -100;
+    }
+    else if (KiddoPaint.Current.modifiedCtrlRange < -100) {
+      KiddoPaint.Current.modifiedCtrlRange = 100;
+    }
+  }
+  // kick off a redraw of preview
+  if(KiddoPaint.Current.ev) { ev_canvas(KiddoPaint.Current.ev); }
+  if(ev.preventDefault) { ev.preventDefault(); }
+  ev.returnValue = false;  
+  return false;
 }

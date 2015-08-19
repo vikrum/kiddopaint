@@ -26,5 +26,7 @@ KiddoPaint.Stamps.stamp = function(stamp, alt, size) {
 	}
 	contextBrush.restore();
 
+	hueShift(canvasBrush, contextBrush, KiddoPaint.Current.modifiedCtrlRange / 100);
+
 	return canvasBrush;
 }

@@ -112,6 +112,10 @@ html, body {
 .colorlblue { background-color: rgb(0, 0, 255); }
 .colordpurple { background-color: rgb(128, 0, 128); }
 .colorlpurple { background-color: rgb(255, 0, 255); }
+.colordbrown { background-color: rgb(73, 61, 38); }
+.colorlbrown { background-color: rgb(136, 104, 67); }
+.colordorange { background-color: rgb(225, 135, 0); }
+.colorlorange { background-color: rgb(255, 195, 30); }
 
 #paint {
   position: relative;

@@ -9,6 +9,7 @@ KiddoPaint.Sounds = {};
 KiddoPaint.Display = {};
 KiddoPaint.Colors = {};
 KiddoPaint.Current = {};
+KiddoPaint.Cache = {};
 
 function init_kiddo_paint() {
   var canvas = document.getElementById('kiddopaint');
@@ -62,6 +63,10 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modified = false;
   KiddoPaint.Current.modifiedAlt = false;
   KiddoPaint.Current.modifiedCtrl = false;
+  reset_ranges();
+}
+
+function reset_ranges() {
   KiddoPaint.Current.modifiedRange = 0;
   KiddoPaint.Current.modifiedAltRange = 0;
   KiddoPaint.Current.modifiedCtrlRange = 0;
@@ -84,6 +89,9 @@ function init_listeners(canvas) {
      }
      else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = true;
+     }
+     else if(e.keyCode == 83) {
+      save_to_file();
      }
   }
   document.onkeyup = function checkKey(e) {
@@ -115,6 +123,7 @@ function init_color_selector() {
 }
 
 function show_sub_toolbar(subtoolbar) {
+  reset_ranges();
   var subtoolbars = document.getElementById('subtoolbars').children;
   for(var i = 0, len = subtoolbars.length; i < len; i++) {
     var div = subtoolbars[i];
@@ -240,7 +249,7 @@ function init_stamp_subtoolbar() {
   var stampselect = document.querySelectorAll('*[id^="xst"]');
   for(var i = 0; i < stampselect.length; i++) {
     var stampButton = stampselect[i];
-    stampButton.addEventListener('mousedown', function(ev) { KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
+    stampButton.addEventListener('mousedown', function(ev) { reset_ranges(); KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
   }
 }
 
@@ -300,4 +309,9 @@ function mouse_wheel(ev) {
   if(ev.preventDefault) { ev.preventDefault(); }
   ev.returnValue = false;  
   return false;
+}
+
+function save_to_file() {
+  var image = KiddoPaint.Display.main_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  window.location.href=image; 
 }

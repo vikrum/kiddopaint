@@ -6,7 +6,7 @@ KiddoPaint.Stamps.grouping = {
   }
 
 
-KiddoPaint.Stamps.stamp = function(stamp, alt, size) {
+KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount) {
 	stamp = stamp || '';
 	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = size + (size * 0.05);
@@ -26,7 +26,7 @@ KiddoPaint.Stamps.stamp = function(stamp, alt, size) {
 	}
 	contextBrush.restore();
 
-	hueShift(canvasBrush, contextBrush, KiddoPaint.Current.modifiedCtrlRange / 100);
+	hueShift(canvasBrush, contextBrush, shiftAmount);
 
 	return canvasBrush;
 }

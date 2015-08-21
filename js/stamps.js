@@ -9,8 +9,8 @@ KiddoPaint.Stamps.grouping = {
 KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount) {
 	stamp = stamp || '';
 	var canvasBrush = document.createElement('canvas');
-	canvasBrush.width = size + (size * 0.05);
-	canvasBrush.height = size + (size * 0.05);
+	canvasBrush.width = Math.max(size + (size * 0.05), 24);
+	canvasBrush.height = Math.max(size + (size * 0.05), 24);
 
 	var contextBrush = canvasBrush.getContext('2d');
 	contextBrush.font = size + 'px sans-serif';

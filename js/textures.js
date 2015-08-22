@@ -138,3 +138,9 @@ KiddoPaint.Textures.RSolid = function() {
   return KiddoPaint.Textures.Solid(color1);
 }
 
+KiddoPaint.Textures.None = function() {
+	var canvasPattern = document.createElement('canvas');
+	canvasPattern.width = 1;
+	canvasPattern.height = 1;
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
+}

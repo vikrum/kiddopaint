@@ -226,7 +226,8 @@ KiddoPaint.Tools.Toolbox.Square = function() {
 	this.isDown = false;
 	this.size = 1;
 	this.stomp = true;
-	this.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
+	this.texture = function() { return KiddoPaint.Textures.None(); };
+	this.stroke = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
@@ -239,11 +240,12 @@ KiddoPaint.Tools.Toolbox.Square = function() {
 			if(tool.stomp) {
 				KiddoPaint.Display.clearTmp();
 			}
-			KiddoPaint.Display.context.beginPath();
-			KiddoPaint.Display.context.moveTo(Math.round(tool.x), Math.round(tool.y));
+			KiddoPaint.Display.context.strokeStyle = tool.stroke();
+			KiddoPaint.Display.context.lineWidth = 1.5;
+			KiddoPaint.Display.context.strokeRect(tool.x, tool.y, ev._x - tool.x, ev._y - tool.y);
+
 			KiddoPaint.Display.context.fillStyle = tool.texture();
 			KiddoPaint.Display.context.fillRect(tool.x, tool.y, ev._x - tool.x, ev._y - tool.y);
-			KiddoPaint.Display.context.closePath();
 		}
 	};
 
@@ -262,7 +264,8 @@ KiddoPaint.Tools.Toolbox.Circle = function() {
 	this.isDown = false;
 	this.size = 1;
 	this.stomp = true;
-	this.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
+	this.texture = function() { return KiddoPaint.Textures.None(); };
+	this.stroke = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
@@ -276,10 +279,12 @@ KiddoPaint.Tools.Toolbox.Circle = function() {
 				KiddoPaint.Display.clearTmp();
 			}
 			KiddoPaint.Display.context.beginPath();
-			KiddoPaint.Display.context.moveTo(Math.round(tool.x), Math.round(tool.y));
 			KiddoPaint.Display.context.fillStyle = tool.texture();
+			KiddoPaint.Display.context.strokeStyle = tool.stroke();
+			KiddoPaint.Display.context.lineWidth = 1.5;
 			KiddoPaint.Display.context.arc(tool.x, tool.y, Math.abs(tool.x - ev._x), 0, 2*Math.PI);
 			KiddoPaint.Display.context.fill();
+			KiddoPaint.Display.context.stroke();
 			KiddoPaint.Display.context.closePath();
 		}
 	};

@@ -253,6 +253,19 @@ function init_square_subtoolbar() {
   document.getElementById('sqt3').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
   document.getElementById('sqt4').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
   document.getElementById('sqt5').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
+  document.getElementById('sqt6').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Stripes(KiddoPaint.Current.color); } });
+  document.getElementById('sqt7').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Speckles(KiddoPaint.Current.color); } });
+  document.getElementById('sqt8').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Bubbles(KiddoPaint.Current.color); } });
+  document.getElementById('sqt9').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Thatch(KiddoPaint.Current.color); } });
+  document.getElementById('sqt10').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Shingles(KiddoPaint.Current.color); } });
+  document.getElementById('sqt11').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Diamond(KiddoPaint.Current.color); } });
+  document.getElementById('sqt12').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Ribbon(KiddoPaint.Current.color); } });
+  document.getElementById('sqt13').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Sand(KiddoPaint.Current.color); } });
+  document.getElementById('sqt14').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Brick(KiddoPaint.Current.color); } });
+  document.getElementById('sqt15').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Chevron(KiddoPaint.Current.color); } });
+  document.getElementById('sqt16').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Stairs(KiddoPaint.Current.color); } });
+  document.getElementById('sqt17').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Cross(KiddoPaint.Current.color); } });
+  document.getElementById('sqt18').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.DiagBrick(KiddoPaint.Current.color); } });
 }
 
 function init_circle_subtoolbar() {

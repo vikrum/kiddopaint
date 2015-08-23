@@ -1,9 +1,10 @@
-- Stamp packs: MC, machines, etc
-- Car tracks, bike track, foot prints, train tracks - brush type
+- Car tracks, bike track, brush type
 - Draggable bridge, rainbow
 - Maze fill with varied density
 - Box fill with thread connect (1,10; 2,9; 3,8..)
+- Multipen with hypotrochoid following center
 
 Notes: 
 - // http://stackoverflow.com/a/16511854
 - // http://dev.opera.com/articles/html5-canvas-painting/
+- // http://linuxgazette.net/133/luana.html

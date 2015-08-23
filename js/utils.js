@@ -79,3 +79,7 @@ function hueShift(canvas, context, shift) {
   }
   context.putImageData(imageData, 0, 0);
 }
+
+function ziggurat() {
+  return ((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) - 3) / 3;
+}

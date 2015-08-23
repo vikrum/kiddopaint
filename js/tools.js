@@ -89,6 +89,7 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 	this.texture = function() { };
 	this.spacing = 5;
 	this.step = 0;
+	this.offset = 25;
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
@@ -100,14 +101,14 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 		if (tool.isDown) {
 			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
 			  var brushFill = tool.texture(tool.step);
-			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x), Math.round(ev._y));
+			  KiddoPaint.Display.context.drawImage(brushFill, Math.round(ev._x - tool.offset), Math.round(ev._y - tool.offset));
 			  tool.previousEv = ev;
 			  tool.step += 1;
 			}
 		}
 		else {
 			  var brushFill = tool.texture(0);
-			  KiddoPaint.Display.previewContext.drawImage(brushFill, Math.round(ev._x) - 20, Math.round(ev._y - 20));
+			  KiddoPaint.Display.previewContext.drawImage(brushFill, Math.round(ev._x - tool.offset), Math.round(ev._y - tool.offset));
 		}
 	};
 

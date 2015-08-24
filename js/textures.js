@@ -482,27 +482,6 @@ KiddoPaint.Textures.CornerStair = function(color1) {
 	contextPattern.beginPath();
 	contextPattern.fillStyle = color1;
 
-	contextPattern.rect(0, 0, 6, 2);
-	contextPattern.rect(0, 2, 4, 2);
-	contextPattern.rect(0, 4, 2, 2);
-
-	contextPattern.fill();
-	contextPattern.closePath();
-
-	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
-}
-
-KiddoPaint.Textures.CornerStair = function(color1) {
-	color1 = color1 || 'black';
-
-	var canvasPattern = document.createElement('canvas');
-	canvasPattern.width = 8;
-	canvasPattern.height = 8;
-	var contextPattern = canvasPattern.getContext('2d');
-	
-	contextPattern.beginPath();
-	contextPattern.fillStyle = color1;
-
 	if(KiddoPaint.Current.modifiedAlt) {
 		contextPattern.rect(0, 0, 6, 2);
 		contextPattern.rect(0, 2, 4, 2);

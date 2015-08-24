@@ -10,6 +10,7 @@ KiddoPaint.Display = {};
 KiddoPaint.Colors = {};
 KiddoPaint.Current = {};
 KiddoPaint.Cache = {};
+KiddoPaint.Alphabet = {};
 
 function init_kiddo_paint() {
   var canvas = document.getElementById('kiddopaint');
@@ -63,6 +64,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modified = false;
   KiddoPaint.Current.modifiedAlt = false;
   KiddoPaint.Current.modifiedCtrl = false;
+  KiddoPaint.Alphabet.page = 1;
   reset_ranges();
 }
 
@@ -166,24 +168,35 @@ function init_tool_bar() {
   document.getElementById('stamp1').addEventListener('mousedown', function() {
     init_stamp_bar('stamp1');
     show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
   document.getElementById('stamp2').addEventListener('mousedown', function() {
     init_stamp_bar('stamp2');
     show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
   document.getElementById('stamp3').addEventListener('mousedown', function() {
     init_stamp_bar('stamp3');
     show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
   document.getElementById('stamp4').addEventListener('mousedown', function() {
     init_stamp_bar('stamp4');
     show_sub_toolbar('stamptoolbar');
+    KiddoPaint.Tools.Stamp.useColor = false;
+    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+  });
+
+  document.getElementById('alphabet').addEventListener('mousedown', function() {
+    init_alphabet_bar('character1');
+    show_sub_toolbar('alphabettoolbar');
+    KiddoPaint.Tools.Stamp.useColor = true;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
@@ -196,6 +209,11 @@ function init_tool_bar() {
     KiddoPaint.Sounds.explosion();
     KiddoPaint.Display.clearAll();
   });
+
+  document.getElementById('alnext').addEventListener('mousedown', function() {
+    KiddoPaint.Alphabet.nextPage();
+    init_alphabet_bar('character' + KiddoPaint.Alphabet.page);
+  });
 };
 
 function init_stamp_bar(stampgroup) {
@@ -207,6 +225,15 @@ function init_stamp_bar(stampgroup) {
   }
 }
 
+function init_alphabet_bar(alphabetgroup) {
+  var alphabettoolbar = KiddoPaint.Alphabet.english[alphabetgroup].letters;
+  KiddoPaint.Tools.Stamp.stamp = alphabettoolbar[0];
+  for(var i = 0; i < alphabettoolbar.length; i++) {
+    var buttonValue = '<h1>' + alphabettoolbar[i] + '</h1>';
+    document.getElementById('xal' + i).innerHTML = buttonValue;
+  }
+}
+
 function init_subtool_bars() {
   init_pencil_subtoolbar();
   init_line_subtoolbar();
@@ -214,6 +241,7 @@ function init_subtool_bars() {
   init_circle_subtoolbar();
   init_brush_subtoolbar();
   init_stamp_subtoolbar();
+  init_alphabet_subtoolbar();
 }
 
 function init_pencil_subtoolbar() {
@@ -295,6 +323,13 @@ function init_stamp_subtoolbar() {
   }
 }
 
+function init_alphabet_subtoolbar() {
+  var alphaselect = document.querySelectorAll('*[id^="xal"]');
+  for(var i = 0; i < alphaselect.length; i++) {
+    var alphaButton = alphaselect[i];
+    alphaButton.addEventListener('mousedown', function(ev) { reset_ranges(); KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
+  }
+}
 
 function ev_canvas(ev) {
   // pre event 

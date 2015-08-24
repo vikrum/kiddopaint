@@ -3,7 +3,7 @@ KiddoPaint.Tools.Toolbox = {};
 KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 	var tool = this;
 	this.isDown = false;
-	this.size = 1;
+	this.size = 7;
 	this.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
 
 	this.mousedown = function (ev) {

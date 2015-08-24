@@ -31,7 +31,7 @@ KiddoPaint.Brushes.RCircles = function() {
 KiddoPaint.Brushes.Spray = function(color1) {
 	color1 = color1 || 'black';
 
-	var radius = 25;
+	var radius = 25 * KiddoPaint.Current.scaling;
 	var density = 256;
 
 	var canvasBrush = document.createElement('canvas');

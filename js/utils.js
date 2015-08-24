@@ -83,3 +83,36 @@ function hueShift(canvas, context, shift) {
 function ziggurat() {
   return ((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) - 3) / 3;
 }
+
+function makeIcon(texture) {
+	var canvasIcon = document.createElement('canvas');
+	canvasIcon.width = 50;
+	canvasIcon.height = 50;
+	var contextIcon = canvasIcon.getContext('2d');
+	
+	contextIcon.beginPath();
+	contextIcon.lineWidth = 1;
+	contextIcon.strokeRect(10, 10, 30, 30);
+	contextIcon.fillStyle = texture();
+	contextIcon.fillRect(10, 10, 30, 30);
+	contextIcon.closePath();
+
+	return canvasIcon.toDataURL();
+}
+
+function makeCircleIcon(texture) {
+	var canvasIcon = document.createElement('canvas');
+	canvasIcon.width = 50;
+	canvasIcon.height = 50;
+	var contextIcon = canvasIcon.getContext('2d');
+	
+	contextIcon.beginPath();
+	contextIcon.lineWidth = 1;
+	contextIcon.fillStyle = texture();
+	contextIcon.arc(25, 25, 15, 0, 2*Math.PI);
+	contextIcon.fill();
+	contextIcon.stroke();
+	contextIcon.closePath();
+
+	return canvasIcon.toDataURL();
+}

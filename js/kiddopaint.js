@@ -252,11 +252,23 @@ function init_pencil_subtoolbar() {
   document.getElementById('pw5').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.size = 100; });
 
   document.getElementById('pt1').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); } });
+  document.getElementById('ipt1').src = makeIcon(KiddoPaint.Textures.Solid);
+  
   document.getElementById('pt2').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
+  document.getElementById('ipt2').src = makeIcon(KiddoPaint.Textures.Partial1);
+  
   document.getElementById('pt3').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
+  document.getElementById('ipt3').src = makeIcon(KiddoPaint.Textures.Partial2);
+  
   document.getElementById('pt4').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
+  document.getElementById('ipt4').src = makeIcon(KiddoPaint.Textures.Partial3);
+  
   document.getElementById('pt5').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Current.modifiedAlt ? KiddoPaint.Textures.RSmiley() : KiddoPaint.Textures.Smiley(KiddoPaint.Current.color); } });
+  document.getElementById('ipt5').src = makeIcon(KiddoPaint.Textures.Smiley);
+  
   document.getElementById('pt6').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.PartialSquares(KiddoPaint.Current.color); } });
+  document.getElementById('ipt6').src = makeIcon(KiddoPaint.Textures.PartialSquares);
+
   document.getElementById('pt7').addEventListener('mousedown', function() { KiddoPaint.Tools.PixelPencil.texture = function() { return KiddoPaint.Textures.RSolid(); } });
 }
 
@@ -268,39 +280,142 @@ function init_line_subtoolbar() {
   document.getElementById('lw5').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.size = 100; });
 
   document.getElementById('lt1').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); } });
+  document.getElementById('ilt1').src = makeIcon(KiddoPaint.Textures.Solid);
+
   document.getElementById('lt2').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
+  document.getElementById('ilt2').src = makeIcon(KiddoPaint.Textures.Partial1);
+  
   document.getElementById('lt3').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
+  document.getElementById('ilt3').src = makeIcon(KiddoPaint.Textures.Partial2);
+  
   document.getElementById('lt4').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = true; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
+  document.getElementById('ilt4').src = makeIcon(KiddoPaint.Textures.Partial3);
+  
   document.getElementById('lt7').addEventListener('mousedown', function() { KiddoPaint.Tools.Line.stomp = false; KiddoPaint.Tools.Line.texture = function() { return KiddoPaint.Textures.RSolid(); } });
 }
 
 function init_square_subtoolbar() {
   document.getElementById('sqt1').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.None(KiddoPaint.Current.color); } });
+  document.getElementById('isqt1').src = makeIcon(KiddoPaint.Textures.None);
+
   document.getElementById('sqt2').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); } });
+  document.getElementById('isqt2').src = makeIcon(KiddoPaint.Textures.Solid);
+  
   document.getElementById('sqt3').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
+  document.getElementById('isqt3').src = makeIcon(KiddoPaint.Textures.Partial1);
+
   document.getElementById('sqt4').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
+  document.getElementById('isqt4').src = makeIcon(KiddoPaint.Textures.Partial2);
+  
   document.getElementById('sqt5').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
+  document.getElementById('isqt5').src = makeIcon(KiddoPaint.Textures.Partial3);
+  
   document.getElementById('sqt6').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Stripes(KiddoPaint.Current.color); } });
+  document.getElementById('isqt6').src = makeIcon(KiddoPaint.Textures.Stripes);
+  
   document.getElementById('sqt7').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Speckles(KiddoPaint.Current.color); } });
+  document.getElementById('isqt7').src = makeIcon(KiddoPaint.Textures.Speckles);
+  
   document.getElementById('sqt8').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Bubbles(KiddoPaint.Current.color); } });
+  document.getElementById('isqt8').src = makeIcon(KiddoPaint.Textures.Bubbles);
+  
   document.getElementById('sqt9').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Thatch(KiddoPaint.Current.color); } });
+  document.getElementById('isqt9').src = makeIcon(KiddoPaint.Textures.Thatch);
+  
   document.getElementById('sqt10').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Shingles(KiddoPaint.Current.color); } });
+  document.getElementById('isqt10').src = makeIcon(KiddoPaint.Textures.Shingles);
+  
   document.getElementById('sqt11').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Diamond(KiddoPaint.Current.color); } });
+  document.getElementById('isqt11').src = makeIcon(KiddoPaint.Textures.Diamond);
+  
   document.getElementById('sqt12').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Ribbon(KiddoPaint.Current.color); } });
+  document.getElementById('isqt12').src = makeIcon(KiddoPaint.Textures.Ribbon);
+  
   document.getElementById('sqt13').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Sand(KiddoPaint.Current.color); } });
+  document.getElementById('isqt13').src = makeIcon(KiddoPaint.Textures.Sand);
+  
   document.getElementById('sqt14').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Brick(KiddoPaint.Current.color); } });
+  document.getElementById('isqt14').src = makeIcon(KiddoPaint.Textures.Brick);
+  
   document.getElementById('sqt15').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Chevron(KiddoPaint.Current.color); } });
+  document.getElementById('isqt15').src = makeIcon(KiddoPaint.Textures.Chevron);
+  
   document.getElementById('sqt16').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Stairs(KiddoPaint.Current.color); } });
+  document.getElementById('isqt16').src = makeIcon(KiddoPaint.Textures.Stairs);
+  
   document.getElementById('sqt17').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Cross(KiddoPaint.Current.color); } });
+  document.getElementById('isqt17').src = makeIcon(KiddoPaint.Textures.Cross);
+  
   document.getElementById('sqt18').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.DiagBrick(KiddoPaint.Current.color); } });
+  document.getElementById('isqt18').src = makeIcon(KiddoPaint.Textures.DiagBrick);
+
+  document.getElementById('sqt19').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.CornerStair(KiddoPaint.Current.color); } });
+  document.getElementById('isqt19').src = makeIcon(KiddoPaint.Textures.CornerStair);
+
+  document.getElementById('sqt20').addEventListener('mousedown', function() { KiddoPaint.Tools.Square.texture = function() { return KiddoPaint.Textures.Houndstooth(KiddoPaint.Current.color); } });
+  document.getElementById('isqt20').src = makeIcon(KiddoPaint.Textures.Houndstooth);
 }
 
 function init_circle_subtoolbar() {
   document.getElementById('ct1').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.None(KiddoPaint.Current.color); } });
+  document.getElementById('ict1').src = makeCircleIcon(KiddoPaint.Textures.None);
+  
   document.getElementById('ct2').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); } });
+  document.getElementById('ict2').src = makeCircleIcon(KiddoPaint.Textures.Solid);
+  
   document.getElementById('ct3').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color); } });
+  document.getElementById('ict3').src = makeCircleIcon(KiddoPaint.Textures.Partial1);
+
   document.getElementById('ct4').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color); } });
+  document.getElementById('ict4').src = makeCircleIcon(KiddoPaint.Textures.Partial2);
+
   document.getElementById('ct5').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color); } });
+  document.getElementById('ict5').src = makeCircleIcon(KiddoPaint.Textures.Partial3);
+
+  document.getElementById('ct6').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Stripes(KiddoPaint.Current.color); } });
+  document.getElementById('ict6').src = makeCircleIcon(KiddoPaint.Textures.Stripes);
+  
+  document.getElementById('ct7').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Speckles(KiddoPaint.Current.color); } });
+  document.getElementById('ict7').src = makeCircleIcon(KiddoPaint.Textures.Speckles);
+  
+  document.getElementById('ct8').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Bubbles(KiddoPaint.Current.color); } });
+  document.getElementById('ict8').src = makeCircleIcon(KiddoPaint.Textures.Bubbles);
+  
+  document.getElementById('ct9').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Thatch(KiddoPaint.Current.color); } });
+  document.getElementById('ict9').src = makeCircleIcon(KiddoPaint.Textures.Thatch);
+  
+  document.getElementById('ct10').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Shingles(KiddoPaint.Current.color); } });
+  document.getElementById('ict10').src = makeCircleIcon(KiddoPaint.Textures.Shingles);
+  
+  document.getElementById('ct11').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Diamond(KiddoPaint.Current.color); } });
+  document.getElementById('ict11').src = makeCircleIcon(KiddoPaint.Textures.Diamond);
+  
+  document.getElementById('ct12').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Ribbon(KiddoPaint.Current.color); } });
+  document.getElementById('ict12').src = makeCircleIcon(KiddoPaint.Textures.Ribbon);
+  
+  document.getElementById('ct13').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Sand(KiddoPaint.Current.color); } });
+  document.getElementById('ict13').src = makeCircleIcon(KiddoPaint.Textures.Sand);
+  
+  document.getElementById('ct14').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Brick(KiddoPaint.Current.color); } });
+  document.getElementById('ict14').src = makeCircleIcon(KiddoPaint.Textures.Brick);
+  
+  document.getElementById('ct15').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Chevron(KiddoPaint.Current.color); } });
+  document.getElementById('ict15').src = makeCircleIcon(KiddoPaint.Textures.Chevron);
+  
+  document.getElementById('ct16').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Stairs(KiddoPaint.Current.color); } });
+  document.getElementById('ict16').src = makeCircleIcon(KiddoPaint.Textures.Stairs);
+  
+  document.getElementById('ct17').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Cross(KiddoPaint.Current.color); } });
+  document.getElementById('ict17').src = makeCircleIcon(KiddoPaint.Textures.Cross);
+  
+  document.getElementById('ct18').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.DiagBrick(KiddoPaint.Current.color); } });
+  document.getElementById('ict18').src = makeCircleIcon(KiddoPaint.Textures.DiagBrick);
+
+  document.getElementById('ct19').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.CornerStair(KiddoPaint.Current.color); } });
+  document.getElementById('ict19').src = makeCircleIcon(KiddoPaint.Textures.CornerStair);
+
+  document.getElementById('ct20').addEventListener('mousedown', function() { KiddoPaint.Tools.Circle.texture = function() { return KiddoPaint.Textures.Houndstooth(KiddoPaint.Current.color); } });
+  document.getElementById('ict20').src = makeCircleIcon(KiddoPaint.Textures.Houndstooth);
 }
 
 function init_brush_subtoolbar() {

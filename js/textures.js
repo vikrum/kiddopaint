@@ -470,3 +470,83 @@ KiddoPaint.Textures.DiagBrick = function(color1) {
 
 	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
 }
+
+KiddoPaint.Textures.CornerStair = function(color1) {
+	color1 = color1 || 'black';
+
+	var canvasPattern = document.createElement('canvas');
+	canvasPattern.width = 8;
+	canvasPattern.height = 8;
+	var contextPattern = canvasPattern.getContext('2d');
+	
+	contextPattern.beginPath();
+	contextPattern.fillStyle = color1;
+
+	contextPattern.rect(0, 0, 6, 2);
+	contextPattern.rect(0, 2, 4, 2);
+	contextPattern.rect(0, 4, 2, 2);
+
+	contextPattern.fill();
+	contextPattern.closePath();
+
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
+}
+
+KiddoPaint.Textures.CornerStair = function(color1) {
+	color1 = color1 || 'black';
+
+	var canvasPattern = document.createElement('canvas');
+	canvasPattern.width = 8;
+	canvasPattern.height = 8;
+	var contextPattern = canvasPattern.getContext('2d');
+	
+	contextPattern.beginPath();
+	contextPattern.fillStyle = color1;
+
+	if(KiddoPaint.Current.modifiedAlt) {
+		contextPattern.rect(0, 0, 6, 2);
+		contextPattern.rect(0, 2, 4, 2);
+		contextPattern.rect(0, 4, 2, 2);
+	}
+	else {
+		contextPattern.rect(2, 6, 6, 2);
+		contextPattern.rect(4, 4, 4, 2);
+		contextPattern.rect(6, 2, 2, 2);
+	}
+
+	contextPattern.fill();
+	contextPattern.closePath();
+
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
+}
+
+KiddoPaint.Textures.Houndstooth = function(color1) {
+	color1 = color1 || 'black';
+
+	var canvasPattern = document.createElement('canvas');
+	canvasPattern.width = 9;
+	canvasPattern.height = 11;
+	var contextPattern = canvasPattern.getContext('2d');
+	
+	contextPattern.beginPath();
+	contextPattern.fillStyle = color1;
+
+	contextPattern.rect(0, 4, 1, 2);
+	contextPattern.rect(1, 3, 1, 2);
+	contextPattern.rect(6, 0, 1, 1);
+	contextPattern.rect(5, 1, 2, 1);
+	contextPattern.rect(2, 2, 7, 1);
+	contextPattern.rect(2, 3, 6, 1);
+	contextPattern.rect(2, 4, 5, 2);
+	contextPattern.rect(2, 6, 7, 1);
+	contextPattern.rect(8, 5, 1, 1);
+	contextPattern.rect(4, 7, 2, 1);
+	contextPattern.rect(3, 8, 2, 1);
+	contextPattern.rect(2, 9, 2, 1);
+	contextPattern.rect(2, 10, 1, 1);
+
+	contextPattern.fill();
+	contextPattern.closePath();
+
+	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
+}

@@ -2,14 +2,15 @@ KiddoPaint.Brushes.Circles = function(color1, color2, alwaysFill) {
 	color1 = color1 || 'black';
 	color2 = color2 || color1;
 	alwaysFill = alwaysFill || false;
+	var size = 20;
 
 	var canvasBrush = document.createElement('canvas');
-	canvasBrush.width = 40;
-	canvasBrush.height = 40;
+	canvasBrush.width = size * 2;
+	canvasBrush.height = size * 2;
 	var contextBrush = canvasBrush.getContext('2d');
 
 	contextBrush.beginPath();
-	contextBrush.arc(20, 20, 10, 0, 2 * Math.PI);
+	contextBrush.arc(size, size, 10, 0, 2 * Math.PI);
 	if(alwaysFill || KiddoPaint.Display.step % 2 == 0) {
 	  contextBrush.fillStyle = color1;
 	  contextBrush.fill();
@@ -19,7 +20,7 @@ KiddoPaint.Brushes.Circles = function(color1, color2, alwaysFill) {
 	contextBrush.stroke();
 	contextBrush.closePath();
 	
-	return canvasBrush;
+	return {brush: canvasBrush, offset: size};
 }
 
 KiddoPaint.Brushes.RCircles = function() {
@@ -49,7 +50,7 @@ KiddoPaint.Brushes.Spray = function(color1) {
 		y = Math.sin(ra) * rr;
 		contextBrush.fillRect(radius + x, radius + y, rp, rp);
 	}
-	return canvasBrush;
+	return {brush: canvasBrush, offset: radius};
 }
 
 KiddoPaint.Brushes.Pies = function(color1) {
@@ -74,5 +75,24 @@ KiddoPaint.Brushes.Pies = function(color1) {
 	contextBrush.arc(size, size, size + 2, 0 + offset, ((0.5 + Math.random() - 0.5) * Math.PI) + offset);
 	contextBrush.lineTo(size, size);
 	contextBrush.fill();
-	return canvasBrush;
+	return {brush: canvasBrush, offset: size};
+}
+
+KiddoPaint.Brushes.Concentric = function(color1, step) {
+	color1 = color1 || 'black';
+
+	var canvasBrush = document.createElement('canvas');
+	var size = (step % 7 * 5) + 5;
+	canvasBrush.width = size * 2;
+	canvasBrush.height = size * 2;
+	var contextBrush = canvasBrush.getContext('2d');
+
+	contextBrush.beginPath();
+	contextBrush.arc(size, size, size, 0, Math.PI * 2);
+	contextBrush.strokeStyle = color1;
+	contextBrush.lineWidth = 1;
+	contextBrush.stroke();
+	contextBrush.closePath();
+
+	return {brush: canvasBrush, offset: size};
 }

@@ -8,14 +8,15 @@ KiddoPaint.Stamps.grouping = {
 
 KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount, color) {
 	stamp = stamp || '';
-	color = color || 'transparent';
 	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = Math.max(size + (size * 0.05), 24);
 	canvasBrush.height = Math.max(size + (size * 0.05), 24);
 
 	var contextBrush = canvasBrush.getContext('2d');
 	contextBrush.font = size + 'px sans-serif';
-	contextBrush.fillStyle = color;
+	if(color) { // chrome & safari compat hack
+	  contextBrush.fillStyle = color;
+	}
 
 	contextBrush.save();
 	if(alt) {

@@ -220,7 +220,7 @@ function init_stamp_bar(stampgroup) {
   var stamptoolbar = KiddoPaint.Stamps.grouping[stampgroup].stamps;
   KiddoPaint.Tools.Stamp.stamp = stamptoolbar[0];
   for(var i = 0; i < stamptoolbar.length; i++) {
-    var buttonValue = '<h1>' + stamptoolbar[i] + '</h1>';
+    var buttonValue = '<emj>' + stamptoolbar[i] + '</emj>';
     document.getElementById('xst' + i).innerHTML = buttonValue;
   }
 }

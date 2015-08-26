@@ -116,3 +116,9 @@ function makeCircleIcon(texture) {
 
 	return canvasIcon.toDataURL();
 }
+
+function guil(R, r, m, theta, p, Q, m, n) {
+  var x = (R + r) * Math.cos(m * theta) + (r + p) * Math.cos( ( (R + r) / r )  * m * theta  ) + Q * Math.cos(n * theta);
+  var y = (R + r) * Math.sin(m * theta) - (r + p) * Math.sin( ( (R + r) / r )  * m * theta  ) + Q * Math.sin(n * theta);
+  return {x: x, y: y};
+}

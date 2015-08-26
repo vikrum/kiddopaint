@@ -430,6 +430,9 @@ function init_brush_subtoolbar() {
   document.getElementById('br9').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 40; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Brushes.Pies(KiddoPaint.Current.color) }; });
   document.getElementById('br10').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Concentric(KiddoPaint.Current.color, step) }; });
   document.getElementById('br11').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Twirly(KiddoPaint.Current.color, step) }; });
+  document.getElementById('br12').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Current.modifiedAlt ? KiddoPaint.Brushes.RotatingPentagon(KiddoPaint.Current.color, step) : KiddoPaint.Brushes.FollowingSine(KiddoPaint.Current.color, step) }; });
+  document.getElementById('br13').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Rose(KiddoPaint.Current.color, step) }; });
+  document.getElementById('br14').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Guilloche; });
 }
 
 function init_stamp_subtoolbar() {

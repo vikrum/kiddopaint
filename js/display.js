@@ -5,6 +5,7 @@ KiddoPaint.Display.clearAll = function() {
   KiddoPaint.Display.clearPreview();
   KiddoPaint.Display.clearTmp();
   KiddoPaint.Display.clearMain();
+  KiddoPaint.Display.clearLocalStorage();
 }
 
 KiddoPaint.Display.clearMain = function() {
@@ -23,6 +24,7 @@ KiddoPaint.Display.saveMain = function() {
   KiddoPaint.Display.saveUndo();
   KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
   KiddoPaint.Display.clearTmp();
+  KiddoPaint.Display.saveToLocalStorage();
 }
 
 KiddoPaint.Display.saveUndo = function() {
@@ -36,5 +38,25 @@ KiddoPaint.Display.undo = function() {
     img.src = KiddoPaint.Display.undoData;
     img.onload = function() { KiddoPaint.Display.clearMain(); KiddoPaint.Display.main_context.drawImage(img, 0, 0); }
     KiddoPaint.Display.undoData = nextUndoData;
+  }
+}
+
+KiddoPaint.Display.clearLocalStorage = function() {
+  if (typeof(Storage) != "undefined") {
+    localStorage.removeItem("kiddopaint");
+  }
+}
+
+KiddoPaint.Display.saveToLocalStorage = function() {
+  if (typeof(Storage) != "undefined") {
+    localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL());
+  }
+}
+
+KiddoPaint.Display.loadFromLocalStorage = function() {
+  if (typeof(Storage) != "undefined" && localStorage.getItem("kiddopaint")) {
+      var img = new Image();
+      img.src = localStorage.getItem("kiddopaint");
+      img.onload = function() { KiddoPaint.Display.clearMain(); KiddoPaint.Display.main_context.drawImage(img, 0, 0); }
   }
 }

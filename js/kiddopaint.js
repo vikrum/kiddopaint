@@ -48,6 +48,8 @@ function init_kiddo_paint() {
     KiddoPaint.Display.main_canvas = canvas;
     KiddoPaint.Display.main_context = ctx;
 
+    KiddoPaint.Display.loadFromLocalStorage();
+
     init_kiddo_defaults();
     init_listeners(tmpCanvas);
     init_tool_bar();

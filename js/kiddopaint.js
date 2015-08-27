@@ -435,6 +435,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br12').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Current.modifiedAlt ? KiddoPaint.Brushes.RotatingPentagon(KiddoPaint.Current.color, step) : KiddoPaint.Brushes.FollowingSine(KiddoPaint.Current.color, step) }; });
   document.getElementById('br13').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Rose(KiddoPaint.Current.color, step) }; });
   document.getElementById('br14').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Guilloche; });
+  document.getElementById('br15').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Contours; });
 }
 
 function init_stamp_subtoolbar() {

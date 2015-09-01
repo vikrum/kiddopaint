@@ -122,3 +122,28 @@ function guil(R, r, m, theta, p, Q, m, n) {
   var y = (R + r) * Math.sin(m * theta) - (r + p) * Math.sin( ( (R + r) / r )  * m * theta  ) + Q * Math.sin(n * theta);
   return {x: x, y: y};
 }
+
+// http://stackoverflow.com/a/9138593
+function scaleImageData(imageData, scale) {
+	var scaled = KiddoPaint.Display.main_context.createImageData(imageData.width * scale, imageData.height * scale);
+	for(var row = 0; row < imageData.height; row++) {
+		for(var col = 0; col < imageData.width; col++) {
+			var sourcePixel = (imageData.data[(row * imageData.width + col) * 4 + 0] == 0 && imageData.data[(row * imageData.width + col) * 4 + 1] == 0 && imageData.data[(row * imageData.width + col) * 4 + 2] == 0 && imageData.data[(row * imageData.width + col) * 4 + 3] == 0) ? [255, 255, 255, 255] : [ imageData.data[(row * imageData.width + col) * 4 + 0], imageData.data[(row * imageData.width + col) * 4 + 1], imageData.data[(row * imageData.width + col) * 4 + 2], imageData.data[(row * imageData.width + col) * 4 + 3] ];
+			for(var y = 0; y < scale; y++) {
+				var destRow = row * scale + y;
+				for(var x = 0; x < scale; x++) {
+					var destCol = col * scale + x;
+					for(var i = 0; i < 4; i++) {
+						if(sourcePixel[i] == 0 ) {
+							scaled.data[(destRow * scaled.width + destCol) * 4 + i] = [255, 255, 255, 255];
+						}
+						else {
+							scaled.data[(destRow * scaled.width + destCol) * 4 + i] = sourcePixel[i];
+						}
+					}
+				}
+			}
+		}
+	}
+	return scaled;
+}

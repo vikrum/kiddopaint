@@ -469,7 +469,6 @@ KiddoPaint.Tools.Toolbox.Astroid = function() {
 	};
 
 	this.mouseup = function (ev) {
-		console.log(tool.points);
 		if(tool.points.length == 3) {
 			KiddoPaint.Display.clearTmp();
 			tool.drawAstroid(tool.points[0], tool.points[1], {x: ev._x, y: ev.y});

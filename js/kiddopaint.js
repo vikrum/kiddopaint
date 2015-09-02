@@ -67,6 +67,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modifiedAlt = false;
   KiddoPaint.Current.modifiedCtrl = false;
   KiddoPaint.Alphabet.page = 1;
+  KiddoPaint.Stamps.page = 1;
   reset_ranges();
 }
 
@@ -167,29 +168,8 @@ function init_tool_bar() {
     KiddoPaint.Current.tool = KiddoPaint.Tools.Brush;
   });
 
-  document.getElementById('stamp1').addEventListener('mousedown', function() {
+  document.getElementById('stamp').addEventListener('mousedown', function() {
     init_stamp_bar('stamp1');
-    show_sub_toolbar('stamptoolbar');
-    KiddoPaint.Tools.Stamp.useColor = false;
-    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
-  });
-
-  document.getElementById('stamp2').addEventListener('mousedown', function() {
-    init_stamp_bar('stamp2');
-    show_sub_toolbar('stamptoolbar');
-    KiddoPaint.Tools.Stamp.useColor = false;
-    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
-  });
-
-  document.getElementById('stamp3').addEventListener('mousedown', function() {
-    init_stamp_bar('stamp3');
-    show_sub_toolbar('stamptoolbar');
-    KiddoPaint.Tools.Stamp.useColor = false;
-    KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
-  });
-
-  document.getElementById('stamp4').addEventListener('mousedown', function() {
-    init_stamp_bar('stamp4');
     show_sub_toolbar('stamptoolbar');
     KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
@@ -215,6 +195,11 @@ function init_tool_bar() {
   document.getElementById('alnext').addEventListener('mousedown', function() {
     KiddoPaint.Alphabet.nextPage();
     init_alphabet_bar('character' + KiddoPaint.Alphabet.page);
+  });
+
+  document.getElementById('stnext').addEventListener('mousedown', function() {
+    KiddoPaint.Stamps.nextPage();
+    init_stamp_bar('stamp' + KiddoPaint.Stamps.page);
   });
 };
 

@@ -424,6 +424,8 @@ function init_brush_subtoolbar() {
   document.getElementById('br16').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Astroid; });
   document.getElementById('br17').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Magnify; });
   document.getElementById('br18').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Kaleidoscope; });
+  document.getElementById('br19').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(1)); }; });
+  document.getElementById('br20').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(2)); }; });
 }
 
 function init_stamp_subtoolbar() {

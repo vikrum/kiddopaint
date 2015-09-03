@@ -423,6 +423,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br15').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Contours; });
   document.getElementById('br16').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Astroid; });
   document.getElementById('br17').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Magnify; });
+  document.getElementById('br18').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Kaleidoscope; });
 }
 
 function init_stamp_subtoolbar() {

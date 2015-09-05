@@ -5,7 +5,6 @@ KiddoPaint.Alphabet.english = {
 }
 
 KiddoPaint.Alphabet.wingdings = {
-  index: 0,
   pages: 2,
   character1: { letters: [ '☃', '☼', '☂', '☁', '♠', '♣', '♥', '♦', '♚', '♛', '♜', '♝', '♞', '♟', '✌', '✍', '✂', '⚾', '✇', '✈', '♨', '♆', '☄', '✠', '⚜', '⚖', '⚛', '☯', '☸', '⚇' ] },
   character2: { letters: [ '❖', '◎', '◉', '⦿', '✢', '✣', '✤', '✥', '✦', '✧', '★', '☆', '✯', '✩', '✪', '✫', '✬', '✭', '✮', '✶', '✷', '✵', '✸', '✹', '✺', '❊', '✻', '✽', '✼', '❉', '✱', '✲', '✾', '❃', '❋', '✳', '✴', '❇', '❈', '※', '❅', '❆', '❄', '✿', '❀', '❁', '❂', '☙', '❧', '❦' ] }
@@ -19,10 +18,13 @@ KiddoPaint.Alphabet.nextPage = function() {
 }
 
 KiddoPaint.Alphabet.nextWingding = function(page) {
-	var ret = KiddoPaint.Alphabet.wingdings['character' + page].letters[KiddoPaint.Alphabet.wingdings.index];	
-	KiddoPaint.Alphabet.wingdings.index += 1;
-	if(KiddoPaint.Alphabet.wingdings.index >= KiddoPaint.Alphabet.wingdings['character' + page].letters.length) {
-		KiddoPaint.Alphabet.wingdings.index = 0;
-	}
-	return ret;
-}
+  var idx = 0;
+  return function(page) {
+    if(idx >= KiddoPaint.Alphabet.wingdings['character' + page].letters.length) {
+      idx = 0;
+    }
+    var ret = KiddoPaint.Alphabet.wingdings['character' + page].letters[idx];	
+    idx += 1;
+    return ret;
+  }
+}();

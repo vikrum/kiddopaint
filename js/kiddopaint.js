@@ -169,14 +169,14 @@ function init_tool_bar() {
   });
 
   document.getElementById('stamp').addEventListener('mousedown', function() {
-    init_stamp_bar('stamp1');
+    init_stamp_bar('stamp' + KiddoPaint.Stamps.page);
     show_sub_toolbar('stamptoolbar');
     KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
   });
 
   document.getElementById('alphabet').addEventListener('mousedown', function() {
-    init_alphabet_bar('character1');
+    init_alphabet_bar('character' + KiddoPaint.Alphabet.page);
     show_sub_toolbar('alphabettoolbar');
     KiddoPaint.Tools.Stamp.useColor = true;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;

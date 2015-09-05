@@ -7,9 +7,8 @@ KiddoPaint.Textures.Solid = function(color1) {
 	var contextPattern = canvasPattern.getContext('2d');
 	
 	contextPattern.beginPath();
-	contextPattern.strokeStyle = color1;
-	contextPattern.rect(0, 0, 1, 1);
-	contextPattern.stroke();
+	contextPattern.fillStyle = color1;
+	contextPattern.fillRect(0, 0, 1, 1);
 	
 	return KiddoPaint.Display.context.createPattern(canvasPattern, 'repeat');
 }

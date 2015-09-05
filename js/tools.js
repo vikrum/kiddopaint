@@ -242,7 +242,7 @@ KiddoPaint.Tools.Toolbox.Square = function() {
 			if(tool.stomp) {
 				KiddoPaint.Display.clearTmp();
 			}
-			if(!KiddoPaint.Current.modifiedAlt) {
+			if(!KiddoPaint.Current.modifiedCtrl) {
 				KiddoPaint.Display.context.strokeStyle = tool.stroke();
 				KiddoPaint.Display.context.lineWidth = 1.5;
 				KiddoPaint.Display.context.strokeRect(tool.x, tool.y, ev._x - tool.x, ev._y - tool.y);
@@ -288,7 +288,7 @@ KiddoPaint.Tools.Toolbox.Circle = function() {
 			KiddoPaint.Display.context.lineWidth = 1.5;
 			KiddoPaint.Display.context.arc(tool.x, tool.y, Math.abs(tool.x - ev._x), 0, 2*Math.PI);
 			KiddoPaint.Display.context.fill();
-			if(!KiddoPaint.Current.modifiedAlt) {
+			if(!KiddoPaint.Current.modifiedCtrl) {
 				KiddoPaint.Display.context.stroke();
 			}
 			KiddoPaint.Display.context.closePath();
@@ -511,6 +511,7 @@ KiddoPaint.Tools.Toolbox.Magnify = function() {
 KiddoPaint.Tools.Magnify = new KiddoPaint.Tools.Toolbox.Magnify();
 
 KiddoPaint.Tools.Toolbox.Kaleidoscope = function() {
+// bug: undo does one quadrant
 	var tool = this;
 	this.isDown = false;
 	this.size = 2;
@@ -568,11 +569,11 @@ KiddoPaint.Tools.Toolbox.Kaleidoscope = function() {
 
 	this.mouseup = function (ev) {
 		if (tool.isDown) {
+			KiddoPaint.Display.context.restore();
 			KiddoPaint.Display.context.closePath();
 			tool.previousEv = {x: 0, y: 0};
 			tool.isDown = false;
 			KiddoPaint.Display.saveMain();
-			KiddoPaint.Display.context.restore();
 		}
 	};
 };

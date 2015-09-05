@@ -1,0 +1,29 @@
+{
+  "name": "kiddopaint",
+  "version": "1.0.0",
+  "description": "Kiddo Paint",
+  "main": "js/kiddopaint.js",
+  "devDependencies": {
+    "uglify-js": "^2.4.24"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikrum/kiddopaint.git"
+  },
+  "keywords": [
+    "kiddo paint",
+    "kid pix",
+    "dr halo",
+    "macdraw",
+    "ms paint"
+  ],
+  "author": "@vikrum5000",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vikrum/kiddopaint/issues"
+  },
+  "homepage": "https://github.com/vikrum/kiddopaint#readme"
+}

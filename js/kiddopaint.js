@@ -84,6 +84,8 @@ function init_listeners(canvas) {
   canvas.addEventListener('mouseup', ev_canvas);
   canvas.addEventListener('mouseleave', function() { KiddoPaint.Display.clearPreview(); });
   canvas.addEventListener("mousewheel", mouse_wheel);
+  canvas.addEventListener("dragover", function(ev) { if(ev.preventDefault) { ev.preventDefault(); }; ev.returnValue = false;  return false; }, false);
+  canvas.addEventListener("drop", image_upload);
 
   document.onkeydown = function checkKey(e) {
     if(e.keyCode == 16) {
@@ -556,4 +558,23 @@ function mouse_wheel(ev) {
 function save_to_file() {
   var image = KiddoPaint.Display.main_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href=image; 
+}
+
+function image_upload(ev) {
+  var files = ev.dataTransfer.files;
+  if (files.length > 0) {
+    var file = files[0];
+    if (typeof FileReader !== "undefined") {
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        var img = new Image();
+        img.onload = function() { KiddoPaint.Display.context.drawImage(img, 0, 0); KiddoPaint.Display.saveMain(); };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  if(ev.preventDefault) { ev.preventDefault(); }
+  ev.returnValue = false;  
+  return false;
 }

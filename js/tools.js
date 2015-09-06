@@ -126,7 +126,7 @@ KiddoPaint.Tools.PlainBrush = new KiddoPaint.Tools.Toolbox.PlainBrush();
 KiddoPaint.Tools.Toolbox.Line = function() {
 	var tool = this;
 	this.isDown = false;
-	this.size = 1;
+	this.size = 7;
 	this.stomp = true;
 	this.texture = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
 

@@ -1,4 +1,5 @@
 KiddoPaint.Stamps.grouping = {
+  face: 'Apple Color Emoji',
   pages: 6,
   stamp1: { stamps: [ '🚂', '🚃', '🚌', '🚍', '🚙', '🚘', '🚗', '🚕', '🚛', '🚚', '🚒', '🚑', '🚐', '🚜', '⛵', '🚤', '🚀', '✈️', '🚁' ] },
   stamp2: { stamps: [ '🏠', '🎪', '🏫', '🏢', '🏣', '🏥', '🏦', '🏪', '🏨', '🏬', '🏤', '🏭', '🛁', '🚽', '🚪', '🇺🇸', '🚏', '📭', '📦' ] },
@@ -15,7 +16,7 @@ KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount, color) {
 	canvasBrush.height = Math.max(size + (size * 0.05), 24);
 
 	var contextBrush = canvasBrush.getContext('2d');
-	contextBrush.font = size + 'px sans-serif';
+	contextBrush.font = size + 'px ' + KiddoPaint.Stamps.currentFace;
 	if(color) { // chrome & safari compat hack
 	  contextBrush.fillStyle = color;
 	}

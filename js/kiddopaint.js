@@ -68,6 +68,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modifiedCtrl = false;
   KiddoPaint.Alphabet.page = 1;
   KiddoPaint.Stamps.page = 1;
+  KiddoPaint.Stamps.currentFace = KiddoPaint.Stamps.grouping.face;
   reset_ranges();
 }
 
@@ -173,6 +174,7 @@ function init_tool_bar() {
     show_sub_toolbar('stamptoolbar');
     KiddoPaint.Tools.Stamp.useColor = false;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+    KiddoPaint.Stamps.currentFace = KiddoPaint.Stamps.grouping.face;
   });
 
   document.getElementById('alphabet').addEventListener('mousedown', function() {
@@ -180,6 +182,7 @@ function init_tool_bar() {
     show_sub_toolbar('alphabettoolbar');
     KiddoPaint.Tools.Stamp.useColor = true;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Stamp;
+    KiddoPaint.Stamps.currentFace = KiddoPaint.Alphabet.english.face;
   });
 
   document.getElementById('undo').addEventListener('mousedown', function() {

@@ -14,6 +14,10 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
 	this.mousemove = function (ev) {
 		var ctx = tool.isDown ? KiddoPaint.Display.context : KiddoPaint.Display.previewContext;
 		ctx.fillStyle = tool.texture();
+		if(KiddoPaint.Current.modifiedAlt) {
+			ev._x = ev._x - (ev._x % (tool.size * KiddoPaint.Current.scaling));
+			ev._y = ev._y - (ev._y % (tool.size * KiddoPaint.Current.scaling));
+		}
 		ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size * KiddoPaint.Current.scaling, tool.size * KiddoPaint.Current.scaling);
 	};
 

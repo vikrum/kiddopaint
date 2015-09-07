@@ -147,3 +147,18 @@ function scaleImageData(imageData, scale) {
 	}
 	return scaled;
 }
+
+// http://michalbe.blogspot.com/2011/02/javascript-random-numbers-with-custom_23.html
+function srng(seed) {
+  seed = seed || 7;
+  var constant = Math.pow(2, 11)+1;
+  var prime = 4241;
+  var maximum = 4243;
+    return {
+      next : function() {
+        seed *= constant;
+        seed += prime;
+        return seed%maximum/maximum;
+    }
+  }
+}

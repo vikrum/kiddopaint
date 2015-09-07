@@ -69,6 +69,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Alphabet.page = 1;
   KiddoPaint.Stamps.page = 1;
   KiddoPaint.Stamps.currentFace = KiddoPaint.Stamps.grouping.face;
+  KiddoPaint.Current.multiplier = 1;
   reset_ranges();
 }
 
@@ -100,6 +101,9 @@ function init_listeners(canvas) {
      }
      else if(e.keyCode == 83) {
       save_to_file();
+     }
+     else if(e.keyCode > 48 && e.keyCode < 58) {
+      KiddoPaint.Current.multiplier = e.keyCode - 48;
      }
   }
   document.onkeyup = function checkKey(e) {

@@ -66,6 +66,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modified = false;
   KiddoPaint.Current.modifiedAlt = false;
   KiddoPaint.Current.modifiedCtrl = false;
+  KiddoPaint.Current.modifiedToggle = false;
   KiddoPaint.Alphabet.page = 1;
   KiddoPaint.Stamps.page = 1;
   KiddoPaint.Stamps.currentFace = KiddoPaint.Stamps.grouping.face;
@@ -77,6 +78,7 @@ function reset_ranges() {
   KiddoPaint.Current.modifiedRange = 0;
   KiddoPaint.Current.modifiedAltRange = 0;
   KiddoPaint.Current.modifiedCtrlRange = 0;
+  KiddoPaint.Current.modifiedToggle = false;
 }
 
 function init_listeners(canvas) {
@@ -89,6 +91,7 @@ function init_listeners(canvas) {
   canvas.addEventListener("drop", image_upload);
 
   document.onkeydown = function checkKey(e) {
+  console.log(e.keyCode);
     if(e.keyCode == 16) {
       KiddoPaint.Current.scaling = 2;
       KiddoPaint.Current.modified = true;
@@ -104,6 +107,9 @@ function init_listeners(canvas) {
      }
      else if(e.keyCode > 48 && e.keyCode < 58) {
       KiddoPaint.Current.multiplier = e.keyCode - 48;
+     }
+     else if(e.keyCode == 32) {
+       KiddoPaint.Current.modifiedToggle = ! KiddoPaint.Current.modifiedToggle;
      }
   }
   document.onkeyup = function checkKey(e) {

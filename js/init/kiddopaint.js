@@ -1,6 +1,7 @@
 // Kiddo Paint Applications
 var KiddoPaint = {};
 KiddoPaint.Tools = {};
+KiddoPaint.Tools.Toolbox = {};
 KiddoPaint.Textures = {};
 KiddoPaint.Brushes = {};
 KiddoPaint.Builders = {};

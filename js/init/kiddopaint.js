@@ -128,7 +128,8 @@ function init_listeners(canvas) {
 }
 
 function colorSelect(e) {
-  var color = e.srcElement.className.split(' ')[1];
+  var src = e.srcElement || e.target;
+  var color = src.className.split(' ')[1];
   KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
   document.getElementById('currentColor').className = 'currentColor ' + color;
 }
@@ -497,7 +498,7 @@ function init_stamp_subtoolbar() {
   var stampselect = document.querySelectorAll('*[id^="xst"]');
   for(var i = 0; i < stampselect.length; i++) {
     var stampButton = stampselect[i];
-    stampButton.addEventListener('mousedown', function(ev) { reset_ranges(); KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
+    stampButton.addEventListener('mousedown', function(ev) { reset_ranges(); src = ev.srcElement || ev.target; KiddoPaint.Tools.Stamp.stamp = src.firstChild.nodeValue; });
   }
 }
 
@@ -505,7 +506,7 @@ function init_alphabet_subtoolbar() {
   var alphaselect = document.querySelectorAll('*[id^="xal"]');
   for(var i = 0; i < alphaselect.length; i++) {
     var alphaButton = alphaselect[i];
-    alphaButton.addEventListener('mousedown', function(ev) { reset_ranges(); KiddoPaint.Tools.Stamp.stamp = ev.srcElement.firstChild.nodeValue; });
+    alphaButton.addEventListener('mousedown', function(ev) { reset_ranges(); src = ev.srcElement || ev.target; KiddoPaint.Tools.Stamp.stamp = src.firstChild.nodeValue; });
   }
 }
 

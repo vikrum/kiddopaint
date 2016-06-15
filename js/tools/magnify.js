@@ -1,7 +1,7 @@
 KiddoPaint.Tools.Toolbox.Magnify = function() {
 	var tool = this;
 	this.isDown = false;
-	this.size = 30;
+	this.size = 36;
 	this.scale = 2;
 
 	this.mousedown = function (ev) {
@@ -11,9 +11,15 @@ KiddoPaint.Tools.Toolbox.Magnify = function() {
 
 	this.mousemove = function (ev) {
 		var target = KiddoPaint.Display.main_context.getImageData(ev._x - tool.size, ev._y - tool.size, 2 * tool.size, 2 * tool.size);
-		var scaled = scaleImageData(target, tool.scale);
 		var ctx = tool.isDown ? KiddoPaint.Display.context : KiddoPaint.Display.previewContext;
-		ctx.putImageData(scaled, ev._x - (tool.scale * tool.size), ev._y - (tool.scale * tool.size));
+		if(KiddoPaint.Current.modifiedAlt) {
+			var dithered = ditherImageData(target);
+			ctx.putImageData(dithered, ev._x - tool.size, ev._y - tool.size);
+		}
+		else {
+			var scaled = KiddoPaint.Current.modifiedAlt ? ditherImageData(target) : scaleImageData(target, tool.scale);
+			ctx.putImageData(scaled, ev._x - (tool.scale * tool.size), ev._y - (tool.scale * tool.size));
+		}
 	};
 
 	this.mouseup = function (ev) {

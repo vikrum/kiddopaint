@@ -148,6 +148,31 @@ function scaleImageData(imageData, scale) {
 	return scaled;
 }
 
+// https://github.com/meemoo/iframework/blob/gh-pages/src/nodes/image-monochrome-worker.js
+function ditherImageData(imageData) {
+  var threshold = 128;
+  var bayerThresholdMap = [ [  15, 135,  45, 165 ], [ 195,  75, 225, 105 ], [  60, 180,  30, 150 ], [ 240, 120, 210,  90 ] ];
+  var lumR = [], lumG = [], lumB = [];
+  for (var i=0; i<256; i++) { lumR[i] = i*0.299; lumG[i] = i*0.587; lumB[i] = i*0.114; }
+
+  var dithered = KiddoPaint.Display.main_context.createImageData(imageData.width, imageData.height);
+
+  var imageDataLength = imageData.data.length;
+  for (var i = 0; i <= imageDataLength; i += 4) {
+    dithered.data[i] = Math.floor(lumR[imageData.data[i]] + lumG[imageData.data[i+1]] + lumB[imageData.data[i+2]]);
+  }
+
+  for(var pixel = 0; pixel <= imageDataLength; pixel += 4) {
+    if(imageData.data[pixel] == 0 && imageData.data[pixel + 1] == 0 && imageData.data[pixel + 2] == 0 && imageData.data[pixel + 3] == 0) continue;
+    var x = pixel / 4 % imageData.width;
+    var y = Math.floor(pixel / 4 / imageData.width);
+    var map = Math.floor( (imageData.data[pixel] + bayerThresholdMap[x % 4][y % 4]) / 2 );
+    dithered.data[pixel] = dithered.data[pixel + 1] = dithered.data[pixel + 2] = (map < threshold) ? 0 : 255;
+    dithered.data[pixel + 3] = 255;
+  }
+  return dithered;
+}
+
 // http://michalbe.blogspot.com/2011/02/javascript-random-numbers-with-custom_23.html
 function srng(seed) {
   seed = seed || 7;

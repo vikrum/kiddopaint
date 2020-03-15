@@ -187,3 +187,68 @@ function srng(seed) {
     }
   }
 }
+
+// https://stackoverflow.com/questions/17924214/canvas-how-would-you-properly-interpolate-between-two-points-using-bresenhams
+function bresenham(x1, y1, x2, y2, callback) {
+    var dx = x2 - x1;
+    var sx = 1;
+    var dy = y2 - y1;
+    var sy = 1;
+    var space = 0;
+    var spacing = 50;
+
+    if (dx < 0) {
+        sx = -1;
+        dx = -dx;
+    }
+
+    if (dy < 0) {
+        sy = -1;
+        dy = -dy;
+    }
+
+    dx = dx << 1;
+    dy = dy << 1;
+
+    if (dy < dx) {
+        var fraction = dy - (dx >> 1);
+
+        while (x1 != x2) {
+            if (fraction >= 0) {
+                y1 += sy;
+                fraction -= dx;
+            }
+
+            fraction += dy;
+            x1 += sx;
+
+            if (space == spacing) {
+                callback(x1, y1);
+                space = 0;
+            } else {
+                space += 1;
+            }
+        }
+    } else {
+        var fraction = dx - (dy >> 1);
+
+        while (y1 != y2) {
+            if (fraction >= 0) {
+                x1 += sx;
+                fraction -= dy;
+            }
+
+            fraction += dx;
+            y1 += sy;
+
+            if (space == spacing) {
+                callback(x1, y1);
+                space = 0;
+            } else {
+                space += 1;
+            }
+        }
+    }
+
+    callback(x1, y1);
+}

@@ -21,7 +21,7 @@ KiddoPaint.Tools.Toolbox.Stamp = function() {
 				hueShift = modifiedHue;
 			}
 
-			return KiddoPaint.Stamps.stamp(tool.stamp, KiddoPaint.Current.modifiedAlt, tool.size, hueShift, tool.useColor ? KiddoPaint.Current.color : null );
+			return KiddoPaint.Stamps.stamp(tool.stamp, KiddoPaint.Current.modifiedAlt, KiddoPaint.Current.modifiedCtrl, tool.size, hueShift, tool.useColor ? KiddoPaint.Current.color : null );
 	};
 
 	this.mousedown = function (ev) {

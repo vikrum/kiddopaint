@@ -18,7 +18,7 @@ KiddoPaint.Stamps.grouping = {
   stamp15: { stamps: [ '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣️', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '🏳️', '🏴', '🏁','🏳️‍🌈','🇺🇸', '🇮🇳' ] },
   }
 
-KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount, color) {
+KiddoPaint.Stamps.stamp = function(stamp, alt, ctrl, size, shiftAmount, color) {
 	stamp = stamp || '';
 	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = Math.max(size + (size * 0.05), 24);
@@ -32,7 +32,17 @@ KiddoPaint.Stamps.stamp = function(stamp, alt, size, shiftAmount, color) {
 	}
 
 	contextBrush.save();
-	if(alt) {
+	if(ctrl && alt) {
+  	  contextBrush.scale(-1, 1);
+  	  contextBrush.scale(1, -1);
+	  contextBrush.translate(-size, -size);
+	  contextBrush.fillText(stamp, 0, size);
+	}
+	else if(ctrl) {
+  	  contextBrush.scale(1, -1);
+	  contextBrush.fillText(stamp, 0, 0);
+	}
+	else if(alt) {
 	  contextBrush.translate(size, size);
   	  contextBrush.scale(-1, 1);
 	  contextBrush.fillText(stamp, 0, 0);

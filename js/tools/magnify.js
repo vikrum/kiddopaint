@@ -16,6 +16,10 @@ KiddoPaint.Tools.Toolbox.Magnify = function() {
 			var dithered = ditherImageData(target);
 			ctx.putImageData(dithered, ev._x - tool.size, ev._y - tool.size);
 		}
+		else if(KiddoPaint.Current.modifiedCtrl) {
+			var grey = greyscaleImageData(target);
+			ctx.putImageData(grey, ev._x - tool.size, ev._y - tool.size);
+		}
 		else {
 			var scaled = KiddoPaint.Current.modifiedAlt ? ditherImageData(target) : scaleImageData(target, tool.scale);
 			ctx.putImageData(scaled, ev._x - (tool.scale * tool.size), ev._y - (tool.scale * tool.size));

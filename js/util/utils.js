@@ -148,6 +148,29 @@ function scaleImageData(imageData, scale) {
 	return scaled;
 }
 
+function greyscaleImageData(imageData) {
+  var grey = KiddoPaint.Display.main_context.createImageData(imageData.width, imageData.height);
+  var imageDataLength = imageData.data.length;
+  for(var pixel = 0; pixel <= imageDataLength; pixel += 4) {
+    if(imageData.data[pixel] == 0 && imageData.data[pixel + 1] == 0 && imageData.data[pixel + 2] == 0 && imageData.data[pixel + 3] == 0) continue;
+
+	// simple
+//    var avg = (imageData.data[pixel] + imageData.data[pixel + 1] + imageData.data[pixel + 2]) / 3.0;
+//    grey.data[pixel] = grey.data[pixel + 1] = grey.data[pixel + 2] = avg;
+
+
+    var hsl = rgbToHsl(imageData.data[pixel], imageData.data[pixel + 1], imageData.data[pixel + 2]);
+    var desat = hslToRgb(hsl.h, 0, hsl.l);
+
+    grey.data[pixel + 0] = desat.r;
+    grey.data[pixel + 1] = desat.g;
+    grey.data[pixel + 2] = desat.b;
+    grey.data[pixel + 3] = imageData.data[pixel + 3]; // keep same alpha
+  }
+  return grey;
+
+}
+
 // https://github.com/meemoo/iframework/blob/gh-pages/src/nodes/image-monochrome-worker.js
 function ditherImageData(imageData) {
   var threshold = 128;
@@ -252,3 +275,4 @@ function bresenham(x1, y1, x2, y2, callback) {
 
     callback(x1, y1);
 }
+

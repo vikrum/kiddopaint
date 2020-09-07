@@ -492,6 +492,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br18').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Kaleidoscope; });
   document.getElementById('br19').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(1)); }; });
   document.getElementById('br20').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function() { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(2)); }; });
+  document.getElementById('br21').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Flood; });
 }
 
 function init_stamp_subtoolbar() {

@@ -19,4 +19,7 @@ node_modules/uglify-js/bin/uglifyjs -c -m -o js/app.js \
   js/stamps/* \
   js/sounds/* \
 
+echo "" >> js/app.js
+echo "// $(date)" >> js/app.js
+
 echo . done.

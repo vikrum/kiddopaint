@@ -11,6 +11,11 @@ function angleBetween(ev1, ev2) {
   return angle;
 }
 
+function angleBetweenRad(ev1, ev2) {
+  return Math.atan2( ev2._x - ev1._x, ev2._y - ev1._y );
+}
+
+
 // http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
 // http://stackoverflow.com/questions/29156849/html5-canvas-changing-image-color
 function rgbToHsl(r, g, b){

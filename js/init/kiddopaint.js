@@ -479,7 +479,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br5').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '🐾', angle); }; });
   document.getElementById('br6').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Rail(KiddoPaint.Colors.randomColor(), angle) }; });
   document.getElementById('br7').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 0; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color) }; 
-  KiddoPaint.Tools.PlainBrush.preprocess = function() { KiddoPaint.Display.context.shadowBlur = 10; KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.color; };
+  KiddoPaint.Tools.PlainBrush.preprocess = function() { KiddoPaint.Display.context.shadowBlur = 16; KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.color; };
   KiddoPaint.Tools.PlainBrush.postprocess = function() { KiddoPaint.Display.context.shadowBlur = 0; KiddoPaint.Display.context.shadowColor = null; };
 
 

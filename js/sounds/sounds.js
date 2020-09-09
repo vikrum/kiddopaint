@@ -5,6 +5,7 @@ KiddoPaint.Sounds.Library.explosion = [ new Audio('snd/explosion0.wav'), new Aud
 KiddoPaint.Sounds.Library.oops = [ new Audio('snd/oops0.wav'), new Audio('snd/oops1.wav') ];
 KiddoPaint.Sounds.Library.pencil = [ new Audio('snd/pencil0.wav') ];
 KiddoPaint.Sounds.Library.stamp = [ new Audio('snd/stamp0.wav'), new Audio('snd/stamp1.wav') ];
+KiddoPaint.Sounds.Library.flood = [ new Audio('snd/flood0.wav'), new Audio('snd/flood1.wav') ];
 
 KiddoPaint.Sounds.Library.play = function(sound) {
   if(KiddoPaint.Sounds.Library.enabled && KiddoPaint.Sounds.Library[sound]) {
@@ -18,3 +19,4 @@ KiddoPaint.Sounds.explosion = function() { KiddoPaint.Sounds.Library.play('explo
 KiddoPaint.Sounds.oops = function() { KiddoPaint.Sounds.Library.play('oops'); }
 KiddoPaint.Sounds.pencil = function() { KiddoPaint.Sounds.Library.play('pencil'); }
 KiddoPaint.Sounds.stamp = function() { KiddoPaint.Sounds.Library.play('stamp'); }
+KiddoPaint.Sounds.flood = function() { KiddoPaint.Sounds.Library.play('flood'); }

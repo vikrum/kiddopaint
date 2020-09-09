@@ -6,9 +6,11 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
 
 	this.mousedown = function (ev) {
 		tool.isDown = true;
+		KiddoPaint.Sounds.flood();
 		var x = ev._x;
 		var y = ev._y;
 		var pixel_stack = [{x:x, y:y}] ;
+		// read from main_context for underlying pixels
 		var pixels = KiddoPaint.Display.main_context.getImageData( 0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height ) ;
 		var linear_cords = ( y * KiddoPaint.Display.canvas.width + x ) * 4 ;
 		var original_color = {r:pixels.data[linear_cords], g:pixels.data[linear_cords+1], b:pixels.data[linear_cords+2], a:pixels.data[linear_cords+3]} ;
@@ -78,6 +80,7 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
 				linear_cords += KiddoPaint.Display.canvas.width * 4 ;
 			}
 		}
+		// write to current context to allow proper ctx mgmt for undo etc
 		KiddoPaint.Display.context.putImageData( pixels, 0, 0 ) ;
 	};
 

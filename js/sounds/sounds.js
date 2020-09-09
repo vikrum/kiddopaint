@@ -2,7 +2,7 @@ KiddoPaint.Sounds.Library = {}
 KiddoPaint.Sounds.Library.enabled = true;
 
 KiddoPaint.Sounds.Library.explosion = [ new Audio('snd/explosion0.wav'), new Audio('snd/explosion1.wav'), new Audio('snd/explosion2.wav') ];
-KiddoPaint.Sounds.Library.oops = [ new Audio('snd/oops0.wav'), new Audio('snd/oops1.wav') ];
+KiddoPaint.Sounds.Library.oops = [ new Audio('snd/oops0.wav'), new Audio('snd/oops1.wav'), new Audio('snd/oops2.wav') ];
 KiddoPaint.Sounds.Library.pencil = [ new Audio('snd/pencil0.wav') ];
 KiddoPaint.Sounds.Library.stamp = [ new Audio('snd/stamp0.wav'), new Audio('snd/stamp1.wav') ];
 KiddoPaint.Sounds.Library.flood = [ new Audio('snd/flood0.wav'), new Audio('snd/flood1.wav') ];

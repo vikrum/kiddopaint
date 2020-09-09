@@ -98,6 +98,10 @@ html, body {
   margin: 0px;
 }
 
+.slider {
+  width: 95%;
+}
+
 .colorblack { background-color: rgb(0, 0, 0); }
 .colorwhite { background-color: rgb(255, 255, 255); }
 .colordgrey { background-color: rgb(128, 128, 128); }

@@ -63,6 +63,7 @@ function init_kiddo_paint() {
 function init_kiddo_defaults() {
   KiddoPaint.Current.color = KiddoPaint.Colors.All.colorblack;
   KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
+  KiddoPaint.Current.globalAlpha = 1.0;
   KiddoPaint.Current.scaling = 1;
   KiddoPaint.Display.step = 0;
   KiddoPaint.Current.modified = false;
@@ -218,6 +219,12 @@ function init_tool_bar() {
   document.getElementById('stnext').addEventListener('mousedown', function() {
     KiddoPaint.Stamps.nextPage();
     init_stamp_bar('stamp' + KiddoPaint.Stamps.page);
+  });
+
+  document.getElementById('alphaslider').addEventListener('input', function() {
+    KiddoPaint.Current.globalAlpha = this.value / 100.0;
+    KiddoPaint.Display.context.globalAlpha = KiddoPaint.Current.globalAlpha;
+    KiddoPaint.Display.previewContext.globalAlpha = KiddoPaint.Current.globalAlpha;
   });
 };
 

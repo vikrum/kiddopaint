@@ -14,7 +14,8 @@ KiddoPaint.Tools.Toolbox.Kaleidoscope = function() {
 		KiddoPaint.Display.context.lineWidth = tool.size;
 		KiddoPaint.Display.context.beginPath();
 		KiddoPaint.Display.context.save();
-		KiddoPaint.Display.context.translate(ev._x, ev._y);
+		KiddoPaint.Display.context.lineJoin = KiddoPaint.Display.context.lineCap = 'round';
+		KiddoPaint.Display.context.translate(ev._x + 0.1, ev._y + 0.1);
 		KiddoPaint.Display.context.moveTo(0, 0);
 	};
 

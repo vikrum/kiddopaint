@@ -4,7 +4,7 @@
   "description": "Kiddo Paint",
   "main": "js/kiddopaint.js",
   "devDependencies": {
-    "uglify-js": "^2.4.24"
+    "uglify-js": "^2.8.29"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

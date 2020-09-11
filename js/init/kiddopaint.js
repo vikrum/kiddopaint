@@ -233,8 +233,8 @@ function init_tool_bar() {
     init_alphabet_bar('character' + KiddoPaint.Alphabet.page);
   });
 
-  document.getElementById('stnext').addEventListener('mousedown', function() {
-    KiddoPaint.Stamps.nextPage();
+  document.getElementById('stnext').addEventListener('mousedown', function(e) {
+    (e.which == 1) ?  KiddoPaint.Stamps.nextPage() : KiddoPaint.Stamps.prevPage(); // left click is 1, right click is 3
     init_stamp_bar('stamp' + KiddoPaint.Stamps.page);
   });
 

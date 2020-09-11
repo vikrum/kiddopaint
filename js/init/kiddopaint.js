@@ -573,7 +573,7 @@ function common_ev_proc(ev) {
     return;
 
   var dist = distanceBetween(KiddoPaint.Current.prevEv, ev);
-  var tsdelta = Date.now() - KiddoPaint.Current.prevEvTs;
+  var tsdelta = (Date.now() - KiddoPaint.Current.prevEvTs) + 1;
   var velocity = (1.0 * dist) / tsdelta * 1000.0;
   KiddoPaint.Current.velocity = velocity;
   KiddoPaint.Current.velocityMultiplier = (velocity > 1000) ? velocity / 1000 : 1.0;

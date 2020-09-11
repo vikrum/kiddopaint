@@ -70,10 +70,16 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modifiedAlt = false;
   KiddoPaint.Current.modifiedCtrl = false;
   KiddoPaint.Current.modifiedToggle = false;
+  KiddoPaint.Current.modifiedMeta = false;
+  KiddoPaint.Current.velToggle = false;
   KiddoPaint.Alphabet.page = 1;
   KiddoPaint.Stamps.page = 1;
   KiddoPaint.Stamps.currentFace = KiddoPaint.Stamps.grouping.face;
   KiddoPaint.Current.multiplier = 1;
+  KiddoPaint.Current.prevEv = null;
+  KiddoPaint.Current.prevEvTs = Date.now();
+  KiddoPaint.Current.velocity = 0;
+  KiddoPaint.Current.velocityMultiplier = 1;
   reset_ranges();
 }
 
@@ -82,6 +88,8 @@ function reset_ranges() {
   KiddoPaint.Current.modifiedAltRange = 0;
   KiddoPaint.Current.modifiedCtrlRange = 0;
   KiddoPaint.Current.modifiedToggle = false;
+  KiddoPaint.Current.velToggle = false;
+  KiddoPaint.Current.modifiedMeta = false;
 }
 
 function init_listeners(canvas) {
@@ -105,6 +113,9 @@ function init_listeners(canvas) {
      else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = true;
      }
+     else if(e.keyCode == 17) {
+      KiddoPaint.Current.modifiedMeta = true;
+     }
      else if(e.keyCode == 83) {
       save_to_file();
      }
@@ -114,6 +125,9 @@ function init_listeners(canvas) {
      else if(e.keyCode == 32) {
        KiddoPaint.Current.modifiedToggle = ! KiddoPaint.Current.modifiedToggle;
      }
+     else if(e.keyCode == 86) {
+       KiddoPaint.Current.velToggle = ! KiddoPaint.Current.velToggle;
+     }
   }
   document.onkeyup = function checkKey(e) {
     if(e.keyCode == 16) {
@@ -122,6 +136,9 @@ function init_listeners(canvas) {
     }
     else if(e.keyCode == 91) {
       KiddoPaint.Current.modifiedCtrl = false;
+    }
+    else if(e.keyCode == 17) {
+     KiddoPaint.Current.modifiedMeta = false;
     }
     else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = false;
@@ -479,9 +496,9 @@ function init_circle_subtoolbar() {
 }
 
 function init_brush_subtoolbar() {
-  document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Current.modified ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
+  document.getElementById('br1').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Current.modifiedMeta ? KiddoPaint.Builders.Arrow(KiddoPaint.Colors.randomColor(), angle) : KiddoPaint.Builders.Arrow(KiddoPaint.Current.color, angle); }; });
   document.getElementById('br2').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle); }; });
-  document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 25; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Current.modified ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
+  document.getElementById('br3').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 25; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Current.modifiedMeta ? KiddoPaint.Brushes.RCircles() : KiddoPaint.Brushes.Circles(KiddoPaint.Current.color); } });
   document.getElementById('br4').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '👣',  angle); }; });
   document.getElementById('br5').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '🐾', angle); }; });
   document.getElementById('br6').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Rail(KiddoPaint.Colors.randomColor(), angle) }; });
@@ -494,8 +511,8 @@ function init_brush_subtoolbar() {
   document.getElementById('br8').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Scribble; });
   document.getElementById('br9').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 40; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Brushes.Pies(KiddoPaint.Current.color) }; });
   document.getElementById('br10').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Concentric(KiddoPaint.Current.color, step) }; });
-  document.getElementById('br11').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Twirly(KiddoPaint.Current.modified ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) }; });
-  document.getElementById('br12').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Current.modifiedCtrl ? KiddoPaint.Brushes.RotatingPentagon(KiddoPaint.Current.modified ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) : KiddoPaint.Brushes.FollowingSine(KiddoPaint.Current.modified ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) }; });
+  document.getElementById('br11').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Twirly(KiddoPaint.Current.modifiedMeta ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) }; });
+  document.getElementById('br12').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Current.modifiedCtrl ? KiddoPaint.Brushes.RotatingPentagon(KiddoPaint.Current.modifiedMeta ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) : KiddoPaint.Brushes.FollowingSine(KiddoPaint.Current.modifiedMeta ? KiddoPaint.Colors.nextColor() : KiddoPaint.Current.color, step) }; });
   document.getElementById('br13').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 1; KiddoPaint.Tools.PlainBrush.texture = function(step) { return KiddoPaint.Brushes.Rose(KiddoPaint.Current.color, step) }; });
   document.getElementById('br14').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Guilloche; });
   document.getElementById('br15').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Contours; });
@@ -542,6 +559,26 @@ function ev_canvas(ev) {
   var func = KiddoPaint.Current.tool[ev.type];
   if (func) {
     func(ev);
+  }
+
+  // common ev processing
+  common_ev_proc(ev);
+
+  KiddoPaint.Current.prevEv = ev;
+  KiddoPaint.Current.prevEvTs = Date.now();
+}
+
+function common_ev_proc(ev) {
+  if(!KiddoPaint.Current.prevEv)
+    return;
+
+  var dist = distanceBetween(KiddoPaint.Current.prevEv, ev);
+  var tsdelta = Date.now() - KiddoPaint.Current.prevEvTs;
+  var velocity = (1.0 * dist) / tsdelta * 1000.0;
+  KiddoPaint.Current.velocity = velocity;
+  KiddoPaint.Current.velocityMultiplier = (velocity > 1000) ? velocity / 1000 : 1.0;
+  if(KiddoPaint.Current.velToggle) {
+    KiddoPaint.Current.scaling = KiddoPaint.Current.velocityMultiplier;
   }
 }
 

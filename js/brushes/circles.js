@@ -4,7 +4,7 @@ KiddoPaint.Brushes.Circles = function() {
 		color1 = color1 || 'black';
 		color2 = color2 || color1;
 		alwaysFill = alwaysFill || false;
-		var size = 20;
+		var size = 20 * KiddoPaint.Current.scaling;
 	
 		var canvasBrush = document.createElement('canvas');
 		canvasBrush.width = size * 2;

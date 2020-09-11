@@ -4,7 +4,7 @@ KiddoPaint.Brushes.RotatingPentagon = function(color1, step) {
 	step = step % interval / interval;
 
 	var canvasBrush = document.createElement('canvas');
-	var size = 33;
+	var size = 33 * KiddoPaint.Current.scaling;
 	canvasBrush.width = size * 2;
 	canvasBrush.height = size * 2;
 	var contextBrush = canvasBrush.getContext('2d');

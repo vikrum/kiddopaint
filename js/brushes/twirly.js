@@ -3,7 +3,7 @@ KiddoPaint.Brushes.Twirly = function(color1, step) {
 	step = step % 24 / 24;
 
 	var canvasBrush = document.createElement('canvas');
-	var size = 25;
+	var size = 25 * KiddoPaint.Current.scaling;
 	canvasBrush.width = size * 2;
 	canvasBrush.height = size * 2;
 	var contextBrush = canvasBrush.getContext('2d');

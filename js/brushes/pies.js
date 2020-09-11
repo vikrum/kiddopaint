@@ -2,7 +2,7 @@ KiddoPaint.Brushes.Pies = function(color1) {
 	color1 = color1 || 'black';
 
 	var canvasBrush = document.createElement('canvas');
-	var size = 20;
+	var size = 20 * KiddoPaint.Current.scaling;
 	canvasBrush.width = size * 2;
 	canvasBrush.height = size * 2;
 	var contextBrush = canvasBrush.getContext('2d');

@@ -27,6 +27,11 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 	this.mousemove = function (ev) {
 		if (tool.isDown) {
 			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
+			  if(KiddoPaint.Current.modifiedTilde) {
+			  	// alpha decay
+				KiddoPaint.Display.context.globalAlpha *= 0.90;
+				KiddoPaint.Display.previewContext.globalAlpha *= 0.90;
+			  }
 			  // gap fill
 			  if(KiddoPaint.Current.modifiedAlt && tool.previousEv != null) {
 				var dist = distanceBetween(tool.previousEv, ev);
@@ -37,6 +42,11 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 			  		var brushFill = tool.texture(tool.step);
 			  		KiddoPaint.Display.context.drawImage(brushFill.brush, Math.round(x - brushFill.offset) , Math.round(y - brushFill.offset));
 			  		tool.step += 1;
+			  		if(KiddoPaint.Current.modifiedTilde) {
+			  			// alpha decay
+						KiddoPaint.Display.context.globalAlpha *= 0.95;
+						KiddoPaint.Display.previewContext.globalAlpha *= 0.95;
+			  		}
 				}
 			  }
 			  var brushFill = tool.texture(tool.step);
@@ -59,6 +69,8 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 			tool.step = 0;
 			tool.postprocess();
 			KiddoPaint.Display.saveMain();
+			KiddoPaint.Display.context.globalAlpha = KiddoPaint.Current.globalAlpha;
+			KiddoPaint.Display.previewContext.globalAlpha = KiddoPaint.Current.globalAlpha;
 		}
 	};
 };

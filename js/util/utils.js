@@ -223,7 +223,7 @@ function bresenham(x1, y1, x2, y2, callback) {
     var dy = y2 - y1;
     var sy = 1;
     var space = 0;
-    var spacing = 50;
+    var spacing = 17;
 
     if (dx < 0) {
         sx = -1;

@@ -43,9 +43,11 @@ function init_kiddo_paint() {
 
     KiddoPaint.Display.canvas = tmpCanvas;
     KiddoPaint.Display.context = tmpContext;
+    KiddoPaint.Display.context.globalAlpha = 1.0;
 
     KiddoPaint.Display.previewCanvas = previewCanvas;
     KiddoPaint.Display.previewContext = previewContext;
+    KiddoPaint.Display.previewContext.globalAlpha = 1.0;
 
     KiddoPaint.Display.main_canvas = canvas;
     KiddoPaint.Display.main_context = ctx;
@@ -71,6 +73,7 @@ function init_kiddo_defaults() {
   KiddoPaint.Current.modifiedCtrl = false;
   KiddoPaint.Current.modifiedToggle = false;
   KiddoPaint.Current.modifiedMeta = false;
+  KiddoPaint.Current.modifiedTilde = false;
   KiddoPaint.Current.velToggle = false;
   KiddoPaint.Alphabet.page = 1;
   KiddoPaint.Stamps.page = 1;
@@ -90,6 +93,7 @@ function reset_ranges() {
   KiddoPaint.Current.modifiedToggle = false;
   KiddoPaint.Current.velToggle = false;
   KiddoPaint.Current.modifiedMeta = false;
+  KiddoPaint.Current.modifiedTilde = false;
 }
 
 function init_listeners(canvas) {
@@ -116,6 +120,9 @@ function init_listeners(canvas) {
      else if(e.keyCode == 17) {
       KiddoPaint.Current.modifiedMeta = true;
      }
+     else if(e.keyCode == 192) {
+      KiddoPaint.Current.modifiedTilde = true;
+     }
      else if(e.keyCode == 83) {
       save_to_file();
      }
@@ -139,6 +146,9 @@ function init_listeners(canvas) {
     }
     else if(e.keyCode == 17) {
      KiddoPaint.Current.modifiedMeta = false;
+    }
+    else if(e.keyCode == 192) {
+     KiddoPaint.Current.modifiedTilde = false;
     }
     else if(e.keyCode == 18) {
       KiddoPaint.Current.modifiedAlt = false;
@@ -246,6 +256,15 @@ function init_tool_bar() {
 };
 
 function init_stamp_bar(stampgroup) {
+  // clear prev page for varying length stamp packs
+  var stampselect = document.querySelectorAll('*[id^="xst"]');
+  for(var i = 0; i < stampselect.length; i++) {
+    var stampButton = stampselect[i];
+    var buttonValue = '<emj> </emj>';
+    stampButton.innerHTML = buttonValue;
+  }
+
+  // populate values
   var stamptoolbar = KiddoPaint.Stamps.grouping[stampgroup].stamps;
   KiddoPaint.Tools.Stamp.stamp = stamptoolbar[0];
   for(var i = 0; i < stamptoolbar.length; i++) {

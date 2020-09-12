@@ -638,8 +638,13 @@ function mouse_wheel(ev) {
 }
 
 function save_to_file() {
-  var image = KiddoPaint.Display.main_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  window.location.href=image; 
+//  var image = KiddoPaint.Display.main_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+//  window.location.href=image; 
+  var image = KiddoPaint.Display.main_canvas.toDataURL("image/png");
+  var a = document.createElement("a"); 
+  a.href = image;
+  a.download = "kiddopaint.png";
+  a.click();
 }
 
 function image_upload(ev) {

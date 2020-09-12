@@ -661,7 +661,7 @@ function image_upload(ev) {
       var reader = new FileReader();
       reader.onload = function (evt) {
         var img = new Image();
-        img.onload = function() { KiddoPaint.Display.context.drawImage(img, 0, 0); KiddoPaint.Display.saveMain(); };
+        img.onload = function() { KiddoPaint.Display.context.drawImage(img, ev.layerX, ev.layerY); KiddoPaint.Display.saveMain(); };
         img.src = evt.target.result;
       };
       reader.readAsDataURL(file);

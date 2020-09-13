@@ -49,7 +49,17 @@ KiddoPaint.Display.clearLocalStorage = function() {
 
 KiddoPaint.Display.saveToLocalStorage = function() {
   if (typeof(Storage) != "undefined") {
-    localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL());
+    try {
+      localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL());
+    }
+    catch (e) {
+      try {
+        localStorage.setItem("kiddopaint", KiddoPaint.Display.main_canvas.toDataURL('image/jpeg', 0.87));
+      }
+      catch(e2) {
+	console.log(e2);
+      }
+    }
   }
 }
 

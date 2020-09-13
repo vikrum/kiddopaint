@@ -29,8 +29,8 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 			if(tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
 			  if(KiddoPaint.Current.modifiedTilde) {
 			  	// alpha decay
-				KiddoPaint.Display.context.globalAlpha *= 0.90;
-				KiddoPaint.Display.previewContext.globalAlpha *= 0.90;
+				KiddoPaint.Display.context.globalAlpha *= 0.95;
+				KiddoPaint.Display.previewContext.globalAlpha *= 0.95;
 			  }
 			  // gap fill
 			  if(KiddoPaint.Current.modifiedAlt && tool.previousEv != null) {
@@ -44,8 +44,8 @@ KiddoPaint.Tools.Toolbox.PlainBrush = function() {
 			  		tool.step += 1;
 			  		if(KiddoPaint.Current.modifiedTilde) {
 			  			// alpha decay
-						KiddoPaint.Display.context.globalAlpha *= 0.95;
-						KiddoPaint.Display.previewContext.globalAlpha *= 0.95;
+						KiddoPaint.Display.context.globalAlpha *= 0.99;
+						KiddoPaint.Display.previewContext.globalAlpha *= 0.99;
 			  		}
 				}
 			  }

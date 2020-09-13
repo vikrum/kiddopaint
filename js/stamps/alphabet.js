@@ -1,8 +1,8 @@
 KiddoPaint.Alphabet.english = {
   face: 'sans-serif',
   pages: 2,
-  character1: { letters: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S' ] },
-  character2: { letters: [ 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ] }
+  character1: { letters: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ] },
+  character2: { letters: [ '!', '?', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '<', '>', '$', '%', '^', '&', '@', '*', '(', ')', '~', '|' ] }
 }
 
 KiddoPaint.Alphabet.wingdings = {

@@ -54,9 +54,13 @@ KiddoPaint.Display.saveToLocalStorage = function() {
 }
 
 KiddoPaint.Display.loadFromLocalStorage = function() {
+  var img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function() { KiddoPaint.Display.clearMain(); KiddoPaint.Display.main_context.drawImage(img, 0, 0); }
   if (typeof(Storage) != "undefined" && localStorage.getItem("kiddopaint")) {
-      var img = new Image();
       img.src = localStorage.getItem("kiddopaint");
-      img.onload = function() { KiddoPaint.Display.clearMain(); KiddoPaint.Display.main_context.drawImage(img, 0, 0); }
+  }
+  else {
+      img.src = "https://kiddopaint.com/static/kiddopaint.jpg";
   }
 }

@@ -64,6 +64,7 @@ function init_kiddo_paint() {
 
 function init_kiddo_defaults() {
   KiddoPaint.Current.color = KiddoPaint.Colors.All.colorblack;
+  KiddoPaint.Current.altColor = KiddoPaint.Colors.All.colorblack;
   KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
   KiddoPaint.Current.globalAlpha = 1.0;
   KiddoPaint.Current.scaling = 1;
@@ -159,8 +160,13 @@ function init_listeners(canvas) {
 function colorSelect(e) {
   var src = e.srcElement || e.target;
   var color = src.className.split(' ')[1];
-  KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
-  document.getElementById('currentColor').className = 'currentColor ' + color;
+  if(e.which == 1) {
+    KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
+    document.getElementById('currentColor').className = 'currentColor ' + color;
+  }
+  else {
+    KiddoPaint.Current.altColor = KiddoPaint.Colors.All[color];
+  }
 }
 
 function init_color_selector() {
@@ -522,7 +528,7 @@ function init_brush_subtoolbar() {
   document.getElementById('br5').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, '🐾', angle); }; });
   document.getElementById('br6').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.Brush; KiddoPaint.Tools.Brush.texture = function(angle) { return KiddoPaint.Builders.Rail(KiddoPaint.Colors.randomColor(), angle) }; });
   document.getElementById('br7').addEventListener('mousedown', function() { KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush; KiddoPaint.Tools.PlainBrush.reset(); KiddoPaint.Tools.PlainBrush.spacing = 0; KiddoPaint.Tools.PlainBrush.texture = function() { return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color) }; 
-  KiddoPaint.Tools.PlainBrush.preprocess = function() { KiddoPaint.Display.context.shadowBlur = 16; KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.color; };
+  KiddoPaint.Tools.PlainBrush.preprocess = function() { KiddoPaint.Display.context.shadowBlur = 16; KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.altColor; };
   KiddoPaint.Tools.PlainBrush.postprocess = function() { KiddoPaint.Display.context.shadowBlur = 0; KiddoPaint.Display.context.shadowColor = null; };
 
 
@@ -655,7 +661,7 @@ function image_upload(ev) {
       var reader = new FileReader();
       reader.onload = function (evt) {
         var img = new Image();
-        img.onload = function() { KiddoPaint.Display.context.drawImage(img, 0, 0); KiddoPaint.Display.saveMain(); };
+        img.onload = function() { KiddoPaint.Display.context.drawImage(img, ev.layerX, ev.layerY); KiddoPaint.Display.saveMain(); };
         img.src = evt.target.result;
       };
       reader.readAsDataURL(file);

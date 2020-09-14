@@ -124,6 +124,19 @@ function init_listeners(canvas) {
      else if(e.keyCode == 192) {
       KiddoPaint.Current.modifiedTilde = true;
      }
+     else if(e.keyCode == 78) {
+       var c = KiddoPaint.Colors.nextAllColor();
+       // keep them in sync
+       KiddoPaint.Current.color = c.crgb;
+       KiddoPaint.Current.altColor = c.crgb;
+       document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
+     }
+     else if(e.keyCode == 82) {
+       var c = KiddoPaint.Colors.randomAllColor();
+       KiddoPaint.Current.color = c.crgb;
+       document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
+       KiddoPaint.Current.altColor = KiddoPaint.Colors.randomAllColor().crgb;
+     }
      else if(e.keyCode == 83) {
       save_to_file();
      }

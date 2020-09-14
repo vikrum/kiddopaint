@@ -60,3 +60,17 @@ KiddoPaint.Colors.nextColor = function() {
 KiddoPaint.Colors.randomColor = function() {
   return KiddoPaint.Colors.Bright[Math.floor(Math.random()*KiddoPaint.Colors.Bright.length)];
 }
+
+KiddoPaint.Colors.nextAllColor = function() {
+  var keys = Object.keys(KiddoPaint.Colors.All);
+  var colorclass = keys[KiddoPaint.Display.step % keys.length];
+  var colorrgb = KiddoPaint.Colors.All[colorclass];
+  return {cclass: colorclass, crgb: colorrgb};
+}
+
+KiddoPaint.Colors.randomAllColor = function() {
+  var keys = Object.keys(KiddoPaint.Colors.All);
+  var colorclass = keys[Math.floor(Math.random()*keys.length)];
+  var colorrgb = KiddoPaint.Colors.All[colorclass];
+  return {cclass: colorclass, crgb: colorrgb};
+}

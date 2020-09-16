@@ -41,22 +41,14 @@ KiddoPaint.Tools.Toolbox.Astroid = function() {
 			KiddoPaint.Display.context.closePath();
 		}
 		else if(tool.points.length == 2) {
-			KiddoPaint.Display.context.beginPath();
-			KiddoPaint.Display.context.moveTo(Math.round(tool.points[0].x), Math.round(tool.points[0].y));
-			KiddoPaint.Display.context.lineTo(Math.round(tool.points[1].x), Math.round(tool.points[1].y));
-//			KiddoPaint.Display.context.lineTo(ev._x,   ev._y); // some offset bug derp
-			KiddoPaint.Display.context.strokeStyle = tool.stroke();
-			KiddoPaint.Display.context.lineWidth = tool.size;
-			KiddoPaint.Display.context.stroke();
-			KiddoPaint.Display.context.closePath();
-			tool.drawAstroid(tool.points[0], tool.points[1], {x: ev._x, y: ev.y});
+			tool.drawAstroid(tool.points[0], tool.points[1], {x: ev._x, y: ev._y});
 		}
 	};
 
 	this.mouseup = function (ev) {
 		if(tool.points.length == 3) {
 			KiddoPaint.Display.clearTmp();
-			tool.drawAstroid(tool.points[0], tool.points[1], {x: ev._x, y: ev.y});
+			tool.drawAstroid(tool.points[0], tool.points[1], {x: ev._x, y: ev._y});
 			tool.points = [];
 			KiddoPaint.Display.saveMain();
 		}

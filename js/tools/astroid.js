@@ -1,12 +1,12 @@
 KiddoPaint.Tools.Toolbox.Astroid = function() {
 	var tool = this;
 	this.size = 1;
-	this.stroke = function() { return KiddoPaint.Textures.Solid(KiddoPaint.Current.color); };
+	this.stroke = function() { return KiddoPaint.Current.color; };
 	this.points = [];
 
 	// http://mathworld.wolfram.com/Astroid.html
 	this.drawAstroid = function(pt1, pt2, pt3) {
-		var interval = 31;
+		var interval = 31 * KiddoPaint.Current.scaling;
 
 		seg1deltax = (pt2.x - pt1.x) / interval;
 		seg1deltay = (pt2.y - pt1.y) / interval;
@@ -20,6 +20,7 @@ KiddoPaint.Tools.Toolbox.Astroid = function() {
 			KiddoPaint.Display.context.beginPath();
 			KiddoPaint.Display.context.moveTo(Math.round(a1.x), Math.round(a1.y));
 			KiddoPaint.Display.context.lineTo(Math.round(a2.x), Math.round(a2.y));
+			KiddoPaint.Display.context.strokeStyle = KiddoPaint.Current.modifiedMeta ? KiddoPaint.Colors.randomColor() : ((i % 2) ? KiddoPaint.Current.color : KiddoPaint.Current.altColor);
 			KiddoPaint.Display.context.stroke();
 			KiddoPaint.Display.context.closePath();
 		}

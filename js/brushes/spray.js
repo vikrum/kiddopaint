@@ -1,8 +1,8 @@
 KiddoPaint.Brushes.Spray = function(color1) {
 	color1 = color1 || 'black';
 
-	var radius = 25 * KiddoPaint.Current.scaling;
-	var density = 256 * KiddoPaint.Current.scaling;
+	var radius = 10 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier;
+	var density = 128 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier;
 
 	var canvasBrush = document.createElement('canvas');
 	canvasBrush.width = radius * 2;

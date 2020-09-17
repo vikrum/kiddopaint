@@ -5,8 +5,10 @@ set -e
 echo [clean] Removing old app.
 rm -f js/app.js
 
-echo [format] Format JS 
-node_modules/js-beautify/js/bin/js-beautify.js js/**/*
+echo [format] Format JS and CSS.
+node_modules/js-beautify/js/bin/js-beautify.js -r js/**/*
+node_modules/js-beautify/js/bin/js-beautify.js -r css/*
+
 
 echo -n [build] Building Kiddo Paint app.js..
 

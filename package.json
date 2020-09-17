@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/vikrum/kiddopaint/issues"
   },
-  "homepage": "https://github.com/vikrum/kiddopaint#readme"
+  "homepage": "https://github.com/vikrum/kiddopaint#readme",
+  "dependencies": {
+    "js-beautify": "^1.13.0"
+  }
 }

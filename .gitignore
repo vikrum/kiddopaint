@@ -1,3 +1,4 @@
 node_modules
 js/app.js
 .firebase
+.DS_Store

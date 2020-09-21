@@ -1,5 +1,6 @@
-KiddoPaint.Brushes.Spray = function(color1) {
+KiddoPaint.Brushes.Spray = function(color1, color2) {
     color1 = color1 || 'black';
+    color2 = color2 || 'black';
 
     var radius = 10 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier;
     var density = 128 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier;
@@ -35,13 +36,21 @@ KiddoPaint.Brushes.Spray = function(color1) {
     }
 
     for (var i = 0; i < density; i++) {
-        contextBrush.globalAlpha = Math.random() / 2;
         if (KiddoPaint.Current.modifiedToggle) {
+            contextBrush.fillStyle = color1;
+            if (KiddoPaint.Current.modifiedMeta) {
+                contextBrush.globalAlpha = Math.random() / 4;
+            } else {
+                contextBrush.globalAlpha = Math.random() / 2;
+            }
             ring();
             if (KiddoPaint.Current.modifiedMeta) {
+                contextBrush.globalAlpha = Math.random() / 3;
+                contextBrush.fillStyle = color2;
                 disc();
             }
         } else {
+            contextBrush.globalAlpha = Math.random() / 2;
             disc();
         }
     }

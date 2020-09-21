@@ -67,6 +67,7 @@ function init_kiddo_paint() {
 function init_kiddo_defaults() {
     KiddoPaint.Current.color = KiddoPaint.Colors.All.colorblack;
     KiddoPaint.Current.altColor = KiddoPaint.Colors.All.colorblack;
+    KiddoPaint.Current.terColor = KiddoPaint.Colors.All.colorblack;
     KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
     KiddoPaint.Current.globalAlpha = 1.0;
     KiddoPaint.Current.scaling = 1;
@@ -134,12 +135,14 @@ function init_listeners(canvas) {
             // keep them in sync
             KiddoPaint.Current.color = c.crgb;
             KiddoPaint.Current.altColor = c.crgb;
+            KiddoPaint.Current.terColor = c.crgb;
             document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
         } else if (e.keyCode == 82) {
             var c = KiddoPaint.Colors.randomAllColor();
             KiddoPaint.Current.color = c.crgb;
             document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
             KiddoPaint.Current.altColor = KiddoPaint.Colors.randomAllColor().crgb;
+            KiddoPaint.Current.terColor = KiddoPaint.Colors.randomAllColor().crgb;
         } else if (e.keyCode == 83) {
             save_to_file();
         } else if (e.keyCode > 48 && e.keyCode < 58) {
@@ -172,8 +175,10 @@ function colorSelect(e) {
     if (e.which == 1) {
         KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
         document.getElementById('currentColor').className = 'currentColor ' + color;
-    } else {
+    } else if (e.which == 3) {
         KiddoPaint.Current.altColor = KiddoPaint.Colors.All[color];
+    } else if (e.which == 2) {
+        KiddoPaint.Current.terColor = KiddoPaint.Colors.All[color];
     }
 }
 
@@ -877,7 +882,7 @@ function init_brush_subtoolbar() {
         KiddoPaint.Tools.PlainBrush.reset();
         KiddoPaint.Tools.PlainBrush.spacing = 0;
         KiddoPaint.Tools.PlainBrush.texture = function() {
-            return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color)
+            return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
         };
         KiddoPaint.Tools.PlainBrush.preprocess = function() {
             KiddoPaint.Display.context.shadowBlur = 16;

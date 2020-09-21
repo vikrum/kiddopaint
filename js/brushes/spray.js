@@ -16,7 +16,7 @@ KiddoPaint.Brushes.Spray = function(color1) {
         var r2 = radius * 0.75;
         var rp = Math.random() + 0.75;
 
-        var dist = Math.sqrt(Math.random() * ((r1 * r1) - (r2 * r2)) + (r2 * r2))
+        var dist = Math.sqrt(Math.abs(ziggurat()) * ((r1 * r1) - (r2 * r2)) + (r2 * r2))
         var xr = dist * Math.cos(theta);
         var yr = dist * Math.sin(theta);
         contextBrush.fillRect(radius + xr, radius + yr, rp, rp);

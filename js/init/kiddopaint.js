@@ -17,6 +17,7 @@ function init_kiddo_paint() {
     document.addEventListener("contextmenu", function(e) {
         e.preventDefault();
     }, false);
+
     var canvas = document.getElementById('kiddopaint');
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
@@ -967,6 +968,9 @@ function init_brush_subtoolbar() {
     });
     document.getElementById('br21').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Flood;
+    });
+    document.getElementById('br22').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Cut;
     });
 }
 

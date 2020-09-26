@@ -29,7 +29,7 @@ KiddoPaint.Tools.Toolbox.Cut = function() {
         }
 
         if (tool.isDown || (KiddoPaint.Current.modifiedToggle && tool.selectedData)) {
-            if (!KiddoPaint.Current.modifiedMeta) { // preview what a cut will look like
+            if (KiddoPaint.Current.modifiedMeta) { // preview what a cut will look like
                 KiddoPaint.Display.previewContext.fillStyle = 'white';
                 KiddoPaint.Display.previewContext.fillRect(tool.x - tool.size(), tool.y - tool.size(), 2 * tool.size(), 2 * tool.size());
             }
@@ -51,7 +51,7 @@ KiddoPaint.Tools.Toolbox.Cut = function() {
             // and peek into abstraction here
             // KiddoPaint.Display.saveMain();
             KiddoPaint.Display.saveUndo();
-            if (!KiddoPaint.Current.modifiedMeta) { // actually do the cut; and before placing the new pixels
+            if (KiddoPaint.Current.modifiedMeta) { // actually do the cut; and before placing the new pixels
                 KiddoPaint.Display.main_context.clearRect(tool.x - tool.size(), tool.y - tool.size(), 2 * tool.size(), 2 * tool.size());
             }
             KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);

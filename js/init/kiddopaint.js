@@ -66,9 +66,9 @@ function init_kiddo_paint() {
 }
 
 function init_kiddo_defaults() {
-    KiddoPaint.Current.color = KiddoPaint.Colors.All.colorblack;
-    KiddoPaint.Current.altColor = KiddoPaint.Colors.All.colorblack;
-    KiddoPaint.Current.terColor = KiddoPaint.Colors.All.colorblack;
+    KiddoPaint.Current.color = KiddoPaint.Colors.currentPalette()[0];
+    KiddoPaint.Current.altColor = KiddoPaint.Colors.currentPalette()[0];
+    KiddoPaint.Current.terColor = KiddoPaint.Colors.currentPalette()[0];
     KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
     KiddoPaint.Current.globalAlpha = 1.0;
     KiddoPaint.Current.scaling = 1;
@@ -134,16 +134,16 @@ function init_listeners(canvas) {
         } else if (e.keyCode == 78) {
             var c = KiddoPaint.Colors.nextAllColor();
             // keep them in sync
-            KiddoPaint.Current.color = c.crgb;
-            KiddoPaint.Current.altColor = c.crgb;
-            KiddoPaint.Current.terColor = c.crgb;
-            document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
+            KiddoPaint.Current.color = c;
+            KiddoPaint.Current.altColor = c;
+            KiddoPaint.Current.terColor = c;
+            document.getElementById('currentColor').style = 'background-color: ' + c;
         } else if (e.keyCode == 82) {
             var c = KiddoPaint.Colors.randomAllColor();
-            KiddoPaint.Current.color = c.crgb;
-            document.getElementById('currentColor').className = 'currentColor ' + c.cclass;
-            KiddoPaint.Current.altColor = KiddoPaint.Colors.randomAllColor().crgb;
-            KiddoPaint.Current.terColor = KiddoPaint.Colors.randomAllColor().crgb;
+            KiddoPaint.Current.color = c;
+            document.getElementById('currentColor').style = 'background-color: ' + c;
+            KiddoPaint.Current.altColor = KiddoPaint.Colors.randomAllColor();
+            KiddoPaint.Current.terColor = KiddoPaint.Colors.randomAllColor();
         } else if (e.keyCode == 83) {
             save_to_file();
         } else if (e.keyCode > 48 && e.keyCode < 58) {
@@ -172,23 +172,39 @@ function init_listeners(canvas) {
 
 function colorSelect(e) {
     var src = e.srcElement || e.target;
-    var color = src.className.split(' ')[1];
+    var colorId = src.id;
+    var colorSelected = KiddoPaint.Colors.currentPalette()[colorId];
     if (e.which == 1) {
-        KiddoPaint.Current.color = KiddoPaint.Colors.All[color];
-        document.getElementById('currentColor').className = 'currentColor ' + color;
+        KiddoPaint.Current.color = colorSelected
+        document.getElementById('currentColor').style = "background-color:" + colorSelected;
     } else if (e.which == 3) {
-        KiddoPaint.Current.altColor = KiddoPaint.Colors.All[color];
+        KiddoPaint.Current.altColor = colorSelected;
     } else if (e.which == 2) {
-        KiddoPaint.Current.terColor = KiddoPaint.Colors.All[color];
+        KiddoPaint.Current.terColor = colorSelected;
+    }
+}
+
+function set_colors_to_current_palette() {
+    var pal = KiddoPaint.Colors.currentPalette();
+    var buttons = document.getElementById('colorselector').children;
+    for (var i = 0, len = buttons.length; i < len; i++) {
+        var button = buttons[i];
+        var buttonid = button.id;
+        var color = pal[buttonid];
+        button.style = "background-color:" + color;
     }
 }
 
 function init_color_selector() {
     var buttons = document.getElementById('colorselector').children;
+    console.log(buttons.length);
     for (var i = 0, len = buttons.length; i < len; i++) {
         var button = buttons[i];
+        button.id = i;
         button.addEventListener('mousedown', colorSelect);
     }
+    set_colors_to_current_palette();
+    document.getElementById('currentColor').style = "background-color:" + KiddoPaint.Current.color;
 }
 
 function show_sub_toolbar(subtoolbar) {

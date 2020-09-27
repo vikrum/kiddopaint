@@ -228,6 +228,11 @@ function init_tool_bar() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
     });
 
+    document.getElementById('pen').addEventListener('mousedown', function() {
+        show_sub_toolbar('penciltoolbar');
+        KiddoPaint.Current.tool = KiddoPaint.Tools.SmoothPen;
+    });
+
     document.getElementById('line').addEventListener('mousedown', function() {
         show_sub_toolbar('linetoolbar');
         KiddoPaint.Current.tool = KiddoPaint.Tools.Line;

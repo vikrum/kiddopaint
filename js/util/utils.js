@@ -306,21 +306,35 @@ function bresenham(x1, y1, x2, y2, callback) {
 }
 
 
-function rgb2json(rgb) {
-    var sep = rgb.indexOf(",") > -1 ? "," : " ";
-    rgb = rgb.substr(4).split(")")[0].split(sep);
-    var r = (+rgb[0]),
-        g = (+rgb[1]),
-        b = (+rgb[2]);
+function color2json(color) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, 1, 1);
+    var imageData = ctx.getImageData(0, 0, 1, 1);
 
     return {
-        r: r,
-        g: g,
-        b: b,
-        a: 255
+        r: imageData.data[0],
+        g: imageData.data[1],
+        b: imageData.data[2],
+        a: imageData.data[3]
     };
 }
 
 function colorsEqual(color1, color2) {
     return color1.r === color2.r && color1.g === color2.g && color1.b === color2.b && color1.a === color2.a;
+}
+
+function lerp(a, b, t) {
+    return a + (b - a) * t;
+}
+
+function createFeatherGradient(radius, hardness) {
+    const innerRadius = Math.min(radius * hardness, radius - 1);
+    const gradient = KiddoPaint.Display.context.createRadialGradient(
+        0, 0, innerRadius,
+        0, 0, radius);
+    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+    return gradient;
 }

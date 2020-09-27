@@ -22,7 +22,8 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
             b: pixels.data[linear_cords + 2],
             a: pixels.data[linear_cords + 3]
         };
-        var color = rgb2json(KiddoPaint.Current.color);
+
+        var color = color2json(KiddoPaint.Current.color);
 
         if (colorsEqual(color, original_color)) {
             return;

@@ -103,9 +103,15 @@ KiddoPaint.Colors.randomColor = function() {
     return KiddoPaint.Colors.Palette.Bright[Math.floor(Math.random() * KiddoPaint.Colors.Palette.Bright.length)];
 }
 
+KiddoPaint.Colors.Current.colorStep = 0;
+KiddoPaint.Colors.getAndIncColorStep = function() {
+    KiddoPaint.Colors.Current.colorStep += 1;
+    return KiddoPaint.Colors.Current.colorStep;
+}
+
 KiddoPaint.Colors.nextAllColor = function() {
     var pal = KiddoPaint.Colors.currentPalette();
-    return pal[KiddoPaint.Display.step % pal.length];
+    return pal[KiddoPaint.Colors.getAndIncColorStep() % pal.length];
 }
 
 KiddoPaint.Colors.randomAllColor = function() {

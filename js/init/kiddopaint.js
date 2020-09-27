@@ -131,14 +131,17 @@ function init_listeners(canvas) {
             KiddoPaint.Current.modifiedMeta = true;
         } else if (e.keyCode == 192) {
             KiddoPaint.Current.modifiedTilde = true;
-        } else if (e.keyCode == 78) {
+        } else if (e.keyCode == 78) { // n
             var c = KiddoPaint.Colors.nextAllColor();
             // keep them in sync
             KiddoPaint.Current.color = c;
             KiddoPaint.Current.altColor = c;
             KiddoPaint.Current.terColor = c;
             document.getElementById('currentColor').style = 'background-color: ' + c;
-        } else if (e.keyCode == 82) {
+        } else if (e.keyCode == 67) { // c
+            KiddoPaint.Colors.nextPalette();
+            set_colors_to_current_palette();
+        } else if (e.keyCode == 82) { // r
             var c = KiddoPaint.Colors.randomAllColor();
             KiddoPaint.Current.color = c;
             document.getElementById('currentColor').style = 'background-color: ' + c;

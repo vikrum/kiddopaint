@@ -119,7 +119,6 @@ function init_listeners(canvas) {
     canvas.addEventListener("drop", image_upload);
 
     document.onkeydown = function checkKey(e) {
-        //  console.log(e.keyCode);
         if (e.keyCode == 16) {
             KiddoPaint.Current.scaling = 2;
             KiddoPaint.Current.modified = true;
@@ -200,7 +199,6 @@ function set_colors_to_current_palette() {
 
 function init_color_selector() {
     var buttons = document.getElementById('colorselector').children;
-    console.log(buttons.length);
     for (var i = 0, len = buttons.length; i < len; i++) {
         var button = buttons[i];
         button.id = i;

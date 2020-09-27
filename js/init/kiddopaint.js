@@ -264,6 +264,13 @@ function init_tool_bar() {
         KiddoPaint.Stamps.currentFace = KiddoPaint.Alphabet.english.face;
     });
 
+    document.getElementById('flood').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Flood;
+    });
+    document.getElementById('truck').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Cut;
+    });
+
     document.getElementById('undo').addEventListener('mousedown', function() {
         KiddoPaint.Sounds.oops();
         KiddoPaint.Display.undo();
@@ -982,12 +989,6 @@ function init_brush_subtoolbar() {
         KiddoPaint.Tools.Brush.texture = function() {
             return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(2));
         };
-    });
-    document.getElementById('br21').addEventListener('mousedown', function() {
-        KiddoPaint.Current.tool = KiddoPaint.Tools.Flood;
-    });
-    document.getElementById('br22').addEventListener('mousedown', function() {
-        KiddoPaint.Current.tool = KiddoPaint.Tools.Cut;
     });
 }
 

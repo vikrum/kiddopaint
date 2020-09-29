@@ -142,8 +142,31 @@ function guil(R, r, m, theta, p, Q, m, n) {
     };
 }
 
-// http://stackoverflow.com/a/9138593
 function scaleImageData(imageData, scale) {
+    return scaleImageDataPixelwise(imageData, scale);
+    //return scaleImageDataCanvasAPI(imageData, scale);
+}
+
+// https://stackoverflow.com/a/40772881 doesn't handle alpha well wrt to emojis etc
+function scaleImageDataCanvasAPI(imageData, scale) {
+    var canvas = document.createElement('canvas');
+    canvas.width = imageData.width;
+    canvas.height = imageData.height;
+    canvas.getContext("2d").putImageData(imageData, 0, 0);
+
+    var scaleCanvas = document.createElement('canvas');
+    scaleCanvas.width = imageData.width * scale;
+    scaleCanvas.height = imageData.height * scale;
+    var scaleCtx = scaleCanvas.getContext("2d");
+    scaleCtx.scale(scale, scale);
+    scaleCtx.drawImage(canvas, 0, 0);
+
+    var scaledImageData = scaleCtx.getImageData(0, 0, scaleCanvas.width * scale, scaleCanvas.height * scale);
+    return scaledImageData;
+}
+
+// http://stackoverflow.com/a/9138593 w/ alpha bg flattening
+function scaleImageDataPixelwise(imageData, scale) {
     var scaled = KiddoPaint.Display.main_context.createImageData(imageData.width * scale, imageData.height * scale);
     for (var row = 0; row < imageData.height; row++) {
         for (var col = 0; col < imageData.width; col++) {
@@ -325,6 +348,10 @@ function colorsEqual(color1, color2) {
     return color1.r === color2.r && color1.g === color2.g && color1.b === color2.b && color1.a === color2.a;
 }
 
+function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
 function lerp(a, b, t) {
     return a + (b - a) * t;
 }
@@ -334,7 +361,11 @@ function createFeatherGradient(radius, hardness) {
     const gradient = KiddoPaint.Display.context.createRadialGradient(
         0, 0, innerRadius,
         0, 0, radius);
-    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+    gradient.addColorStop(0, 'rgba(255, 0, 0, 0)');
+    gradient.addColorStop(1, 'rgba(0, 0, 255, 1)');
     return gradient;
+}
+
+function lerp(a, b, t) {
+    return a + (b - a) * t;
 }

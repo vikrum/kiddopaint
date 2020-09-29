@@ -1,7 +1,7 @@
 KiddoPaint.Tools.Toolbox.Magnify = function() {
     var tool = this;
     this.isDown = false;
-    this.size = 36 * (KiddoPaint.Current.modified ? 2 : 1);
+    this.size = 36;
     this.scale = 2;
 
     this.mousedown = function(ev) {

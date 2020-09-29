@@ -364,16 +364,8 @@ function createFeatherGradient(radius, hardness) {
     gradient.addColorStop(0, 'rgba(255, 0, 0, 0)');
     gradient.addColorStop(1, 'rgba(0, 0, 255, 1)');
     return gradient;
-}function lerp(a, b, t) {
-    return a + (b - a) * t;
 }
 
-function createFeatherGradient(radius, hardness) {
-    const innerRadius = Math.min(radius * hardness, radius - 1);
-    const gradient = KiddoPaint.Display.context.createRadialGradient(
-        0, 0, innerRadius,
-        0, 0, radius);
-    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
-    return gradient;
+function lerp(a, b, t) {
+    return a + (b - a) * t;
 }

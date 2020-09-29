@@ -995,6 +995,14 @@ function init_brush_subtoolbar() {
             return KiddoPaint.Builders.Prints(KiddoPaint.Current.color, KiddoPaint.Alphabet.nextWingding(2));
         };
     });
+    document.getElementById('br21').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
+        KiddoPaint.Tools.PlainBrush.reset();
+        KiddoPaint.Tools.PlainBrush.spacing = 1;
+        KiddoPaint.Tools.PlainBrush.texture = function(step) {
+            return KiddoPaint.Brushes.MeanStreak(step)
+        };
+    });
 }
 
 function init_stamp_subtoolbar() {

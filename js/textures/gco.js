@@ -8,15 +8,15 @@ var lightMix = function() {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
     ctx.beginPath();
-    ctx.fillStyle = '#f00'; //KiddoPaint.Current.color;
+    ctx.fillStyle = KiddoPaint.Current.color;
     ctx.arc(100, 200, 100, Math.PI * 2, 0, false);
     ctx.fill()
     ctx.beginPath();
-    ctx.fillStyle = '#0f0'; //KiddoPaint.Current.altColor;
+    ctx.fillStyle = KiddoPaint.Current.altColor;
     ctx.arc(220, 200, 100, Math.PI * 2, 0, false);
     ctx.fill()
     ctx.beginPath();
-    ctx.fillStyle = '#00f'; //KiddoPaint.Current.terColor;
+    ctx.fillStyle = KiddoPaint.Current.terColor;
     ctx.arc(160, 100, 100, Math.PI * 2, 0, false);
     ctx.fill();
     ctx.restore();

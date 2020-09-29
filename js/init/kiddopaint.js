@@ -1023,12 +1023,33 @@ function init_brush_subtoolbar() {
         };
     });
     document.getElementById('br21').addEventListener('mousedown', function() {
+        /*
         KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
         KiddoPaint.Tools.PlainBrush.reset();
         KiddoPaint.Tools.PlainBrush.spacing = 0;
         KiddoPaint.Tools.PlainBrush.texture = function(step) {
             return KiddoPaint.Brushes.MeanStreak(step)
         };
+*/
+
+        KiddoPaint.Tools.Composite.clearComposed();
+
+        KiddoPaint.Tools.PlainBrush.reset();
+        KiddoPaint.Tools.PlainBrush.spacing = 0;
+        KiddoPaint.Tools.PlainBrush.texture = function(step) {
+            return KiddoPaint.Brushes.MeanStreak(step)
+        };
+
+        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.PlainBrush);
+
+        KiddoPaint.Tools.Smudge.size = 15;
+        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.Smudge);
+
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Composite;
+    });
+    document.getElementById('br22').addEventListener('mousedown', function() {
+        KiddoPaint.Tools.Smudge.size = 36;
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Smudge;
     });
 }
 

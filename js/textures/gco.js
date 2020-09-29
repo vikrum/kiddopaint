@@ -31,7 +31,6 @@ var colorSphere = function() {
     var width = 360;
     var halfWidth = width / 2;
     var rotate = (1 / 360) * Math.PI * 2; // per degree
-    var offset = 0; // scrollbar offset
     var oleft = -20;
     var otop = -20;
     for (var n = 0; n <= 359; n++) {

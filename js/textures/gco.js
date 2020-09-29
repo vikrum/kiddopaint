@@ -41,9 +41,11 @@ var colorSphere = function() {
             S: 100,
             V: 100
         });
-        gradient.addColorStop(0, "rgba(0,0,0,0)");
+        gradient.addColorStop(0, KiddoPaint.Current.modifiedToggle ? "rgba(255, 255, 255, 0)" : "rgba(0, 0, 0, 0)");
+        //gradient.addColorStop(0, color2cssWithAlpha(KiddoPaint.Current.terColor, '0'));
         gradient.addColorStop(0.7, "rgba(" + color.R + "," + color.G + "," + color.B + ",1)");
         gradient.addColorStop(1, "rgba(255,255,255,1)");
+        //gradient.addColorStop(0, color2cssWithAlpha(KiddoPaint.Current.altColor, '1'));
         ctx.beginPath();
         ctx.moveTo(oleft + halfWidth, otop);
         ctx.lineTo(oleft + halfWidth, otop + halfWidth);

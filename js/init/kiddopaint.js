@@ -1025,7 +1025,7 @@ function init_brush_subtoolbar() {
     document.getElementById('br21').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
         KiddoPaint.Tools.PlainBrush.reset();
-        KiddoPaint.Tools.PlainBrush.spacing = 1;
+        KiddoPaint.Tools.PlainBrush.spacing = 0;
         KiddoPaint.Tools.PlainBrush.texture = function(step) {
             return KiddoPaint.Brushes.MeanStreak(step)
         };

@@ -105,6 +105,29 @@ function init_listeners(canvas) {
     canvas.addEventListener('mousedown', ev_canvas);
     canvas.addEventListener('mousemove', ev_canvas);
     canvas.addEventListener('mouseup', ev_canvas);
+
+    canvas.addEventListener('touchstart', e => {
+        e.preventDefault();
+        e.touches[0].type = e.type;
+        ev_canvas(e.touches[0]);
+    }, {
+        passive: false
+    });
+    canvas.addEventListener('touchmove', e => {
+        e.preventDefault();
+        e.touches[0].type = e.type;
+        ev_canvas(e.touches[0]);
+    }, {
+        passive: false
+    });
+    canvas.addEventListener('touchend', e => {
+        e.preventDefault();
+        e.touches[0].type = e.type;
+        ev_canvas(e.touches[0]);
+    }, {
+        passive: false
+    });
+
     canvas.addEventListener('mouseleave', function() {
         KiddoPaint.Display.clearPreview();
     });
@@ -223,6 +246,10 @@ function show_sub_toolbar(subtoolbar) {
 }
 
 function init_tool_bar() {
+    document.getElementById('save').addEventListener('mousedown', function() {
+        save_to_file();
+    });
+
     document.getElementById('pencil').addEventListener('mousedown', function() {
         show_sub_toolbar('penciltoolbar');
         KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
@@ -1023,10 +1050,15 @@ function init_alphabet_subtoolbar() {
 }
 
 function ev_canvas(ev) {
+    if (!ev) {
+        return;
+    }
     // pre event 
     KiddoPaint.Display.step += 1;
     KiddoPaint.Display.clearPreview();
     KiddoPaint.Current.ev = ev;
+
+    // console.log(ev);
 
     if (ev.layerX || ev.layerX == 0) {
         ev._x = ev.layerX;
@@ -1037,6 +1069,16 @@ function ev_canvas(ev) {
     }
 
     // handle event
+    if (ev.type === "touchstart") {
+        ev.type = "mousedown";
+    }
+    if (ev.type === "touchmove") {
+        ev.type = "mousemove";
+    }
+    if (ev.type === "touchend") {
+        ev.type = "mouseup";
+    }
+
     var func = KiddoPaint.Current.tool[ev.type];
     if (func) {
         func(ev);

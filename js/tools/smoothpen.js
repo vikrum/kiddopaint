@@ -19,10 +19,12 @@ KiddoPaint.Tools.Toolbox.SmoothPen = function() {
     this.mousemove = function(ev) {
         if (tool.isDown) {
             tool.points.push([ev._x, ev._y]);
-            if (tool.points.length > 15) {
+            if (tool.points.length > 20) {
                 //tool.points = simplifyDouglasPeucker(tool.points, 10);
                 KiddoPaint.Display.clearPreview();
                 renderFitLine(KiddoPaint.Display.context);
+                KiddoPaint.Display.saveMain();
+
                 tool.points = [];
                 tool.points.push([ev._x, ev._y]);
             } else {
@@ -32,15 +34,28 @@ KiddoPaint.Tools.Toolbox.SmoothPen = function() {
         }
     };
 
-
-
     this.mouseup = function(ev) {
         if (tool.isDown) {
             tool.isDown = false;
             KiddoPaint.Display.clearPreview();
             renderFitLine(KiddoPaint.Display.context);
+            KiddoPaint.Display.saveMain();
         }
     };
+
+    function offsetPoints(bezPoints, offsetAmount) {
+        var startPt = bezPoints[0];
+        var ctrl1 = bezPoints[1];
+        var ctrl2 = bezPoints[2];
+        var stopPt = bezPoints[3];
+
+        return [
+            [startPt[0] + offsetAmount, startPt[1] + offsetAmount],
+            [ctrl1[0] + offsetAmount, ctrl1[1] + offsetAmount],
+            [ctrl2[0] + offsetAmount, ctrl2[1] + offsetAmount],
+            [stopPt[0] + offsetAmount, stopPt[1] + offsetAmount],
+        ];
+    }
 
     function renderFitLine(ctx) {
         var fitted = fitCurve(tool.points, 75); // use multiplier keys 1-9 to have some spectrum of error values
@@ -51,18 +66,21 @@ KiddoPaint.Tools.Toolbox.SmoothPen = function() {
             ctx.lineJoin = 'round';
 
             fitted.forEach(element => {
-                var startPt = element[0];
-                var ctrl1 = element[1];
-                var ctrl2 = element[2];
-                var stopPt = element[3];
+                for (var i = 0; i < 1; i++) {
+                    var offsetElement = offsetPoints(element, 11 * i);
 
-                ctx.beginPath();
-                ctx.moveTo(startPt[0], startPt[1]);
-                ctx.bezierCurveTo(ctrl1[0], ctrl1[1], ctrl2[0], ctrl2[1], stopPt[0], stopPt[1]);
-                ctx.stroke();
-                ctx.closePath();
+                    var startPt = offsetElement[0];
+                    var ctrl1 = offsetElement[1];
+                    var ctrl2 = offsetElement[2];
+                    var stopPt = offsetElement[3];
 
-                KiddoPaint.Display.saveMain();
+                    ctx.beginPath();
+                    ctx.moveTo(startPt[0], startPt[1]);
+                    ctx.bezierCurveTo(ctrl1[0], ctrl1[1], ctrl2[0], ctrl2[1], stopPt[0], stopPt[1]);
+                    ctx.stroke();
+                    ctx.closePath();
+
+                }
 
             });
         }

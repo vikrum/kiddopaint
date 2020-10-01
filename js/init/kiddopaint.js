@@ -1051,6 +1051,10 @@ function init_brush_subtoolbar() {
         KiddoPaint.Tools.Smudge.size = 36;
         KiddoPaint.Current.tool = KiddoPaint.Tools.Smudge;
     });
+    document.getElementById('br23').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Maze;
+    });
+
 }
 
 function init_stamp_subtoolbar() {

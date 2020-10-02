@@ -369,3 +369,23 @@ function createFeatherGradient(radius, hardness) {
 function lerp(a, b, t) {
     return a + (b - a) * t;
 }
+
+// Given the 4 control points on a Bezier curve 
+// get x,y at interval T along the curve (0<=T<=1)
+// The curve starts when T==0 and ends when T==1
+// https://stackoverflow.com/questions/34681457/html5-canvas-bezier-curve-get-all-the-points
+function getCubicBezierXYatPercent(startPt, controlPt1, controlPt2, endPt, percent) {
+    var x = CubicN(percent, startPt[0], controlPt1[0], controlPt2[0], endPt[0]);
+    var y = CubicN(percent, startPt[1], controlPt1[1], controlPt2[1], endPt[1]);
+    return ({
+        _x: x,
+        _y: y
+    });
+}
+
+// cubic helper formula
+function CubicN(T, a, b, c, d) {
+    var t2 = T * T;
+    var t3 = t2 * T;
+    return a + (-a * 3 + T * (3 * a - a * T)) * T + (3 * b + T * (-6 * b + b * 3 * T)) * T + (c * 3 - c * 3 * T) * t2 + d * t3;
+}

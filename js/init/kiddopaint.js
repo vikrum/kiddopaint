@@ -949,8 +949,6 @@ function init_brush_subtoolbar() {
             KiddoPaint.Display.context.shadowBlur = 0;
             KiddoPaint.Display.context.shadowColor = null;
         };
-
-
     });
     document.getElementById('br8').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Scribble;
@@ -1054,6 +1052,11 @@ function init_brush_subtoolbar() {
     document.getElementById('br23').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Maze;
     });
+    document.getElementById('br24').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
+    });
+
+
 
 }
 

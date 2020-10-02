@@ -19,6 +19,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     this.mousemove = function(ev) {
         if (tool.isDown) {
             tool.points.push([ev._x, ev._y]);
+            /*
             if (tool.points.length > 20) {
                 //tool.points = simplifyDouglasPeucker(tool.points, 10);
                 KiddoPaint.Display.clearPreview();
@@ -30,6 +31,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
             } else {
                 renderFitLine(KiddoPaint.Display.previewContext);
             }
+            */
 
         }
     };
@@ -57,14 +59,49 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
         ];
     }
 
-    function renderFitLine(ctx) {
-        var fitted = fitCurve(tool.points, 75); // use multiplier keys 1-9 to have some spectrum of error values
-        if (fitted) {
-            ctx.strokeStyle = tool.texture();
-            ctx.lineWidth = tool.size();
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
+    function getSynthesizedTool() {
+        return getSynSprayBrush();
+    }
 
+    function getSynSprayBrush() {
+        KiddoPaint.Tools.PlainBrush.reset();
+        KiddoPaint.Tools.PlainBrush.spacing = 0;
+        KiddoPaint.Tools.PlainBrush.texture = function() {
+            return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
+        };
+        KiddoPaint.Tools.PlainBrush.preprocess = function() {
+            KiddoPaint.Display.context.shadowBlur = 16;
+            KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.altColor;
+        };
+        KiddoPaint.Tools.PlainBrush.postprocess = function() {
+            KiddoPaint.Display.context.shadowBlur = 0;
+            KiddoPaint.Display.context.shadowColor = null;
+        };
+        return KiddoPaint.Tools.PlainBrush;
+    }
+
+    function getSynMeanStreak() {
+        KiddoPaint.Tools.Composite.clearComposed();
+
+        KiddoPaint.Tools.PlainBrush.reset();
+        KiddoPaint.Tools.PlainBrush.spacing = 0;
+        KiddoPaint.Tools.PlainBrush.texture = function(step) {
+            return KiddoPaint.Brushes.MeanStreak(step)
+        };
+
+        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.PlainBrush);
+
+        KiddoPaint.Tools.Smudge.size = 15;
+        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.Smudge);
+
+        return KiddoPaint.Tools.Composite;
+    }
+
+    function renderFitLine(ctx) {
+        var fitted = fitCurve(tool.points, 50); // use multiplier keys 1-9 to have some spectrum of error values
+        if (fitted) {
+            var synthtool = getSynthesizedTool();
+            var lastSegmentEv = null;
             fitted.forEach(element => {
                 for (var i = 0; i < 1; i++) {
                     var offsetElement = offsetPoints(element, 11 * i);
@@ -74,15 +111,22 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     var ctrl2 = offsetElement[2];
                     var stopPt = offsetElement[3];
 
-                    ctx.beginPath();
-                    ctx.moveTo(startPt[0], startPt[1]);
-                    ctx.bezierCurveTo(ctrl1[0], ctrl1[1], ctrl2[0], ctrl2[1], stopPt[0], stopPt[1]);
-                    ctx.stroke();
-                    ctx.closePath();
-
+                    var fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 0);
+                    if (!lastSegmentEv) {
+                        synthtool.mousedown(fakeEv);
+                    } else {
+                        synthtool.mousemove(lastSegmentEv);
+                    }
+                    for (var n = 0; n < 33; n++) {
+                        fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / 32.0);
+                        synthtool.mousemove(fakeEv);
+                    }
+                    fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 1);
+                    synthtool.mousemove(fakeEv);
+                    lastSegmentEv = fakeEv;
                 }
-
             });
+            synthtool.mouseup(lastSegmentEv);
         }
     }
 };

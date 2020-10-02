@@ -1,6 +1,9 @@
 KiddoPaint.Tools.Toolbox.BezFollow = function() {
     var tool = this;
     this.isDown = false;
+    this.previousEv = null;
+    this.spacing = 25;
+
     this.points = [];
 
     this.size = function() {
@@ -14,32 +17,29 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     this.mousedown = function(ev) {
         tool.isDown = true;
         tool.points = [];
+        tool.mousemove(ev);
+        tool.previousEv = ev;
     };
 
     this.mousemove = function(ev) {
         if (tool.isDown) {
-            tool.points.push([ev._x, ev._y]);
-            /*
-            if (tool.points.length > 20) {
-                //tool.points = simplifyDouglasPeucker(tool.points, 10);
-                KiddoPaint.Display.clearPreview();
-                renderFitLine(KiddoPaint.Display.context);
-                KiddoPaint.Display.saveMain();
-
-                tool.points = [];
+            if (tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
                 tool.points.push([ev._x, ev._y]);
-            } else {
-                renderFitLine(KiddoPaint.Display.previewContext);
+                tool.previousEv = ev;
             }
-            */
-
+            tool.points.forEach(pt => {
+                KiddoPaint.Display.previewContext.fillStyle = '#0f0';
+                KiddoPaint.Display.previewContext.fillRect(pt[0], pt[1], 5, 5);
+            })
         }
     };
 
     this.mouseup = function(ev) {
         if (tool.isDown) {
             tool.isDown = false;
+            tool.points.push([ev._x, ev._y]);
             KiddoPaint.Display.clearPreview();
+
             renderFitLine(KiddoPaint.Display.context);
             KiddoPaint.Display.saveMain();
         }
@@ -60,7 +60,8 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     }
 
     function getSynthesizedTool() {
-        return getSynSprayBrush();
+        //return getSynSprayBrush();
+        return getSynMeanStreak();
     }
 
     function getSynSprayBrush() {
@@ -98,8 +99,9 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     }
 
     function renderFitLine(ctx) {
-        var fitted = fitCurve(tool.points, 50); // use multiplier keys 1-9 to have some spectrum of error values
+        var fitted = fitCurve(tool.points, 25); // use multiplier keys 1-9 to have some spectrum of error values
         if (fitted) {
+            //var oldMultiplier = KiddoPaint.Current.scaling;
             var synthtool = getSynthesizedTool();
             var lastSegmentEv = null;
             fitted.forEach(element => {
@@ -117,9 +119,10 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     } else {
                         synthtool.mousemove(lastSegmentEv);
                     }
-                    for (var n = 0; n < 33; n++) {
-                        fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / 32.0);
+                    for (var n = 0; n <= 35; n++) {
+                        fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / 35.0);
                         synthtool.mousemove(fakeEv);
+                        //KiddoPaint.Current.scaling *= 1.002;
                     }
                     fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 1);
                     synthtool.mousemove(fakeEv);
@@ -127,6 +130,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                 }
             });
             synthtool.mouseup(lastSegmentEv);
+            //KiddoPaint.Current.scaling = oldMultiplier;
         }
     }
 };

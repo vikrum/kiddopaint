@@ -1182,7 +1182,7 @@ function save_to_file() {
     var image = KiddoPaint.Display.main_canvas.toDataURL("image/png");
     var a = document.createElement("a");
     a.href = image;
-    a.download = "kiddopaint.png";
+    a.download = "kiddopaint-" + Date.now() + ".png";
     a.click();
 }
 

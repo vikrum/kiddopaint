@@ -1,6 +1,8 @@
 KiddoPaint.Tools.Toolbox.SmoothPen = function() {
     var tool = this;
     this.isDown = false;
+    this.previousEv = null;
+    this.spacing = 25;
     this.points = [];
 
     this.size = function() {
@@ -18,19 +20,11 @@ KiddoPaint.Tools.Toolbox.SmoothPen = function() {
 
     this.mousemove = function(ev) {
         if (tool.isDown) {
-            tool.points.push([ev._x, ev._y]);
-            if (tool.points.length > 20) {
-                //tool.points = simplifyDouglasPeucker(tool.points, 10);
-                KiddoPaint.Display.clearPreview();
-                renderFitLine(KiddoPaint.Display.context);
-                KiddoPaint.Display.saveMain();
-
-                tool.points = [];
+            if (tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
                 tool.points.push([ev._x, ev._y]);
-            } else {
-                renderFitLine(KiddoPaint.Display.previewContext);
+                tool.previousEv = ev;
             }
-
+            renderFitLine(KiddoPaint.Display.previewContext);
         }
     };
 

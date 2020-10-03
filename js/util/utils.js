@@ -356,6 +356,14 @@ function lerp(a, b, t) {
     return a + (b - a) * t;
 }
 
+function invlerp(a, b, v) {
+    return (1.0 * (v - a)) / (1.0 * (b - a));
+}
+
+function remap(imin, imax, omin, omax, v) {
+    return lerp(omin, omax, invlerp(imin, imax, v));
+}
+
 function createFeatherGradient(radius, hardness) {
     const innerRadius = Math.min(radius * hardness, radius - 1);
     const gradient = KiddoPaint.Display.context.createRadialGradient(
@@ -364,10 +372,6 @@ function createFeatherGradient(radius, hardness) {
     gradient.addColorStop(0, 'rgba(255, 0, 0, 0)');
     gradient.addColorStop(1, 'rgba(0, 0, 255, 1)');
     return gradient;
-}
-
-function lerp(a, b, t) {
-    return a + (b - a) * t;
 }
 
 // Given the 4 control points on a Bezier curve 

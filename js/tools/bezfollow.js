@@ -3,7 +3,10 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     this.isDown = false;
     this.previousEv = null;
     this.spacing = 25;
-
+    this.ylimit = {
+        min: 5000,
+        max: -1
+    };
     this.points = [];
 
     this.size = function() {
@@ -23,6 +26,13 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
 
     this.mousemove = function(ev) {
         if (tool.isDown) {
+            if (ev._y < tool.ylimit.min) {
+                tool.ylimit.min = ev._y;
+            }
+            if (ev._y > tool.ylimit.max) {
+                tool.ylimit.max = ev._y;
+            }
+
             if (tool.previousEv == null || distanceBetween(tool.previousEv, ev) > tool.spacing) {
                 tool.points.push([ev._x, ev._y]);
                 tool.previousEv = ev;
@@ -42,6 +52,10 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
 
             renderFitLine(KiddoPaint.Display.context);
             KiddoPaint.Display.saveMain();
+            tool.ylimit = {
+                min: 5000,
+                max: -1
+            };
         }
     };
 
@@ -101,7 +115,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     function renderFitLine(ctx) {
         var fitted = fitCurve(tool.points, 25); // use multiplier keys 1-9 to have some spectrum of error values
         if (fitted) {
-            //var oldMultiplier = KiddoPaint.Current.scaling;
+            var oldMultiplier = KiddoPaint.Current.scaling;
             var synthtool = getSynthesizedTool();
             var lastSegmentEv = null;
             fitted.forEach(element => {
@@ -114,6 +128,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     var stopPt = offsetElement[3];
 
                     var fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 0);
+                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
                     if (!lastSegmentEv) {
                         synthtool.mousedown(fakeEv);
                     } else {
@@ -121,16 +136,19 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     }
                     for (var n = 0; n <= 35; n++) {
                         fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / 35.0);
+                        KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
                         synthtool.mousemove(fakeEv);
                         //KiddoPaint.Current.scaling *= 1.002;
                     }
                     fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 1);
+                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
                     synthtool.mousemove(fakeEv);
                     lastSegmentEv = fakeEv;
                 }
             });
+            KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, lastSegmentEv._y);
             synthtool.mouseup(lastSegmentEv);
-            //KiddoPaint.Current.scaling = oldMultiplier;
+            KiddoPaint.Current.scaling = oldMultiplier;
         }
     }
 };

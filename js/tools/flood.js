@@ -1,11 +1,6 @@
 KiddoPaint.Tools.Toolbox.Flood = function() {
-    var tool = this;
-    this.isDown = false;
-    this.connected = true;
-    this.texture = false;
 
     this.mousedown = function(ev) {
-        tool.isDown = true;
         KiddoPaint.Sounds.flood();
         var x = ev._x;
         var y = ev._y;
@@ -15,6 +10,7 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
         }];
         // read from main_context for underlying pixels
         var pixels = KiddoPaint.Display.main_context.getImageData(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+
         var linear_cords = (y * KiddoPaint.Display.canvas.width + x) * 4;
         var original_color = {
             r: pixels.data[linear_cords],
@@ -53,6 +49,7 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
                     pixels.data[linear_cords + 1] == original_color.g &&
                     pixels.data[linear_cords + 2] == original_color.b &&
                     pixels.data[linear_cords + 3] == original_color.a)) {
+
                 pixels.data[linear_cords] = color.r;
                 pixels.data[linear_cords + 1] = color.g;
                 pixels.data[linear_cords + 2] = color.b;
@@ -95,16 +92,15 @@ KiddoPaint.Tools.Toolbox.Flood = function() {
                 linear_cords += KiddoPaint.Display.canvas.width * 4;
             }
         }
-        // write to current context to allow proper ctx mgmt for undo etc
+        // since we are possibly rewriting a non-rectangular shape back, we put back all the pixels.
+        // however, due to alpha (& premultiplication w/ get -> put), it mutates unchanged pixels underneath
+        // so, add a new helper that clears main before writing the preview context. this also preserves
+        // undoing the fill properly.
         KiddoPaint.Display.context.putImageData(pixels, 0, 0);
+        KiddoPaint.Display.clearBeforeSaveMain();
     };
 
     this.mousemove = function(ev) {};
-    this.mouseup = function(ev) {
-        if (tool.isDown) {
-            tool.isDown = false;
-            KiddoPaint.Display.saveMain();
-        }
-    };
+    this.mouseup = function(ev) {};
 };
 KiddoPaint.Tools.Flood = new KiddoPaint.Tools.Toolbox.Flood();

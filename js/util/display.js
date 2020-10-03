@@ -20,6 +20,14 @@ KiddoPaint.Display.clearPreview = function() {
     KiddoPaint.Display.previewContext.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
 }
 
+KiddoPaint.Display.clearBeforeSaveMain = function() {
+    KiddoPaint.Display.saveUndo();
+    KiddoPaint.Display.clearMain();
+    KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
+    KiddoPaint.Display.clearTmp();
+    KiddoPaint.Display.saveToLocalStorage();
+}
+
 KiddoPaint.Display.saveMain = function() {
     KiddoPaint.Display.saveUndo();
     KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);

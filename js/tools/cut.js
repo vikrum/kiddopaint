@@ -43,10 +43,13 @@ KiddoPaint.Tools.Toolbox.Cut = function() {
             }
             KiddoPaint.Display.previewContext.putImageData(tool.selectedData, ev._x - sizex, ev._y - sizey);
         } else {
-            KiddoPaint.Display.previewContext.strokeStyle = 'grey';
+            KiddoPaint.Display.previewContext.strokeStyle = 'white';
             KiddoPaint.Display.previewContext.lineWidth = 0.5;
             KiddoPaint.Display.previewContext.setLineDash((KiddoPaint.Display.step % 2) ? [4] : [2]);
             KiddoPaint.Display.previewContext.strokeRect(ev._x - sizex, ev._y - sizey, 2 * sizex, 2 * sizey);
+            KiddoPaint.Display.previewContext.strokeStyle = 'black';
+            KiddoPaint.Display.previewContext.strokeRect(ev._x - sizex, ev._y - sizey, 2 * sizex + 1, 2 * sizey + 1);
+
         }
     };
 

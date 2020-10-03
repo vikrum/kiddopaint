@@ -14,21 +14,21 @@ KiddoPaint.Builders.Rail = function(color1, angle) {
     contextBrush.translate(-15.5, -15.5);
 
     // left rail
-    contextBrush.fillStyle = KiddoPaint.Colors.All.colorlgrey;
+    contextBrush.fillStyle = 'rgb(190, 190, 190)';
     contextBrush.fillRect(0.5, 0, 3, 40);
     contextBrush.fillRect(30.5, 0, 2.5, 40);
 
     // right rail
-    contextBrush.fillStyle = KiddoPaint.Colors.All.colordgrey;
+    contextBrush.fillStyle = 'rgb(128, 128, 128)';
     contextBrush.fillRect(3.5, 0, 2.5, 40);
     contextBrush.fillRect(27.5, 0, 2.5, 40);
 
     // ties
     for (var i = 0; i < 4; i++) {
         var offset = 8 * i;
-        contextBrush.fillStyle = KiddoPaint.Colors.All.colorlbrown;
+        contextBrush.fillStyle = 'rgb(136, 104, 67)';
         contextBrush.fillRect(0, 5.5 + offset, 35, 2);
-        contextBrush.fillStyle = KiddoPaint.Colors.All.colordbrown;
+        contextBrush.fillStyle = 'rgb(73, 61, 38)';
         contextBrush.fillRect(0, 7 + offset, 35, 1.5);
     }
     return canvasBrush;

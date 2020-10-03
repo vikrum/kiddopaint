@@ -905,7 +905,7 @@ function init_brush_subtoolbar() {
     document.getElementById('br2').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Brush;
         KiddoPaint.Tools.Brush.texture = function(angle) {
-            return KiddoPaint.Builders.Road(KiddoPaint.Current.color, angle);
+            return KiddoPaint.Builders.Road(KiddoPaint.Current.color, KiddoPaint.Current.altColor, angle);
         };
     });
     document.getElementById('br3').addEventListener('mousedown', function() {

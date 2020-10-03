@@ -1,4 +1,5 @@
 KiddoPaint.Display.undoData = null;
+KiddoPaint.Display.undoOn = true;
 
 KiddoPaint.Display.clearAll = function() {
     KiddoPaint.Display.saveUndo();
@@ -35,8 +36,18 @@ KiddoPaint.Display.saveMain = function() {
     KiddoPaint.Display.saveToLocalStorage();
 }
 
+KiddoPaint.Display.pauseUndo = function() {
+    KiddoPaint.Display.undoOn = false;
+}
+
+KiddoPaint.Display.resumeUndo = function() {
+    KiddoPaint.Display.undoOn = true;
+}
+
 KiddoPaint.Display.saveUndo = function() {
-    KiddoPaint.Display.undoData = KiddoPaint.Display.main_canvas.toDataURL();
+    if (KiddoPaint.Display.undoOn) {
+        KiddoPaint.Display.undoData = KiddoPaint.Display.main_canvas.toDataURL();
+    }
 }
 
 KiddoPaint.Display.undo = function() {

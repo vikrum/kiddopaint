@@ -1179,7 +1179,8 @@ function mouse_wheel(ev) {
 function save_to_file() {
     //  var image = KiddoPaint.Display.main_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     //  window.location.href=image; 
-    var image = KiddoPaint.Display.main_canvas.toDataURL("image/png");
+    var canvasToSave = KiddoPaint.Current.modifiedAlt ? trimCanvas(KiddoPaint.Display.main_canvas) : KiddoPaint.Display.main_canvas;
+    var image = canvasToSave.toDataURL("image/png");
     var a = document.createElement("a");
     a.href = image;
     a.download = "kiddopaint-" + Date.now() + ".png";

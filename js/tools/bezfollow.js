@@ -60,8 +60,8 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     }
 
     function getSynthesizedTool() {
-        //return getSynSprayBrush();
-        return getSynMeanStreak();
+        return getSynSprayBrush();
+        //return getSynMeanStreak();
     }
 
     function getSynSprayBrush() {

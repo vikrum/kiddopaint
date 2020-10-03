@@ -50,7 +50,11 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
             tool.points.push([ev._x, ev._y]);
             KiddoPaint.Display.clearPreview();
 
+            // calling synthetic tools have their own propagation to main, so pause undo state capture
+            KiddoPaint.Display.pauseUndo();
             renderFitLine(KiddoPaint.Display.context);
+            KiddoPaint.Display.resumeUndo();
+
             KiddoPaint.Display.saveMain();
             tool.ylimit = {
                 min: 5000,

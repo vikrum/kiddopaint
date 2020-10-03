@@ -11,9 +11,7 @@ KiddoPaint.Tools.Toolbox.Composite = function() {
     }
 
     this.mousedown = function(ev) {
-        // composites will be doing many saveMains, so keep state here including
-        // undo state, then pause undo state saving for all subsequent steps.
-        KiddoPaint.Display.saveMain();
+        // composites will be doing many saveMains, so pause state here
         KiddoPaint.Display.pauseUndo();
         for (const ctool of tool.composed) {
             ctool.mousedown(ev);
@@ -31,9 +29,9 @@ KiddoPaint.Tools.Toolbox.Composite = function() {
             ctool.mouseup(ev);
         }
         // ... everything in between should have done saveMains, so all the composite's
-        // intermediate preview, tmp contexts, etc are already on main. and we've ignored
-        // all the undo states inbetween. turn it back on now
+        // intermediate preview, tmp contexts, etc are still pending turn it back on now and save main
         KiddoPaint.Display.resumeUndo();
+        KiddoPaint.Display.saveMain();
     };
 };
 KiddoPaint.Tools.Composite = new KiddoPaint.Tools.Toolbox.Composite();

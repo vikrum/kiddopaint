@@ -22,18 +22,20 @@ KiddoPaint.Display.clearPreview = function() {
 }
 
 KiddoPaint.Display.clearBeforeSaveMain = function() {
-    KiddoPaint.Display.saveUndo();
-    KiddoPaint.Display.clearMain();
-    KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
-    KiddoPaint.Display.clearTmp();
-    KiddoPaint.Display.saveToLocalStorage();
+    if (KiddoPaint.Display.saveUndo()) {
+        KiddoPaint.Display.clearMain();
+        KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
+        KiddoPaint.Display.clearTmp();
+        KiddoPaint.Display.saveToLocalStorage();
+    }
 }
 
 KiddoPaint.Display.saveMain = function() {
-    KiddoPaint.Display.saveUndo();
-    KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
-    KiddoPaint.Display.clearTmp();
-    KiddoPaint.Display.saveToLocalStorage();
+    if (KiddoPaint.Display.saveUndo()) {
+        KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
+        KiddoPaint.Display.clearTmp();
+        KiddoPaint.Display.saveToLocalStorage();
+    }
 }
 
 KiddoPaint.Display.pauseUndo = function() {
@@ -48,6 +50,7 @@ KiddoPaint.Display.saveUndo = function() {
     if (KiddoPaint.Display.undoOn) {
         KiddoPaint.Display.undoData = KiddoPaint.Display.main_canvas.toDataURL();
     }
+    return KiddoPaint.Display.undoOn;
 }
 
 KiddoPaint.Display.undo = function() {

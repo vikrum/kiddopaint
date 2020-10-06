@@ -1,33 +1,5 @@
 KiddoPaint.Submenu = {};
 
-KiddoPaint.Submenu.spray = [{
-        name: 'Default spray',
-        imgSrc: 'img/pw1.png',
-        handler: function() {
-            KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
-        }
-    },
-    {
-        name: 'Default spray',
-        imgSrc: 'img/pw2.png',
-        handler: function() {
-            KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
-        }
-    },
-    {
-        name: 'spacer',
-        invisible: true,
-        handler: true
-    },
-    {
-        name: 'Default spray',
-        text: 'zzz',
-        handler: function() {
-            KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
-        }
-    }
-];
-
 function show_generic_submenu(subtoolbar) {
     if (!KiddoPaint.Submenu[subtoolbar]) {
         return;
@@ -63,6 +35,10 @@ function show_generic_submenu(subtoolbar) {
         } else if (buttonDetail.imgSrc) {
             var img = document.createElement('img');
             img.src = buttonDetail.imgSrc;
+            button.appendChild(img);
+        } else if (buttonDetail.imgJs) {
+            var img = document.createElement('img');
+            img.src = buttonDetail.imgJs();
             button.appendChild(img);
         } else if (buttonDetail.text) {
             var t = document.createTextNode(buttonDetail.text);

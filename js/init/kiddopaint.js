@@ -242,7 +242,6 @@ function show_sub_toolbar(subtoolbar) {
             div.className = 'hidden'
         }
     }
-
 }
 
 function init_tool_bar() {
@@ -251,12 +250,12 @@ function init_tool_bar() {
     });
 
     document.getElementById('pencil').addEventListener('mousedown', function() {
-        show_sub_toolbar('penciltoolbar');
+        show_generic_submenu('pencil');
         KiddoPaint.Current.tool = KiddoPaint.Tools.Pencil;
     });
 
     document.getElementById('pen').addEventListener('mousedown', function() {
-        show_sub_toolbar('penciltoolbar');
+        show_generic_submenu('pencil');
         KiddoPaint.Current.tool = KiddoPaint.Tools.SmoothPen;
     });
 
@@ -368,118 +367,8 @@ function init_subtool_bars() {
 }
 
 function init_pencil_subtoolbar() {
-    document.getElementById('pw1').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.size = 1;
-    });
-    document.getElementById('pw2').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.size = 5;
-    });
-    document.getElementById('pw3').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.size = 7;
-    });
-    document.getElementById('pw4').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.size = 25;
-    });
-    document.getElementById('pw5').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.size = 100;
-    });
-
-    document.getElementById('pt1').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Solid(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt1').src = makeIcon(KiddoPaint.Textures.Solid);
-
-    document.getElementById('pt2').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Partial1(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt2').src = makeIcon(KiddoPaint.Textures.Partial1);
-
-    document.getElementById('pt3').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Partial2(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt3').src = makeIcon(KiddoPaint.Textures.Partial2);
-
-    document.getElementById('pt4').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Partial3(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt4').src = makeIcon(KiddoPaint.Textures.Partial3);
-
-    document.getElementById('pt5').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Current.modifiedAlt ? KiddoPaint.Textures.RSmiley() : KiddoPaint.Textures.Smiley(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt5').src = makeIcon(KiddoPaint.Textures.Smiley);
-
-    document.getElementById('pt6').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.PartialSquares(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt6').src = makeIcon(KiddoPaint.Textures.PartialSquares);
-
-    document.getElementById('pt8').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Speckles(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt8').src = makeIcon(KiddoPaint.Textures.Speckles);
-
-    document.getElementById('pt9').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Bubbles(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt9').src = makeIcon(KiddoPaint.Textures.Bubbles);
-
-    document.getElementById('pt10').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Diamond(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt10').src = makeIcon(KiddoPaint.Textures.Diamond);
-
-    document.getElementById('pt11').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Sand(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt11').src = makeIcon(KiddoPaint.Textures.Sand);
-
-    document.getElementById('pt12').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Brick(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt12').src = makeIcon(KiddoPaint.Textures.Brick);
-
-    document.getElementById('pt13').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.CornerStair(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt13').src = makeIcon(KiddoPaint.Textures.CornerStair);
-
-    document.getElementById('pt14').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.Houndstooth(KiddoPaint.Current.color);
-        }
-    });
-    document.getElementById('ipt14').src = makeIcon(KiddoPaint.Textures.Houndstooth);
-
-    document.getElementById('pt7').addEventListener('mousedown', function() {
-        KiddoPaint.Tools.Pencil.texture = function() {
-            return KiddoPaint.Textures.RSolid();
-        }
-    });
+    // this is the default, so we show show it
+    show_generic_submenu('pencil');
 }
 
 function init_line_subtoolbar() {

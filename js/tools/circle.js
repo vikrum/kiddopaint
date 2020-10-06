@@ -25,7 +25,17 @@ KiddoPaint.Tools.Toolbox.Circle = function() {
             KiddoPaint.Display.context.fillStyle = tool.texture();
             KiddoPaint.Display.context.strokeStyle = tool.stroke();
             KiddoPaint.Display.context.lineWidth = 1.5;
-            KiddoPaint.Display.context.arc(tool.x, tool.y, Math.abs(tool.x - ev._x), 0, 2 * Math.PI);
+            if (KiddoPaint.Current.modifiedMeta) {
+                KiddoPaint.Display.context.arc((ev._x + tool.x) / 2.0, (ev._y + tool.y) / 2.0, 0.5 * distanceBetween(ev, {
+                    _x: tool.x,
+                    _y: tool.y
+                }), 0, 2 * Math.PI);
+            } else {
+                KiddoPaint.Display.context.arc(tool.x, tool.y, distanceBetween(ev, {
+                    _x: tool.x,
+                    _y: tool.y
+                }), 0, 2 * Math.PI);
+            }
             KiddoPaint.Display.context.fill();
             if (!KiddoPaint.Current.modifiedCtrl) {
                 KiddoPaint.Display.context.stroke();

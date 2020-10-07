@@ -3,6 +3,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     this.isDown = false;
     this.previousEv = null;
     this.spacing = 25;
+    this.synthtool = {};
     this.ylimit = {
         min: 5000,
         max: -1
@@ -52,6 +53,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
 
             // calling synthetic tools have their own propagation to main, so pause undo state capture
             KiddoPaint.Display.pauseUndo();
+            bumpLimits(); // pad sizing and alpha a bit
             renderFitLine(KiddoPaint.Display.context);
             KiddoPaint.Display.resumeUndo();
 
@@ -62,6 +64,11 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
             };
         }
     };
+
+    function bumpLimits() {
+        tool.ylimit.min -= 15;
+        tool.ylimit.max += 15;
+    }
 
     function offsetPoints(bezPoints, offsetAmount) {
         var startPt = bezPoints[0];
@@ -77,48 +84,9 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
         ];
     }
 
-    function getSynthesizedTool() {
-        return getSynSprayBrush();
-        //return getSynMeanStreak();
-    }
-
-    function getSynSprayBrush() {
-        KiddoPaint.Tools.PlainBrush.reset();
-        KiddoPaint.Tools.PlainBrush.spacing = 0;
-        KiddoPaint.Tools.PlainBrush.texture = function() {
-            return KiddoPaint.Brushes.Spray(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
-        };
-        KiddoPaint.Tools.PlainBrush.preprocess = function() {
-            KiddoPaint.Display.context.shadowBlur = 16;
-            KiddoPaint.Display.context.shadowColor = KiddoPaint.Current.altColor;
-        };
-        KiddoPaint.Tools.PlainBrush.postprocess = function() {
-            KiddoPaint.Display.context.shadowBlur = 0;
-            KiddoPaint.Display.context.shadowColor = null;
-        };
-        return KiddoPaint.Tools.PlainBrush;
-    }
-
-    function getSynMeanStreak() {
-        KiddoPaint.Tools.Composite.clearComposed();
-
-        KiddoPaint.Tools.PlainBrush.reset();
-        KiddoPaint.Tools.PlainBrush.spacing = 0;
-        KiddoPaint.Tools.PlainBrush.texture = function(step) {
-            return KiddoPaint.Brushes.MeanStreak(step)
-        };
-
-        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.PlainBrush);
-
-        KiddoPaint.Tools.Smudge.size = 15;
-        KiddoPaint.Tools.Composite.compose(KiddoPaint.Tools.Smudge);
-
-        return KiddoPaint.Tools.Composite;
-    }
-
     function calculateInterval(startPt, ctrl1, ctrl2, stopPt) {
         var approxDistance = bezierLength(startPt, ctrl1, ctrl2, stopPt);
-        return Math.round(approxDistance / 5);
+        return Math.round(approxDistance / 3.5);
     }
 
     function renderFitLine(ctx) {
@@ -126,11 +94,10 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
         if (fitted) {
             var oldMultiplier = KiddoPaint.Current.scaling;
             var oldAlpha = KiddoPaint.Display.context.globalAlpha;
-            var synthtool = getSynthesizedTool();
             var lastSegmentEv = null;
             var startScaling = 5; // top heavy when start > end
             var endScaling = 1;
-            var startAlpha = oldAlpha * 0.1;
+            var startAlpha = 0;
             var endAlpha = oldAlpha;
 
             fitted.forEach(element => {
@@ -147,9 +114,9 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
 
                     if (!lastSegmentEv) {
-                        synthtool.mousedown(fakeEv);
+                        tool.synthtool.mousedown(fakeEv);
                     } else {
-                        synthtool.mousemove(lastSegmentEv);
+                        tool.synthtool.mousemove(lastSegmentEv);
                     }
 
                     var interval = calculateInterval(startPt, ctrl1, ctrl2, stopPt);
@@ -160,18 +127,18 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                         KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
                         console.log(KiddoPaint.Display.context.globalAlpha);
 
-                        synthtool.mousemove(fakeEv);
+                        tool.synthtool.mousemove(fakeEv);
                         //KiddoPaint.Current.scaling *= 1.002;
                     }
                     fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 1);
                     KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, fakeEv._y);
                     KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
-                    synthtool.mousemove(fakeEv);
+                    tool.synthtool.mousemove(fakeEv);
                     lastSegmentEv = fakeEv;
                 }
             });
             KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, lastSegmentEv._y);
-            synthtool.mouseup(lastSegmentEv);
+            tool.synthtool.mouseup(lastSegmentEv);
 
             // reset any changed values
             KiddoPaint.Current.scaling = oldMultiplier;

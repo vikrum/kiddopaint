@@ -393,3 +393,23 @@ function CubicN(T, a, b, c, d) {
     var t3 = t2 * T;
     return a + (-a * 3 + T * (3 * a - a * T)) * T + (3 * b + T * (-6 * b + b * 3 * T)) * T + (c * 3 - c * 3 * T) * t2 + d * t3;
 }
+
+// https://stackoverflow.com/a/38626906
+function bezierLength(startPt, controlPt1, controlPt2, endPt) {
+    var a = startPt;
+    var b = endPt;
+    var c1 = controlPt1;
+    var c2 = controlPt2;
+
+    // output the curve in SVG bezier syntax
+    var svgBezier = `M${a[0]} ${a[1]} C ${c1[0]} ${c1[1]}, ${c2[0]} ${c2[1]}, ${b[0]} ${b[1]}`;
+
+    // create a new <path> element
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    // add the curve
+    path.setAttribute('d', svgBezier);
+
+    // get the length using browser power
+    return path.getTotalLength();
+}

@@ -116,12 +116,23 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
         return KiddoPaint.Tools.Composite;
     }
 
+    function calculateInterval(startPt, ctrl1, ctrl2, stopPt) {
+        var approxDistance = bezierLength(startPt, ctrl1, ctrl2, stopPt);
+        return Math.round(approxDistance / 5);
+    }
+
     function renderFitLine(ctx) {
         var fitted = fitCurve(tool.points, 25); // use multiplier keys 1-9 to have some spectrum of error values
         if (fitted) {
             var oldMultiplier = KiddoPaint.Current.scaling;
+            var oldAlpha = KiddoPaint.Display.context.globalAlpha;
             var synthtool = getSynthesizedTool();
             var lastSegmentEv = null;
+            var startScaling = 5; // top heavy when start > end
+            var endScaling = 1;
+            var startAlpha = oldAlpha * 0.1;
+            var endAlpha = oldAlpha;
+
             fitted.forEach(element => {
                 for (var i = 0; i < 1; i++) {
                     var offsetElement = offsetPoints(element, 11 * i);
@@ -132,27 +143,39 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                     var stopPt = offsetElement[3];
 
                     var fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 0);
-                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
+                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, fakeEv._y);
+                    KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
+
                     if (!lastSegmentEv) {
                         synthtool.mousedown(fakeEv);
                     } else {
                         synthtool.mousemove(lastSegmentEv);
                     }
-                    for (var n = 0; n <= 35; n++) {
-                        fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / 35.0);
-                        KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
+
+                    var interval = calculateInterval(startPt, ctrl1, ctrl2, stopPt);
+
+                    for (var n = 0; n <= interval; n++) {
+                        fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / (interval * 1.0));
+                        KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, fakeEv._y);
+                        KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
+                        console.log(KiddoPaint.Display.context.globalAlpha);
+
                         synthtool.mousemove(fakeEv);
                         //KiddoPaint.Current.scaling *= 1.002;
                     }
                     fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, 1);
-                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, fakeEv._y);
+                    KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, fakeEv._y);
+                    KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
                     synthtool.mousemove(fakeEv);
                     lastSegmentEv = fakeEv;
                 }
             });
-            KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, 1, 5, lastSegmentEv._y);
+            KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, lastSegmentEv._y);
             synthtool.mouseup(lastSegmentEv);
+
+            // reset any changed values
             KiddoPaint.Current.scaling = oldMultiplier;
+            KiddoPaint.Display.context.globalAlpha = oldAlpha;
         }
     }
 };

@@ -21,7 +21,12 @@ KiddoPaint.Submenu.spray = [{
         name: 'Default spray',
         text: 'zzz',
         handler: function() {
-            KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
+            KiddoPaint.Tools.PlainBrush.reset();
+            KiddoPaint.Tools.PlainBrush.spacing = 0;
+            KiddoPaint.Tools.PlainBrush.texture = function() {
+                return KiddoPaint.Brushes.Dumbbell(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
+            };
         }
     }
 ];

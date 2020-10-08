@@ -39,7 +39,7 @@ KiddoPaint.Submenu.spray = [{
     },
     {
         name: 'Bar Spray Can',
-        text: 'x',
+        text: 'bar',
         handler: function() {
             KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
             KiddoPaint.Tools.PlainBrush.reset();
@@ -48,5 +48,17 @@ KiddoPaint.Submenu.spray = [{
                 return KiddoPaint.Brushes.Dumbbell(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
             };
         }
-    }
+    },
+    {
+        name: 'Icy Spray Can',
+        text: 'icy',
+        handler: function() {
+            KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
+            KiddoPaint.Tools.PlainBrush.reset();
+            KiddoPaint.Tools.PlainBrush.spacing = 0;
+            KiddoPaint.Tools.PlainBrush.texture = function() {
+                return KiddoPaint.Brushes.Icy(KiddoPaint.Current.color, KiddoPaint.Current.terColor)
+            };
+        }
+    },
 ];

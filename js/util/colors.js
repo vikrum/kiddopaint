@@ -82,6 +82,23 @@ KiddoPaint.Colors.All = [KiddoPaint.Colors.Palette.Basic,
 KiddoPaint.Colors.Current.PaletteNumber = 0;
 KiddoPaint.Colors.Current.Palette = KiddoPaint.Colors.All[KiddoPaint.Colors.Current.PaletteNumber];
 
+KiddoPaint.Colors.rainbowPalette = function() {
+    var rpal = [];
+    if (KiddoPaint.Colors.Current.PaletteNumber == 0) {
+        rpal = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'violet'];
+    } else {
+        const cpal = KiddoPaint.Colors.currentPalette();
+        rpal.push(cpal[0]);
+        rpal.push(cpal[4]);
+        rpal.push(cpal[8]);
+        rpal.push(cpal[12]);
+        rpal.push(cpal[16]);
+        rpal.push(cpal[20]);
+        rpal.push(cpal[30]);
+    }
+    return rpal;
+}
+
 KiddoPaint.Colors.currentPalette = function() {
     return KiddoPaint.Colors.All[KiddoPaint.Colors.Current.PaletteNumber];
 }

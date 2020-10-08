@@ -14,10 +14,9 @@ KiddoPaint.Brushes.Dumbbell = function(color1, color2) {
     function bar() {
         var rr = ziggurat() * radius;
         var ra = Math.random() * 2 * Math.PI;
-        var rp = Math.random() + 0.75;
         var x = Math.cos(ra) * rr;
-        var y = Math.sin(ra) * rr / 9;
-        contextBrush.fillRect(radius + x, radius + y, rp, rp);
+        var y = Math.sin(ra) * rr / 11;
+        contextBrush.fillRect(radius + x, radius + y, 0.7, 0.7);
     }
 
     for (var i = 0; i < density; i++) {

@@ -1,6 +1,6 @@
 KiddoPaint.Brushes.Icy = function(color1) {
     color1 = color1 || 'black';
-    
+
     var radius = 32 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier;
     var density = clamp(0, 2000, 600 * KiddoPaint.Current.scaling * KiddoPaint.Current.multiplier);
 

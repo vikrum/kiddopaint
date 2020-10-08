@@ -88,13 +88,14 @@ KiddoPaint.Colors.rainbowPalette = function() {
         rpal = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'violet'];
     } else {
         const cpal = KiddoPaint.Colors.currentPalette();
-        rpal.push(cpal[0]);
-        rpal.push(cpal[4]);
-        rpal.push(cpal[8]);
-        rpal.push(cpal[12]);
-        rpal.push(cpal[16]);
-        rpal.push(cpal[20]);
-        rpal.push(cpal[30]);
+        const offset = KiddoPaint.Colors.Current.PaletteNumber % 2;
+        rpal.push(cpal[0 + offset]);
+        rpal.push(cpal[4 + offset]);
+        rpal.push(cpal[8 + offset]);
+        rpal.push(cpal[12 + offset]);
+        rpal.push(cpal[16 + offset]);
+        rpal.push(cpal[20 + offset]);
+        rpal.push(cpal[30 + offset]);
     }
     return rpal;
 }

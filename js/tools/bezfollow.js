@@ -90,7 +90,7 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
     }
 
     function renderFitLine(ctx) {
-        var fitted = fitCurve(tool.points, 25); // use multiplier keys 1-9 to have some spectrum of error values
+        var fitted = fitCurve(tool.points, 25);
         if (fitted) {
             var oldMultiplier = KiddoPaint.Current.scaling;
             var oldAlpha = KiddoPaint.Display.context.globalAlpha;

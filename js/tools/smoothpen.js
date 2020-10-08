@@ -57,7 +57,7 @@ KiddoPaint.Tools.Toolbox.SmoothPen = function() {
     }
 
     function renderFitLine(ctx) {
-        var fitted = fitCurve(tool.points, 75); // use multiplier keys 1-9 to have some spectrum of error values
+        var fitted = fitCurve(tool.points, 75);
         if (fitted) {
             ctx.strokeStyle = tool.texture();
             ctx.lineWidth = tool.size();

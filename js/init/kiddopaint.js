@@ -528,6 +528,11 @@ function init_brush_subtoolbar() {
     document.getElementById('br23').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Maze;
     });
+
+    document.getElementById('br24').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Tree;
+    });
+
     /*
     document.getElementById('br24').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;

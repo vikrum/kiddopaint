@@ -327,6 +327,10 @@ function init_tool_bar() {
         KiddoPaint.Display.context.globalAlpha = KiddoPaint.Current.globalAlpha;
         KiddoPaint.Display.previewContext.globalAlpha = KiddoPaint.Current.globalAlpha;
     });
+    document.getElementById('jumble').addEventListener('mousedown', function() {
+        //KiddoPaint.Current.tool = KiddoPaint.Tools.Ink;
+        KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+    });
 };
 
 function init_stamp_bar(stampgroup) {

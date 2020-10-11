@@ -1,10 +1,7 @@
+// this & maze can be refactored to a generic tool that takes a lambda
 KiddoPaint.Tools.Toolbox.Tree = function() {
     var tool = this;
     this.isDown = false;
-
-    this.texture = function() {
-        return KiddoPaint.Textures.Solid(KiddoPaint.Current.color);
-    };
 
     this.mousedown = function(ev) {
         tool.isDown = true;

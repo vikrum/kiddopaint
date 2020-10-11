@@ -38,6 +38,13 @@ KiddoPaint.Display.saveMain = function() {
     }
 }
 
+KiddoPaint.Display.saveMainSkipUndo = function() {
+    KiddoPaint.Display.main_context.drawImage(KiddoPaint.Display.canvas, 0, 0);
+    KiddoPaint.Display.clearTmp();
+    KiddoPaint.Display.saveToLocalStorage();
+}
+
+
 KiddoPaint.Display.pauseUndo = function() {
     KiddoPaint.Display.undoOn = false;
 }

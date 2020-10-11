@@ -683,7 +683,11 @@ function image_upload(ev) {
             reader.onload = function(evt) {
                 var img = new Image();
                 img.onload = function() {
-                    KiddoPaint.Display.context.drawImage(img, ev.layerX, ev.layerY);
+                    if (KiddoPaint.Current.modifiedAlt) {
+                        KiddoPaint.Display.context.drawImage(img, 0, 0);
+                    } else {
+                        KiddoPaint.Display.context.drawImage(img, ev.layerX, ev.layerY);
+                    }
                     KiddoPaint.Display.saveMain();
                 };
                 img.src = evt.target.result;

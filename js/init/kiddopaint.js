@@ -328,7 +328,7 @@ function init_tool_bar() {
         KiddoPaint.Display.previewContext.globalAlpha = KiddoPaint.Current.globalAlpha;
     });
     document.getElementById('jumble').addEventListener('mousedown', function() {
-        //KiddoPaint.Current.tool = KiddoPaint.Tools.Ink;
+        show_generic_submenu('jumble');
         KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
     });
 };

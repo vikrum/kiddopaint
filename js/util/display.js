@@ -60,13 +60,15 @@ KiddoPaint.Display.saveUndo = function() {
     return KiddoPaint.Display.undoOn;
 }
 
-KiddoPaint.Display.undo = function() {
+KiddoPaint.Display.undo = function(doClearMain) {
     if (KiddoPaint.Display.undoData) {
         var nextUndoData = KiddoPaint.Display.main_canvas.toDataURL();
         var img = new Image();
         img.src = KiddoPaint.Display.undoData;
         img.onload = function() {
-            KiddoPaint.Display.clearMain();
+            if (doClearMain) {
+                KiddoPaint.Display.clearMain();
+            }
             KiddoPaint.Display.main_context.drawImage(img, 0, 0);
         }
         KiddoPaint.Display.undoData = nextUndoData;

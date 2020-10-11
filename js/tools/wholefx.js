@@ -53,7 +53,7 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).zoomBlur(tool.initialClick._x, tool.initialClick._y, strength).update();
                     break;
                 case JumbleFx.HEXAGON:
-                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance).update();
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance / 10).update();
                     break;
                 case JumbleFx.INK:
                     var strength = remap(0, 250, -1, 1, drawDistance);

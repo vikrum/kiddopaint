@@ -1,9 +1,21 @@
+const JumbleFx = {
+    PINCH: 'pinch',
+    SWIRL: 'swirl',
+    LENSBLUR: 'lensblur',
+    TRIBLUR: 'triblur',
+    ZOOM: 'zoom',
+    HEXAGON: 'hexagon',
+    INK: 'ink',
+    EDGE: 'edge'
+}
+
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
     var tool = this;
     this.isDown = false;
     this.gfx = fx.canvas();
     this.textureGfx = {};
     this.initialClick = {};
+    this.effect = JumbleFx.PINCH;
 
     this.mousedown = function(ev) {
         tool.isDown = true;
@@ -15,32 +27,43 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
     };
 
     this.mousemove = function(ev) {
-        //var target = KiddoPaint.Display.main_context.getImageData(ev._x - tool.size, ev._y - tool.size, 2 * tool.size, 2 * tool.size);
         if (tool.isDown) {
             KiddoPaint.Display.clearTmp();
-
             var drawDistance = distanceBetween(ev, tool.initialClick);
-            var ctx = KiddoPaint.Display.context;
-
-
-
-            // good
-            //var strength = remap(0, 250, 0, 1, drawDistance);
-            //var moo = tool.gfx.draw(tool.textureGfx).zoomBlur(tool.initialClick._x, tool.initialClick._y, strength).update();
-
-            // good
-            var moo = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance).update();
-
-            // good:
-            //var strength = remap(0, 250, -1, 1, drawDistance);
-            //var moo = tool.gfx.draw(tool.textureGfx).ink(strength).update();
-
-            // good:
-            // var moo = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 2.0).update();
-
-
-            ctx.drawImage(moo, 0, 0);
-
+            switch (tool.effect) {
+                case JumbleFx.PINCH:
+                    var strength = remap(0, 500, -1, 1, drawDistance);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).bulgePinch(tool.initialClick._x, tool.initialClick._y, 200, strength).update();
+                    break;
+                case JumbleFx.SWIRL:
+                    var horizDist = Math.abs(ev._x - tool.initialClick._x);
+                    var vertDist = ev._y - tool.initialClick._y;
+                    var swirlAngle = remap(-300, 300, -Math.PI * 2, Math.PI * 2, vertDist);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).swirl(tool.initialClick._x, tool.initialClick._y, horizDist, swirlAngle).update();
+                    break;
+                case JumbleFx.LENSBLUR:
+                    var strength = remap(0, 500, 0, 50, drawDistance);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).lensBlur(strength, 0.88, 0.70841).update();
+                    break;
+                case JumbleFx.TRIBLUR:
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).triangleBlur(drawDistance / 2.0).update();
+                    break;
+                case JumbleFx.ZOOM:
+                    var strength = remap(0, 250, 0, 1, drawDistance);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).zoomBlur(tool.initialClick._x, tool.initialClick._y, strength).update();
+                    break;
+                case JumbleFx.HEXAGON:
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance).update();
+                    break;
+                case JumbleFx.INK:
+                    var strength = remap(0, 250, -1, 1, drawDistance);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).ink(strength).update();
+                    break;
+                case JumbleFx.EDGE:
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 2.0).update();
+                    break;
+            }
+            KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);
         }
     };
 

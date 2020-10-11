@@ -46,21 +46,21 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).lensBlur(strength, 0.88, 0.70841).update();
                     break;
                 case JumbleFx.TRIBLUR:
-                    var renderedGfx = tool.gfx.draw(tool.textureGfx).triangleBlur(drawDistance / 2.0).update();
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).triangleBlur(drawDistance / 5.0).update();
                     break;
                 case JumbleFx.ZOOM:
                     var strength = remap(0, 250, 0, 1, drawDistance);
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).zoomBlur(tool.initialClick._x, tool.initialClick._y, strength).update();
                     break;
                 case JumbleFx.HEXAGON:
-                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance / 10).update();
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hexagonalPixelate(tool.initialClick._x, tool.initialClick._y, drawDistance / 10.0).update();
                     break;
                 case JumbleFx.INK:
                     var strength = remap(0, 250, -1, 1, drawDistance);
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).ink(strength).update();
                     break;
                 case JumbleFx.EDGE:
-                    var renderedGfx = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 2.0).update();
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 10.0).update();
                     break;
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);

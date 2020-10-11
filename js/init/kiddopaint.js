@@ -304,7 +304,7 @@ function init_tool_bar() {
 
     document.getElementById('undo').addEventListener('mousedown', function() {
         KiddoPaint.Sounds.oops();
-        KiddoPaint.Display.undo( ! KiddoPaint.Current.modifiedAlt);
+        KiddoPaint.Display.undo(!KiddoPaint.Current.modifiedAlt);
     });
 
     document.getElementById('erase').addEventListener('mousedown', function() {

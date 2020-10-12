@@ -125,7 +125,6 @@ KiddoPaint.Tools.Toolbox.BezFollow = function() {
                         fakeEv = getCubicBezierXYatPercent(startPt, ctrl1, ctrl2, stopPt, n / (interval * 1.0));
                         KiddoPaint.Current.scaling = remap(tool.ylimit.min, tool.ylimit.max, startScaling, endScaling, fakeEv._y);
                         KiddoPaint.Display.context.globalAlpha = remap(tool.ylimit.min, tool.ylimit.max, startAlpha, endAlpha, fakeEv._y);
-                        console.log(KiddoPaint.Display.context.globalAlpha);
 
                         tool.synthtool.mousemove(fakeEv);
                         //KiddoPaint.Current.scaling *= 1.002;

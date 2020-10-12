@@ -8,7 +8,7 @@ KiddoPaint.Submenu.jumble = [{
     },
     {
         name: 'Pinch',
-        emoji: '🤏',
+        imgSrc: 'img/pinch.png',
         handler: function() {
             KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.PINCH;
             KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;

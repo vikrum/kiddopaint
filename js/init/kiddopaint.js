@@ -581,8 +581,6 @@ function ev_canvas(ev) {
     KiddoPaint.Display.clearPreview();
     KiddoPaint.Current.ev = ev;
 
-    // console.log(ev);
-
     if (ev.layerX || ev.layerX == 0) {
         ev._x = ev.layerX;
         ev._y = ev.layerY;

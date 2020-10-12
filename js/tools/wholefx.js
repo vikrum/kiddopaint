@@ -67,7 +67,6 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).brightnessContrast(0, 0).update();
                     for (var i = 1; i < 8; i++) {
                         KiddoPaint.Display.context.globalAlpha = i / 8.0;
-                        console.log(KiddoPaint.Display.context.globalAlpha);
                         KiddoPaint.Display.context.drawImage(renderedGfx, 100 - (i * 15), 100 - (i * 15));
                     }
                     KiddoPaint.Display.context.globalAlpha = 1;

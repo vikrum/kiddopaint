@@ -62,4 +62,12 @@ KiddoPaint.Submenu.jumble = [{
             KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
         }
     },
+    {
+        name: 'Pancake Stack',
+        emoji: '🥞',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.PANCAKE;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
 ];

@@ -6,7 +6,8 @@ const JumbleFx = {
     ZOOM: 'zoom',
     HEXAGON: 'hexagon',
     INK: 'ink',
-    EDGE: 'edge'
+    EDGE: 'edge',
+    PANCAKE: 'pancake'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -15,7 +16,7 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
     this.gfx = fx.canvas(); // expensive; create once
     this.textureGfx = {};
     this.initialClick = {};
-    this.effect = JumbleFx.PINCH;
+    this.effect = JumbleFx.PANCAKE;
 
     this.mousedown = function(ev) {
         tool.isDown = true;
@@ -62,6 +63,16 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                 case JumbleFx.EDGE:
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 10.0).update();
                     break;
+                case JumbleFx.PANCAKE:
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).brightnessContrast(0, 0).update();
+                    for (var i = 1; i < 8; i++) {
+                        KiddoPaint.Display.context.globalAlpha = i / 8.0;
+                        console.log(KiddoPaint.Display.context.globalAlpha);
+                        KiddoPaint.Display.context.drawImage(renderedGfx, 100 - (i * 15), 100 - (i * 15));
+                    }
+                    KiddoPaint.Display.context.globalAlpha = 1;
+                    break;
+
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);
         }

@@ -683,10 +683,16 @@ function image_upload(ev) {
                 img.onload = function() {
                     if (KiddoPaint.Current.modifiedAlt) {
                         KiddoPaint.Display.context.drawImage(img, 0, 0);
+                        KiddoPaint.Display.saveMain();
                     } else {
-                        KiddoPaint.Display.context.drawImage(img, ev.layerX, ev.layerY);
+                        KiddoPaint.Tools.Placer.image = img;
+                        KiddoPaint.Tools.Placer.size = {
+                            width: img.width,
+                            height: img.height
+                        };
+                        KiddoPaint.Tools.Placer.prevTool = KiddoPaint.Current.tool;
+                        KiddoPaint.Current.tool = KiddoPaint.Tools.Placer;
                     }
-                    KiddoPaint.Display.saveMain();
                 };
                 img.src = evt.target.result;
             };

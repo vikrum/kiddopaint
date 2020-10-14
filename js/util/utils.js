@@ -178,7 +178,7 @@ function scaleImageDataCanvasAPI(imageData, scale) {
     var canvas = document.createElement('canvas');
     canvas.width = imageData.width;
     canvas.height = imageData.height;
-    canvas.getContext("2d").putImageData(imageData, 0, 0);
+    canvas.getContext("2d").drawImage(imageData, 0, 0);
 
     var scaleCanvas = document.createElement('canvas');
     scaleCanvas.width = imageData.width * scale;
@@ -186,9 +186,9 @@ function scaleImageDataCanvasAPI(imageData, scale) {
     var scaleCtx = scaleCanvas.getContext("2d");
     scaleCtx.scale(scale, scale);
     scaleCtx.drawImage(canvas, 0, 0);
-
-    var scaledImageData = scaleCtx.getImageData(0, 0, scaleCanvas.width * scale, scaleCanvas.height * scale);
-    return scaledImageData;
+    //  var scaledImageData = scaleCtx.getImageData(0, 0, scaleCanvas.width * scale, scaleCanvas.height * scale);
+    //  return scaledImageData;
+    return scaleCanvas;
 }
 
 // http://stackoverflow.com/a/9138593 w/ alpha bg flattening

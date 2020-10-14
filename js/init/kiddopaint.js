@@ -92,6 +92,7 @@ function init_kiddo_defaults() {
 }
 
 function reset_ranges() {
+    KiddoPaint.Current.multiplier = 1;
     KiddoPaint.Current.modifiedRange = 0;
     KiddoPaint.Current.modifiedAltRange = 0;
     KiddoPaint.Current.modifiedCtrlRange = 0;

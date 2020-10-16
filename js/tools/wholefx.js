@@ -65,13 +65,15 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     break;
                 case JumbleFx.PANCAKE:
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).brightnessContrast(0, 0).update();
-                    for (var i = 1; i < 8; i++) {
-                        KiddoPaint.Display.context.globalAlpha = i / 8.0;
-                        KiddoPaint.Display.context.drawImage(renderedGfx, 100 - (i * 15), 100 - (i * 15));
+                    var howManyPancakes = 2 + (drawDistance / 64);
+                    var increment = KiddoPaint.Current.modifiedAlt ? 4 : 16;
+                    var furthestAway = howManyPancakes * increment;
+                    for (var i = 1; i < howManyPancakes; i++) {
+                        KiddoPaint.Display.context.globalAlpha = i / (howManyPancakes * 1.0);
+                        KiddoPaint.Display.context.drawImage(renderedGfx, furthestAway - (i * increment), furthestAway - (i * increment));
                     }
                     KiddoPaint.Display.context.globalAlpha = 1;
                     break;
-
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);
         }

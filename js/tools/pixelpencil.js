@@ -23,7 +23,7 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
     var tool = this;
     this.isDown = false;
     this.size = function() {
-        return KiddoPaint.Tools.Pencil.size;
+        return KiddoPaint.Tools.Pencil.size * (1 + KiddoPaint.Current.modifiedRange / 100.0);
     }
     this.previousEv = null;
     this.spacing = 10;
@@ -41,14 +41,14 @@ KiddoPaint.Tools.Toolbox.PixelPencil = function() {
         var ctx = tool.isDown ? KiddoPaint.Display.context : KiddoPaint.Display.previewContext;
         ctx.fillStyle = tool.texture();
         if (KiddoPaint.Current.modifiedAlt) {
-            ev._x = ev._x - (ev._x % (tool.size() * KiddoPaint.Current.scaling));
-            ev._y = ev._y - (ev._y % (tool.size() * KiddoPaint.Current.scaling));
+            ev._x = ev._x - (ev._x % (tool.size()));
+            ev._y = ev._y - (ev._y % (tool.size()));
         }
         if (tool.previousEv == null || distanceBetween(tool.previousEv, ev) < tool.spacing) {
-            ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size() * KiddoPaint.Current.scaling, tool.size() * KiddoPaint.Current.scaling);
+            ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size(), tool.size());
         } else {
             bresenham(tool.previousEv._x, tool.previousEv._y, ev._x, ev._y, function(x, y) {
-                ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size() * KiddoPaint.Current.scaling, tool.size() * KiddoPaint.Current.scaling);
+                ctx.fillRect(Math.round(ev._x), Math.round(ev._y), tool.size(), tool.size());
             });
         }
         tool.previousEv = ev;
@@ -70,8 +70,9 @@ KiddoPaint.Tools.Toolbox.LinePencil = function() {
     var tool = this;
     this.isDown = false;
     this.size = function() {
-        return KiddoPaint.Tools.Pencil.size;
+        return KiddoPaint.Tools.Pencil.size * (1 + KiddoPaint.Current.modifiedRange / 100.0);
     }
+
     this.texture = function() {
         return KiddoPaint.Tools.Pencil.texture();
     };

@@ -175,6 +175,8 @@ function init_listeners(canvas) {
         } else if (e.keyCode > 48 && e.keyCode < 58) {
             KiddoPaint.Current.multiplier = e.keyCode - 48;
         } else if (e.keyCode == 32) {
+            e.stopPropagation();
+            e.preventDefault();
             KiddoPaint.Current.modifiedToggle = !KiddoPaint.Current.modifiedToggle;
         } else if (e.keyCode == 86) {
             KiddoPaint.Current.velToggle = !KiddoPaint.Current.velToggle;
@@ -366,11 +368,33 @@ function init_subtool_bars() {
     init_brush_subtoolbar();
     init_stamp_subtoolbar();
     init_alphabet_subtoolbar();
+    init_special_handlers();
 }
 
 function init_pencil_subtoolbar() {
     // this is the default, so we show show it
     show_generic_submenu('pencil');
+}
+
+function init_special_handlers() {
+
+    // punch color mode
+    document.getElementById('currentColor').addEventListener('dblclick', function(e) {
+        // turn off undo and short circuit saving to main...
+        KiddoPaint.Display.toggleUndo();
+        if (KiddoPaint.Display.undoOn) {
+            // second click re-enables undo, we then force propagate the previous dest-in operaetions to main and go back to default source-over
+            KiddoPaint.Display.saveMain();
+            KiddoPaint.Display.main_context.globalCompositeOperation = 'source-over';
+            e.target.innerHTML = ' ';
+        } else {
+            // first click turns this on and all operations don't propagate
+            e.target.innerHTML = '⁉️';
+            KiddoPaint.Display.main_context.globalCompositeOperation = 'destination-in';
+        }
+    });
+
+
 }
 
 function init_brush_subtoolbar() {
@@ -543,6 +567,18 @@ function init_brush_subtoolbar() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.BezFollow;
     });
     */
+
+    document.getElementById('br25').addEventListener('mousedown', function() {
+
+        KiddoPaint.Current.tool = KiddoPaint.Tools.PlainBrush;
+        KiddoPaint.Tools.PlainBrush.reset();
+        KiddoPaint.Tools.PlainBrush.spacing = 0;
+        KiddoPaint.Tools.PlainBrush.texture = function(step) {
+            return KiddoPaint.Brushes.RainbowBall(step)
+        };
+
+    });
+
 
 
 

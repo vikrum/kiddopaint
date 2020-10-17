@@ -53,6 +53,10 @@ KiddoPaint.Display.resumeUndo = function() {
     KiddoPaint.Display.undoOn = true;
 }
 
+KiddoPaint.Display.toggleUndo = function() {
+    KiddoPaint.Display.undoOn = !KiddoPaint.Display.undoOn;
+}
+
 KiddoPaint.Display.saveUndo = function() {
     if (KiddoPaint.Display.undoOn) {
         KiddoPaint.Display.undoData = KiddoPaint.Display.main_canvas.toDataURL();

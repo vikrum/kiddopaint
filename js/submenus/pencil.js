@@ -185,7 +185,7 @@ KiddoPaint.Submenu.pencil = [{
     },
     {
         name: 'Rainbow',
-        imgSrc: 'img/pt7.png',
+        emoji: '🌈',
         handler: function() {
             KiddoPaint.Tools.Pencil.texture = function() {
                 return KiddoPaint.Textures.RSolid();

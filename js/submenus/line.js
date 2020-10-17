@@ -306,7 +306,7 @@ KiddoPaint.Submenu.line = [{
     },
     {
         name: 'Rainbow',
-        imgSrc: 'img/pt7.png',
+        emoji: '🌈',
         handler: function() {
             KiddoPaint.Tools.Line.stomp = false;
             KiddoPaint.Tools.Line.texture = function() {

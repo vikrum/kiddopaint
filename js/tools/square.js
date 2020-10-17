@@ -2,7 +2,7 @@ KiddoPaint.Tools.Toolbox.Square = function() {
     var tool = this;
     this.isDown = false;
     this.size = 1;
-    this.stomp = true;
+    this.startEv = null;
     this.texture = function() {
         return KiddoPaint.Textures.None();
     };
@@ -12,31 +12,28 @@ KiddoPaint.Tools.Toolbox.Square = function() {
 
     this.mousedown = function(ev) {
         tool.isDown = true;
-        tool.x = ev._x;
-        tool.y = ev._y;
+        tool.startEv = ev;
     };
 
     this.mousemove = function(ev) {
-        if (tool.isDown) {
-            if (tool.stomp) {
-                KiddoPaint.Display.clearTmp();
-            }
+        if (tool.startEv) {
+            var ctx = tool.isDown ? KiddoPaint.Display.previewContext : KiddoPaint.Display.context;
             if (!KiddoPaint.Current.modifiedCtrl) {
-                KiddoPaint.Display.context.strokeStyle = tool.stroke();
-                KiddoPaint.Display.context.lineWidth = 1.5;
-                KiddoPaint.Display.context.strokeRect(tool.x, tool.y, ev._x - tool.x, ev._y - tool.y);
+                ctx.strokeStyle = tool.stroke();
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(tool.startEv._x, tool.startEv._y, ev._x - tool.startEv._x, ev._y - tool.startEv._y);
             }
-
-            KiddoPaint.Display.context.fillStyle = tool.texture();
-            KiddoPaint.Display.context.fillRect(tool.x, tool.y, ev._x - tool.x, ev._y - tool.y);
+            ctx.fillStyle = tool.texture();
+            ctx.fillRect(tool.startEv._x, tool.startEv._y, ev._x - tool.startEv._x, ev._y - tool.startEv._y);
         }
     };
 
     this.mouseup = function(ev) {
         if (tool.isDown) {
-            tool.mousemove(ev);
             tool.isDown = false;
+            tool.mousemove(ev);
             KiddoPaint.Display.saveMain();
+            tool.startEv = null;
         }
     };
 };

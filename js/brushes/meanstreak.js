@@ -1,6 +1,6 @@
 KiddoPaint.Brushes.MeanStreak = function(step) {
     var canvasBrush = document.createElement('canvas');
-    var size = 25 * KiddoPaint.Current.scaling;
+    var size = 32 * KiddoPaint.Current.scaling;
     canvasBrush.width = size * 2;
     canvasBrush.height = size * 2;
     var contextBrush = canvasBrush.getContext('2d');

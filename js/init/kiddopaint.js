@@ -384,6 +384,7 @@ function init_special_handlers() {
         KiddoPaint.Display.toggleUndo();
         if (KiddoPaint.Display.undoOn) {
             // second click re-enables undo, we then force propagate the previous dest-in operaetions to main and go back to default source-over
+            KiddoPaint.Display.allowClearTmp = true;
             KiddoPaint.Display.saveMain();
             KiddoPaint.Display.main_context.globalCompositeOperation = 'source-over';
             e.target.innerHTML = ' ';
@@ -391,6 +392,7 @@ function init_special_handlers() {
             // first click turns this on and all operations don't propagate
             e.target.innerHTML = '⁉️';
             KiddoPaint.Display.main_context.globalCompositeOperation = 'destination-in';
+            KiddoPaint.Display.allowClearTmp = false;
         }
     });
 

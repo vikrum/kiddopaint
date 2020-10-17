@@ -1,5 +1,6 @@
 KiddoPaint.Display.undoData = null;
 KiddoPaint.Display.undoOn = true;
+KiddoPaint.Display.allowClearTmp = true;
 
 KiddoPaint.Display.clearAll = function() {
     KiddoPaint.Display.saveUndo();
@@ -14,7 +15,9 @@ KiddoPaint.Display.clearMain = function() {
 }
 
 KiddoPaint.Display.clearTmp = function() {
-    KiddoPaint.Display.context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+    if (KiddoPaint.Display.allowClearTmp) {
+        KiddoPaint.Display.context.clearRect(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+    }
 }
 
 KiddoPaint.Display.clearPreview = function() {

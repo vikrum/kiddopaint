@@ -396,7 +396,14 @@ function init_special_handlers() {
         }
     });
 
-
+    // set current color to blank
+    document.getElementById('currentColor').addEventListener('mousedown', function(e) {
+        if (e.which == 3) {
+            var colorSelected = KiddoPaint.Colors.Palette.Blank[0];
+            KiddoPaint.Current.color = colorSelected
+            document.getElementById('currentColor').style = "background-color:" + colorSelected;
+        }
+    });
 }
 
 function init_brush_subtoolbar() {

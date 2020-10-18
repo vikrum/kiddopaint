@@ -8,7 +8,10 @@ const JumbleFx = {
     INK: 'ink',
     EDGE: 'edge',
     PANCAKE: 'pancake',
-    PIXELATE: 'pixelate'
+    PIXELATE: 'pixelate',
+    HUE: 'hue',
+    SAT: 'sat',
+    NIGHTVISION: 'nightvision'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -16,15 +19,17 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
     this.isDown = false;
     this.gfx = fx.canvas(); // expensive; create once
     this.textureGfx = {};
+    this.mainImageData = {};
     this.initialClick = {};
     this.effect = JumbleFx.PANCAKE;
 
     this.mousedown = function(ev) {
         tool.isDown = true;
         tool.initialClick = ev;
+        tool.mainImageData = KiddoPaint.Display.main_context.getImageData(0, 0, KiddoPaint.Display.main_canvas.width, KiddoPaint.Display.main_canvas.height);
         tool.textureGfx = tool.gfx.texture(KiddoPaint.Display.main_canvas);
         KiddoPaint.Display.saveUndo();
-        KiddoPaint.Display.clearMain(); // this causes the bug where if the mouse move off screen, the mouseout even clears preview context and everything is lost; but we need the main clear incase there's alpha it gets double rendered on preview... 
+        KiddoPaint.Display.clearMain(); // this causes the bug where if the mouse move off screen, the mouseout even clears tmp context and everything is lost; but we need the main clear incase there's alpha it gets double rendered on preview... 
         tool.mousemove(ev);
     };
 
@@ -61,6 +66,15 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var strength = remap(0, 250, -1, 1, drawDistance);
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).ink(strength).update();
                     break;
+                case JumbleFx.HUE:
+                    var strength = remap(0, 1000, -1, 1, drawDistance);
+                    //KiddoPaint.Display.previewContext.fillText(strength, ev._x, ev._y);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hueSaturation(strength, 0).update();
+                    break;
+                case JumbleFx.SAT:
+                    var strength = remap(0, 500, -1, 1, drawDistance);
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).hueSaturation(0, strength).update();
+                    break;
                 case JumbleFx.EDGE:
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).edgeWork(drawDistance / 10.0).update();
                     break;
@@ -79,6 +93,10 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var renderedGfx = tool.gfx.draw(tool.textureGfx).brightnessContrast(0, 0).update();
                     var blocks = remap(0, 500, 50, 7, clamp(0, 500, drawDistance));
                     renderedGfx = pixelateCanvas(renderedGfx, blocks);
+                    break;
+                case JumbleFx.NIGHTVISION:
+                    var s = Filters.sobel(tool.mainImageData);
+                    renderedGfx = KiddoPaint.Display.imageTypeToCanvas(s, false);
                     break;
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);

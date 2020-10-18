@@ -7,6 +7,22 @@ KiddoPaint.Submenu.jumble = [{
         }
     },
     {
+        name: 'Color Shift',
+        emoji: '♻️',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.HUE;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
+        name: 'Grey Shift',
+        emoji: '🔄',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.SAT;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
         name: 'Pinch',
         imgSrc: 'img/pinch.png',
         handler: function() {
@@ -67,6 +83,14 @@ KiddoPaint.Submenu.jumble = [{
         emoji: '💈',
         handler: function() {
             KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.EDGE;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
+        name: 'Night Vision',
+        emoji: '🌃',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.NIGHTVISION;
             KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
         }
     },

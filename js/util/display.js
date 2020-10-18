@@ -115,3 +115,20 @@ KiddoPaint.Display.loadFromLocalStorage = function() {
         img.src = "static/kiddopaint.jpg";
     }
 }
+
+KiddoPaint.Display.canvasToImageData = function(canvas) {
+    return canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+}
+
+KiddoPaint.Display.imageTypeToCanvas = function(imageData, doDraw) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = imageData.width;
+    canvas.height = imageData.height;
+    if (doDraw) {
+        ctx.drawImage(imageData, 0, 0);
+    } else {
+        ctx.putImageData(imageData, 0, 0);
+    }
+    return canvas;
+}

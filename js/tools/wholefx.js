@@ -11,7 +11,9 @@ const JumbleFx = {
     PIXELATE: 'pixelate',
     HUE: 'hue',
     SAT: 'sat',
-    NIGHTVISION: 'nightvision'
+    NIGHTVISION: 'nightvision',
+    INVERT: 'invert',
+    SUNSHINE: 'sunshine'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -97,6 +99,16 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                 case JumbleFx.NIGHTVISION:
                     var s = Filters.sobel(tool.mainImageData);
                     renderedGfx = KiddoPaint.Display.imageTypeToCanvas(s, false);
+                    break;
+                case JumbleFx.INVERT:
+                    var alpha = remap(0, 500, 1, 0, clamp(0, 500, drawDistance));
+                    var s = Filters.gcoInvert(tool.mainImageData, alpha);
+                    renderedGfx = s;
+                    break;
+                case JumbleFx.SUNSHINE:
+                    var alpha = remap(0, 500, 1, 0, clamp(0, 500, drawDistance));
+                    var s = Filters.gcoOverlay(tool.mainImageData, alpha);
+                    renderedGfx = s;
                     break;
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);

@@ -54,6 +54,35 @@ Filters.brightness = function(pixels, adjustment) {
     return pixels;
 };
 
+Filters.invert = function(pixels) {
+    var d = pixels.data;
+    for (var i = 0; i < d.length; i += 4) {
+        d[i] = 255 - d[i];
+        d[i + 1] = 255 - d[i + 1];
+        d[i + 2] = 255 - d[i + 2];
+    }
+    return pixels;
+};
+
+Filters.gcoOpWithWhite = function(imageData, alpha, op) {
+    var canvas = KiddoPaint.Display.imageTypeToCanvas(imageData, false);
+    var ctx = canvas.getContext('2d');
+    ctx.globalCompositeOperation = op;
+    ctx.fillStyle = "white";
+    ctx.globalAlpha = alpha;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    return canvas;
+}
+
+Filters.gcoInvert = function(imageData, alpha) {
+    return Filters.gcoOpWithWhite(imageData, alert, 'difference');
+}
+
+Filters.gcoOverlay = function(imageData, alpha) {
+    return Filters.gcoOpWithWhite(imageData, alert, 'overlay');
+}
+
+
 Filters.threshold = function(pixels, threshold) {
     var d = pixels.data;
     for (var i = 0; i < d.length; i += 4) {

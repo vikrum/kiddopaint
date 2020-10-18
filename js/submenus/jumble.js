@@ -95,6 +95,22 @@ KiddoPaint.Submenu.jumble = [{
         }
     },
     {
+        name: 'Invert',
+        emoji: '🔋',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.INVERT;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
+        name: 'Sunshine',
+        emoji: '☀️',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.SUNSHINE;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
         name: 'Pancake Stack',
         emoji: '🥞',
         handler: function() {

@@ -55,6 +55,14 @@ KiddoPaint.Submenu.jumble = [{
         }
     },
     {
+        name: 'Pixelate',
+        emoji: '🔳',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.PIXELATE;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
         name: 'Edge',
         emoji: '💈',
         handler: function() {

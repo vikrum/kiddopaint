@@ -186,9 +186,30 @@ function scaleImageDataCanvasAPI(imageData, scale) {
     var scaleCtx = scaleCanvas.getContext("2d");
     scaleCtx.scale(scale, scale);
     scaleCtx.drawImage(canvas, 0, 0);
-    //  var scaledImageData = scaleCtx.getImageData(0, 0, scaleCanvas.width * scale, scaleCanvas.height * scale);
-    //  return scaledImageData;
     return scaleCanvas;
+}
+
+function pixelateCanvas(imageData, block) {
+    var size = block / 100;
+    var w = imageData.width * size;
+    var h = imageData.height * size;
+
+    // shrink it down
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(imageData, 0, 0, w, h);
+
+    // draw it back original size
+    var canvas2 = document.createElement('canvas');
+    canvas2.width = imageData.width;
+    canvas2.height = imageData.height;
+    var ctx2 = canvas2.getContext("2d");
+    ctx2.imageSmoothingEnabled = false;
+    ctx2.drawImage(canvas, 0, 0, w, h, 0, 0, canvas2.width, canvas2.height);
+    return canvas2;
 }
 
 // http://stackoverflow.com/a/9138593 w/ alpha bg flattening

@@ -7,7 +7,8 @@ const JumbleFx = {
     HEXAGON: 'hexagon',
     INK: 'ink',
     EDGE: 'edge',
-    PANCAKE: 'pancake'
+    PANCAKE: 'pancake',
+    PIXELATE: 'pixelate'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -23,7 +24,7 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
         tool.initialClick = ev;
         tool.textureGfx = tool.gfx.texture(KiddoPaint.Display.main_canvas);
         KiddoPaint.Display.saveUndo();
-        KiddoPaint.Display.clearMain();
+        KiddoPaint.Display.clearMain(); // this causes the bug where if the mouse move off screen, the mouseout even clears preview context and everything is lost; but we need the main clear incase there's alpha it gets double rendered on preview... 
         tool.mousemove(ev);
     };
 
@@ -73,6 +74,11 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                         KiddoPaint.Display.context.drawImage(renderedGfx, furthestAway - (i * increment), furthestAway - (i * increment));
                     }
                     KiddoPaint.Display.context.globalAlpha = 1;
+                    break;
+                case JumbleFx.PIXELATE:
+                    var renderedGfx = tool.gfx.draw(tool.textureGfx).brightnessContrast(0, 0).update();
+                    var blocks = remap(0, 500, 50, 7, clamp(0, 500, drawDistance));
+                    renderedGfx = pixelateCanvas(renderedGfx, blocks);
                     break;
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);

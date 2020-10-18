@@ -1,6 +1,55 @@
 KiddoPaint.Tools.Toolbox.Flood = function() {
 
+    var tool = this;
+
     this.mousedown = function(ev) {
+        if (KiddoPaint.Current.modifiedAlt) {
+            tool.canvasWideReplace(ev);
+        } else {
+            tool.boundedFill(ev);
+        }
+    }
+
+    this.canvasWideReplace = function(ev) {
+        KiddoPaint.Sounds.flood();
+        var x = ev._x;
+        var y = ev._y;
+
+        var pixels = KiddoPaint.Display.main_context.getImageData(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+
+        var linear_cords = (y * KiddoPaint.Display.canvas.width + x) * 4;
+        var original_color = {
+            r: pixels.data[linear_cords],
+            g: pixels.data[linear_cords + 1],
+            b: pixels.data[linear_cords + 2],
+            a: pixels.data[linear_cords + 3]
+        };
+
+        var color = color2json(KiddoPaint.Current.color);
+
+        if (colorsEqual(color, original_color)) {
+            return;
+        }
+
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+            if ((pixels.data[i] == original_color.r &&
+                    pixels.data[i + 1] == original_color.g &&
+                    pixels.data[i + 2] == original_color.b &&
+                    pixels.data[i + 3] == original_color.a)) {
+                pixels.data[i] = color.r;
+                pixels.data[i + 1] = color.g;
+                pixels.data[i + 2] = color.b;
+                pixels.data[i + 3] = color.a;
+
+            }
+
+        }
+        KiddoPaint.Display.context.putImageData(pixels, 0, 0);
+        KiddoPaint.Display.clearBeforeSaveMain();
+    }
+
+    this.boundedFill = function(ev) {
         KiddoPaint.Sounds.flood();
         var x = ev._x;
         var y = ev._y;

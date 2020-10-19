@@ -85,9 +85,13 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var howManyPancakes = 2 + (drawDistance / 64);
                     var increment = KiddoPaint.Current.modifiedAlt ? 4 : 16;
                     var furthestAway = howManyPancakes * increment;
+
+                    var deltax = ev._x - tool.initialClick._x;
+                    var deltay = ev._y - tool.initialClick._y;
+
                     for (var i = 1; i < howManyPancakes; i++) {
                         KiddoPaint.Display.context.globalAlpha = i / (howManyPancakes * 1.0);
-                        KiddoPaint.Display.context.drawImage(renderedGfx, furthestAway - (i * increment), furthestAway - (i * increment));
+                        KiddoPaint.Display.context.drawImage(renderedGfx, (furthestAway - (i * increment)) * Math.sign(deltax), (furthestAway - (i * increment)) * Math.sign(deltay));
                     }
                     KiddoPaint.Display.context.globalAlpha = 1;
                     break;

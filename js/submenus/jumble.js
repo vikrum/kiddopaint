@@ -72,7 +72,7 @@ KiddoPaint.Submenu.jumble = [{
     },
     {
         name: 'Pixelate',
-        emoji: '🔳',
+        emoji: '🔲',
         handler: function() {
             KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.PIXELATE;
             KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;

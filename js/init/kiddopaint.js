@@ -588,6 +588,9 @@ function init_brush_subtoolbar() {
 
     });
 
+    document.getElementById('br26').addEventListener('mousedown', function() {
+        KiddoPaint.Current.tool = KiddoPaint.Tools.Smoke;
+    });
 
 
 

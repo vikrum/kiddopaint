@@ -124,6 +124,8 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
             tool.isDown = false;
             tool.textureGfx.destroy();
             tool.textureGfx = {};
+            tool.mainImageData = {};
+            tool.initialClick = {};
             KiddoPaint.Display.saveMainSkipUndo();
         }
     };

@@ -591,9 +591,6 @@ function init_brush_subtoolbar() {
     document.getElementById('br26').addEventListener('mousedown', function() {
         KiddoPaint.Current.tool = KiddoPaint.Tools.Smoke;
     });
-
-
-
 }
 
 function init_stamp_subtoolbar() {
@@ -605,6 +602,13 @@ function init_stamp_subtoolbar() {
             reset_ranges();
             src = ev.srcElement || ev.target;
             KiddoPaint.Tools.Stamp.stamp = src.firstChild.nodeValue;
+        });
+        stampButton.addEventListener('dblclick', function(ev) {
+            src = ev.srcElement || ev.target;
+            if ('✨' == src.firstChild.nodeValue) {
+                reset_ranges();
+                show_generic_submenu('sparkles');
+            }
         });
     }
 }

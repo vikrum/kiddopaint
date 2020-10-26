@@ -35,6 +35,7 @@ function show_generic_submenu(subtoolbar) {
         } else if (buttonDetail.imgSrc) {
             var img = document.createElement('img');
             img.src = buttonDetail.imgSrc;
+            img.className = 'tool';
             button.appendChild(img);
         } else if (buttonDetail.imgJs) {
             var img = document.createElement('img');

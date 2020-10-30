@@ -13,7 +13,8 @@ const JumbleFx = {
     SAT: 'sat',
     NIGHTVISION: 'nightvision',
     INVERT: 'invert',
-    SUNSHINE: 'sunshine'
+    SUNSHINE: 'sunshine',
+    DITHER: 'dither'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -113,6 +114,18 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     var alpha = remap(0, 500, 1, 0, clamp(0, 500, drawDistance));
                     var s = Filters.gcoOverlay(tool.mainImageData, alpha);
                     renderedGfx = s;
+                    break;
+                case JumbleFx.DITHER:
+                    var s = {};
+                    if (KiddoPaint.Current.modifiedCtrl) {
+                        var threshold = remap(0, 500, 192, 0, clamp(0, 500, drawDistance));
+                        s = Dither.bayer(tool.mainImageData, threshold);
+                    } else if (KiddoPaint.Current.modifiedMeta) {
+                        s = Dither.atkinson(tool.mainImageData);
+                    } else {
+                        s = Dither.floydsteinberg(tool.mainImageData);
+                    }
+                    renderedGfx = KiddoPaint.Display.imageTypeToCanvas(s, false);
                     break;
             }
             KiddoPaint.Display.context.drawImage(renderedGfx, 0, 0);

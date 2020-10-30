@@ -103,6 +103,14 @@ KiddoPaint.Submenu.jumble = [{
         }
     },
     {
+        name: 'Dither',
+        emoji: '🏁',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.DITHER;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+    {
         name: 'Sunshine',
         emoji: '☀️',
         handler: function() {

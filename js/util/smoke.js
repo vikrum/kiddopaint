@@ -1,3 +1,4 @@
+// smoke.js - https://github.com/bijection/smoke.js/blob/master/LICENSE - MIT
 /*   Magic UMD boilerplate Beginning  */
 /**/
 (function(root, factory) {

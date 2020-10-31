@@ -138,6 +138,6 @@ KiddoPaint.Colors.randomAllColor = function() {
 }
 
 function getColorIndicesForCoord(x, y, width) {
-  var red = y * (width * 4) + x * 4;
-  return [red, red + 1, red + 2, red + 3];
+    var red = y * (width * 4) + x * 4;
+    return [red, red + 1, red + 2, red + 3];
 }

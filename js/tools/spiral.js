@@ -1,16 +1,16 @@
 // this & maze can be refactored to a generic tool that takes a lambda
-KiddoPaint.Tools.Toolbox.Spiral = function () {
+KiddoPaint.Tools.Toolbox.Spiral = function() {
     var tool = this;
     this.isDown = false;
 
-    this.mousedown = function (ev) {
+    this.mousedown = function(ev) {
         tool.isDown = true;
         drawSpiral(ev._x, ev._y)
     };
 
-    this.mousemove = function (ev) { };
+    this.mousemove = function(ev) {};
 
-    this.mouseup = function (ev) {
+    this.mouseup = function(ev) {
         if (tool.isDown) {
             tool.isDown = false;
             KiddoPaint.Display.saveMain();
@@ -48,7 +48,7 @@ function drawSpiral(cx, cy) {
         //KiddoPaint.Display.context.fillRect(Math.round(x), Math.round(y), 1, 1);
     }
 
-    var distance = function (a, b) {
+    var distance = function(a, b) {
         return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2);
     }
     KiddoPaint.Current.kdspiral = new kdTree(points, distance, ["x", "y"]);

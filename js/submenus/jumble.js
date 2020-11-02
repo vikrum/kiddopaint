@@ -103,6 +103,15 @@ KiddoPaint.Submenu.jumble = [{
         }
     },
     {
+        name: 'Black and White Threshold',
+        emoji: '🦓',
+        handler: function() {
+            KiddoPaint.Tools.WholeCanvasEffect.effect = JumbleFx.THRESHOLD;
+            KiddoPaint.Current.tool = KiddoPaint.Tools.WholeCanvasEffect;
+        }
+    },
+
+    {
         name: 'Dither',
         emoji: '🏁',
         handler: function() {

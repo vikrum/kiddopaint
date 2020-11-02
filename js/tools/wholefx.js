@@ -14,7 +14,8 @@ const JumbleFx = {
     NIGHTVISION: 'nightvision',
     INVERT: 'invert',
     SUNSHINE: 'sunshine',
-    DITHER: 'dither'
+    DITHER: 'dither',
+    THRESHOLD: 'threshold'
 }
 
 KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
@@ -125,6 +126,11 @@ KiddoPaint.Tools.Toolbox.WholeCanvasEffect = function() {
                     } else {
                         s = Dither.floydsteinberg(tool.mainImageData);
                     }
+                    renderedGfx = KiddoPaint.Display.imageTypeToCanvas(s, false);
+                    break;
+                case JumbleFx.THRESHOLD:
+                    // var threshold = remap(0, 500, 1, 255, clamp(0, 500, drawDistance));
+                    var s = Dither.threshold(tool.mainImageData, 100);
                     renderedGfx = KiddoPaint.Display.imageTypeToCanvas(s, false);
                     break;
             }

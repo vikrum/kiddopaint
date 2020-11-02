@@ -1,4 +1,3 @@
-// this & maze can be refactored to a generic tool that takes a lambda
 KiddoPaint.Tools.Toolbox.Spiral = function() {
     var tool = this;
     this.isDown = false;
@@ -6,6 +5,7 @@ KiddoPaint.Tools.Toolbox.Spiral = function() {
     this.mousedown = function(ev) {
         tool.isDown = true;
         drawSpiral(ev._x, ev._y)
+        processMainCanvas();
     };
 
     this.mousemove = function(ev) {};
@@ -58,27 +58,46 @@ function processMainCanvas() {
     var w = KiddoPaint.Display.main_canvas.width;
     var h = KiddoPaint.Display.main_canvas.height;
 
-    var pixels = KiddoPaint.Display.main_context.getImageData(0, 0, KiddoPaint.Display.canvas.width, KiddoPaint.Display.canvas.height);
+    var pixels = KiddoPaint.Display.main_context.getImageData(0, 0, w, h);
+
+    function isBlack(n) {
+        return pixels.data[n] == 0 &&
+            pixels.data[n + 1] == 0 &&
+            pixels.data[n + 2] == 0 &&
+            pixels.data[n + 3] == 255;
+    }
+
+    function isTransparent(n) {
+        return pixels.data[n + 3] == 0;
+    }
+
+    function isWhite(n) {
+        return pixels.data[n] == 255 &&
+            pixels.data[n + 1] == 255 &&
+            pixels.data[n + 2] == 255 &&
+            pixels.data[n + 3] == 255;
+    }
 
     function isAlone(x, y) {
-        var above = (((y - 1) * w + x) * 4) + 3;
-        var abover = (((y - 1) * w + (x + 1)) * 4) + 3;
-        var abovel = (((y - 1) * w + (x - 1)) * 4) + 3;
+        var above = (((y - 1) * w + x) * 4);
+        var abover = (((y - 1) * w + (x + 1)) * 4);
+        var abovel = (((y - 1) * w + (x - 1)) * 4);
 
-        var below = (((y + 1) * w + x) * 4) + 3;
-        var belowr = (((y + 1) * w + (x + 1)) * 4) + 3;
-        var belowl = (((y + 1) * w + (x - 1)) * 4) + 3;
+        var below = (((y + 1) * w + x) * 4);
+        var belowr = (((y + 1) * w + (x + 1)) * 4);
+        var belowl = (((y + 1) * w + (x - 1)) * 4);
 
-        var left = ((y * w + (x - 1)) * 4) + 3;
-        var right = ((y * w + (x + 1)) * 4) + 3;
-        return pixels.data[above] == 0 &&
-            pixels.data[below] == 0 &&
-            pixels.data[right] == 0 &&
-            pixels.data[left] == 0 &&
-            pixels.data[abover] == 0 &&
-            pixels.data[abovel] == 0 &&
-            pixels.data[belowr] == 0 &&
-            pixels.data[belowl] == 0;
+        var left = ((y * w + (x - 1)) * 4);
+        var right = ((y * w + (x + 1)) * 4);
+
+        return isBlack(above) &&
+            isBlack(below) &&
+            isBlack(right) &&
+            isBlack(left) &&
+            isBlack(abover) &&
+            isBlack(abovel) &&
+            isBlack(belowr) &&
+            isBlack(belowl);
     }
 
     var snaptospiral = [];
@@ -86,9 +105,12 @@ function processMainCanvas() {
         for (j = 1; j < h - 1; j++) {
             var linear_cords = 4 * (j * w + i);
 
-            if (pixels.data[linear_cords + 3] != 0 && isAlone(i, j)) {
+            if (isWhite(linear_cords) && isAlone(i, j)) {
                 // turn off
-                pixels.data[linear_cords + 3] = 0;
+                pixels.data[linear_cords + 0] = 0;
+                pixels.data[linear_cords + 1] = 0;
+                pixels.data[linear_cords + 2] = 0;
+                pixels.data[linear_cords + 3] = 255;
 
                 // look for closes
                 var nearest = KiddoPaint.Current.kdspiral.nearest({
@@ -101,5 +123,7 @@ function processMainCanvas() {
     }
     KiddoPaint.Display.clearMain();
     KiddoPaint.Display.main_context.putImageData(pixels, 0, 0);
+    KiddoPaint.Display.context.fillStyle = 'white';
+    console.log(snaptospiral.length);
     snaptospiral.forEach(element => KiddoPaint.Display.context.fillRect(Math.round(element.x), Math.round(element.y), 1, 1));
 }

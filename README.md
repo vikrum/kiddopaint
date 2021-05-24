@@ -4,4 +4,6 @@ Dr Halo, Kid Pix, MacPaint, & MS Paint were some of my earliest intros to comput
 
 Kiddopaint was meant to be used without having to consult a user guide, so, dig in! There are a handful of hidden features behind various modifier keys (⌘, ⌥, ⇧) for some of the tools. Enjoy! :)
 
-![https://kiddopaint.com/static/kiddopaint.jpg](https://kiddopaint.com/static/kiddopaint.jpg)
+[Six part video guide](https://www.youtube.com/playlist?list=PLWLJNgreFIUZ_4o8LpKkJ6HY3-Qt0dILt).
+
+<a href="https://kiddopaint.com/">![https://kiddopaint.com/static/kiddopaint.jpg](https://kiddopaint.com/static/kiddopaint.jpg)</a>

@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/vikrum/kiddopaint#readme",
   "dependencies": {
-    "js-beautify": "^1.13.0",
+    "js-beautify": "^1.13.13",
     "uglify-es": "^3.3.9"
   }
 }

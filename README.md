@@ -6,4 +6,6 @@ Kiddopaint was meant to be used without having to consult a user guide, so, dig 
 
 [Six part video guide](https://www.youtube.com/playlist?list=PLWLJNgreFIUZ_4o8LpKkJ6HY3-Qt0dILt).
 
+## See also: https://github.com/vikrum/kidpix
+
 <a href="https://5f5.org/mirror/kiddopaint/">![https://5f5.org/mirror/kiddopaint/static/kiddopaint.jpg](https://5f5.org/mirror/kiddopaint/static/kiddopaint.jpg)</a>
